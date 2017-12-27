@@ -1,0 +1,21 @@
+#+TITLE: Flora UI
+* Development
+  You can start development mode by calling:
+  #+BEGIN_SRC sh
+    lein figwheel
+  #+END_SRC
+
+  Figwheel will automatically push cljs changes to the browser. Once Figwheel
+  starts up, you should be able to open the public/index.html page in the
+  browser, or go to http://localhost:3333 for the development server.
+
+  Another option is calling ~script/repl.clj~ from Emacs on
+  ~cider-jack-in-clojurescript~ by including this in your Emacs config:
+
+  #+BEGIN_SRC elisp
+    (setq
+     cider-cljs-lein-repl "(require 'repl)")
+  #+END_SRC
+
+  Just ensure that script is on your ~source path~ which it is in this project
+  already

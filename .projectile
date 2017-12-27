@@ -1,0 +1,9 @@
+-/target
+-/.cljs_rhino_repl
+-/resources/public/js/compiled
+-/node_modules
+-/packages
+-/scripts
+-/tools
+-/tags
+-/resources/public/img
