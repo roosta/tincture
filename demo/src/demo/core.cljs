@@ -7,11 +7,11 @@
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to plain-reagent"]
+  [:div [:h2 "Welcome to flora demo"]
    [:div [:a {:href "/#about"} "go to about page"]]])
 
 (defn about-page []
-  [:div [:h2 "About plain-reagent"]
+  [:div [:h2 "About flora demo"]
    [:div [:a {:href "/"} "go to the home page"]]])
 
 ;; -------------------------
