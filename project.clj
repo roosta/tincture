@@ -5,47 +5,25 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.8.0"]
-                 [secretary "1.2.3"]
-                 [venantius/accountant "0.2.3"]
+                 [org.clojure/clojurescript "1.9.946"]
                  [cljs-css-modules "0.2.1" :exclusions [garden]]
+                 [herb "0.2.0-SNAPSHOT"]
                  [garden "1.3.3"]
                  ;; [cljsjs/hammer "2.0.8-0"]
                  [facjure/mesh "0.4.0"]
-                 [rm-hull/inkspot "0.2.1"]
-                 [cljsjs/react-transition-group "2.2.0-0"]
-                 [org.clojure/clojurescript "1.9.908" :scope "provided"]
-                 [reagent "0.7.0"  :exclusions [cljsjs/react cljsjs/react-dom]]]
+                 [rm-hull/inkspot "0.2.1"]]
 
-  :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-figwheel "0.5.14"]]
+  :source-paths ["src"]
 
-  :min-lein-version "2.5.0"
-
-  :clean-targets ^{:protect false}
-  [:target-path
-   [:cljsbuild :builds :app :compiler :output-dir]
-   [:cljsbuild :builds :app :compiler :output-to]]
-
-  :figwheel {:server-port 3333
-             :nrepl-port 7891
-             :css-dirs ["resources/public/css"]}
-
-  :source-paths ["src/clj"]
-
-  :cljsbuild {:builds [{:id           "demo"
+:cljsbuild {:builds [{:id "test"
+                        :source-paths ["src" "test"]
+                        :compiler {:output-to "target/cljs/test/test.js"
+                                   :output-dir "target/cljs/test"
+                                   :optimizations :none
+                                   :pretty-print true
+                                   :source-map true
+                                   :main flora-ui.runner}}
+                       {:id "prod"
                         :source-paths ["src"]
-                        :compiler     {:main demo.core
-                                       :preloads [devtools.preload re-frisk.preload]
-                                       :asset-path "js/out"
-                                       :output-to "resources/public/js/demo.js"
-                                       :output-dir "resources/public/js/out"
-                                       :optimizations :none
-                                       :source-map true
-                                       :source-map-timestamp true}
-                        :figwheel {:on-jsload "demo.core/mount-root"}}]}
-
-  :profiles {:dev {:dependencies [[binaryage/devtools "0.9.7"]
-                                  [re-frisk "0.5.3"]
-                                  [org.clojure/tools.nrepl "0.2.13"]
-                                  [figwheel-sidecar "0.5.14"]]
-                   :source-paths ["script"]}})
+                        :compiler {:output-to "flora-ui.js"
+                                   :optimizations :advanced}}]})
