@@ -1,4 +1,4 @@
-(defproject flora-ui "0.1.0"
+(defproject flora-ui "0.1.0-SNAPSHOT"
   :description "Opinionated UI framework built with garden"
   :url "https://github.com/roosta/flora-ui"
   :license {:name "Eclipse Public License"
