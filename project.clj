@@ -15,7 +15,7 @@
 
   :source-paths ["src"]
 
-:cljsbuild {:builds [{:id "test"
+  :cljsbuild {:builds [{:id "test"
                         :source-paths ["src" "test"]
                         :compiler {:output-to "target/cljs/test/test.js"
                                    :output-dir "target/cljs/test"
