@@ -10,7 +10,7 @@
                  [herb "0.2.0-SNAPSHOT"]
                  [garden "1.3.3"]
                  ;; [cljsjs/hammer "2.0.8-0"]
-                 [facjure/mesh "0.4.0"]
+                 ; [facjure/mesh "0.4.0"]
                  [rm-hull/inkspot "0.2.1"]]
 
   :source-paths ["src"]
