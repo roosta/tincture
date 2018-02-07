@@ -8,7 +8,7 @@
 
 (defn home-page []
   [:div [:h2 "Welcome to plain-reagent"]
-   [:div [:a {:href "/about"} "go to about page"]]])
+   [:div [:a {:href "/#about"} "go to about page"]]])
 
 (defn about-page []
   [:div [:h2 "About plain-reagent"]
@@ -17,7 +17,7 @@
 ;; -------------------------
 ;; Routes
 
-(def page (atom #'home-page))
+(def page (r/atom #'home-page))
 
 (defn appframe []
   [:div [@page]])
@@ -25,7 +25,7 @@
 (secretary/defroute "/" []
   (reset! page #'home-page))
 
-(secretary/defroute "/about" []
+(secretary/defroute "/#about" []
   (reset! page #'about-page))
 
 (defn mount-root []
