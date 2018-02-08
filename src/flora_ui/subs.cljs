@@ -31,3 +31,10 @@
  :<- [:flora-ui/viewport-size]
  (fn [[_ height]]
    height))
+
+
+;; get viewport size
+(rf/reg-sub
+ :flora-ui/theme
+ (fn [db]
+   (:flora-ui/theme db)))
