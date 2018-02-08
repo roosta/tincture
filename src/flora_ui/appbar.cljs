@@ -11,10 +11,10 @@
    [reagent.core :as r]))
 
 (defn appbar-style
-  [theme pos]
+  [theme pos color]
   (let [root {:display "flex"
               :flex-direction "column"
-              :background "red"
+              :background-color color
               :width "100%"
               :box-sizing "border-box"
               :z-index (-> theme :z-index :app-bar)
@@ -41,11 +41,20 @@
                   :static static))
       {:key pos})))
 
+;; TODO Add mobile scale
+(defn toolbar-style
+  [theme]
+  {:min-height (px 56)
+   :padding-left (px (* (-> theme :spacing :unit) 2))
+   :padding-right (px (* (-> theme :spacing :unit) 2))})
+
 (defui appbar
-  (fn [{:keys [theme position elevation]
+  (fn [{:keys [theme position elevation color]
         :or {position :static
-             elevation 4}}]
-    (into [paper {:class (with-style appbar-style theme position)
-                  :component :header
-                  :elevation elevation}]
-          (r/children (r/current-component)))))
+             elevation 4
+             color (-> theme :palette :primary :main)}}]
+    [paper {:class (with-style appbar-style theme position color)
+            :component :header
+            :elevation elevation}
+     (into [:div {:class (with-style toolbar-style theme)}]
+           (r/children (r/current-component)))]))
