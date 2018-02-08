@@ -1,14 +1,14 @@
 (ns demo.core
   (:require [reagent.core :as r]
             [demo.paper :as paper-demo]
+            [devtools.core :as devtools]
             [re-frame.core :as rf]
             [flora-ui.events]
             [flora-ui.subs]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
 
-;; -------------------------
-;; Views
+(devtools/install!)
 
 (defn home-page []
   [:div [:h2 "Welcome to Flora-ui demo"]

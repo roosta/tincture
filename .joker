@@ -1,2 +1,2 @@
-{:known-macros []
+{:known-macros [flora-ui.macro/defui]
  :ignored-unused-namespaces [reagent.debug]}
