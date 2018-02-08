@@ -1,5 +1,6 @@
 (ns demo.core
   (:require [reagent.core :as r]
+            [demo.paper :as paper-demo]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
 
@@ -7,12 +8,8 @@
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to flora demo"]
-   [:div [:a {:href "/#about"} "go to about page"]]])
-
-(defn about-page []
-  [:div [:h2 "About flora demo"]
-   [:div [:a {:href "/"} "go to the home page"]]])
+  [:div [:h2 "Welcome to Flora-ui demo"]
+   [:div [:a {:href "/#paper"} "Paper demo"]]])
 
 ;; -------------------------
 ;; Routes
@@ -25,8 +22,8 @@
 (secretary/defroute "/" []
   (reset! page #'home-page))
 
-(secretary/defroute "/#about" []
-  (reset! page #'about-page))
+(secretary/defroute "/#paper" []
+  (reset! page #'paper-demo/main))
 
 (defn mount-root []
   (r/render [appframe] (.getElementById js/document "app")))

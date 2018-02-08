@@ -11,6 +11,7 @@
                  [herb "0.2.0-SNAPSHOT"]
                  [facjure/mesh "0.4.0"]
                  [rm-hull/inkspot "0.2.1"]
+                 [re-frame "0.10.4"]
                  [garden "1.3.3"]
                  [reagent "0.7.0"]]
 
@@ -29,7 +30,7 @@
   :source-paths ["src" "../src"]
 
   :figwheel {:http-server-root "."
-             :nrepl-port 7002
+             :nrepl-port 7899
              :server-port 3450
              :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
              :css-dirs ["public/css"]}
