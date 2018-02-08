@@ -25,5 +25,6 @@
   [:div [:h2 "Paper demo"]
    [:div [:a {:href "/"} "go to the home page"]]
    [paper {:class (with-style paper-style)
+           :square false
            :elevation 1}]
    [test-comp {:prop "world"}]])

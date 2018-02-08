@@ -9,13 +9,16 @@
   (:require-macros [flora-ui.macro :refer [defui]]))
 
 (defn paper-root
-  [theme elevation]
+  [theme elevation square]
   {:box-shadow ((:shadows theme) elevation)
+   :border-radius (if square 0 (px 2))
    :background-color (-> theme :palette :background :paper)})
 
 (defui paper
-  (fn [{:keys [theme class elevation]
-        :or {elevation 0}}]
+  (fn [{:keys [theme class elevation component square]
+        :or {elevation 0
+             component :div
+             square false}}]
     (into
-     [:div {:class (s/join " " [(with-style paper-root theme elevation) class])}]
+     [component {:class (s/join " " [(with-style paper-root theme elevation square) class])}]
      (r/children (r/current-component)))))
