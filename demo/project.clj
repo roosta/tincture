@@ -13,7 +13,7 @@
                  [rm-hull/inkspot "0.2.1"]
                  [re-frame "0.10.4"]
                  [garden "1.3.3"]
-                 [reagent "0.7.0"]]
+                 [reagent "0.8.0-alpha2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-figwheel "0.5.14"]]
@@ -42,6 +42,8 @@
                          :output-to "public/js/app.js"
                          :output-dir "public/js/out"
                          :asset-path   "js/out"
+                         :closure-defines {"re_frame.trace.trace_enabled_QMARK_" true}
+                         :preloads [day8.re-frame.trace.preload]
                          :source-map true
                          :optimizations :none
                          :pretty-print  true}
@@ -50,6 +52,7 @@
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.9"]
                                   [figwheel-sidecar "0.5.14"]
+                                  [day8.re-frame/trace "0.1.18-react16"]
                                   [org.clojure/tools.nrepl "0.2.13"]
                                   [com.cemerick/piggieback "0.2.2"]]
                    :source-paths ["script"]}})

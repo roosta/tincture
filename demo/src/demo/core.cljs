@@ -1,6 +1,9 @@
 (ns demo.core
   (:require [reagent.core :as r]
             [demo.paper :as paper-demo]
+            [re-frame.core :as rf]
+            [flora-ui.events]
+            [flora-ui.subs]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
 
@@ -29,14 +32,15 @@
   (r/render [appframe] (.getElementById js/document "app")))
 
 (defn init! []
-   (accountant/configure-navigation!
-    {:nav-handler
-     (fn [path]
-       (secretary/dispatch! path))
-     :path-exists?
-     (fn [path]
-       (secretary/locate-route path))})
-   (accountant/dispatch-current!)
-   (mount-root))
+  (rf/dispatch-sync [:flora-ui/initialize])
+  (accountant/configure-navigation!
+   {:nav-handler
+    (fn [path]
+      (secretary/dispatch! path))
+    :path-exists?
+    (fn [path]
+      (secretary/locate-route path))})
+  (accountant/dispatch-current!)
+  (mount-root))
 
 (init!)
