@@ -42,9 +42,10 @@
       {:key pos})))
 
 (defui appbar
-  (fn [{:keys [theme position]
-        :or {position :static}}]
+  (fn [{:keys [theme position elevation]
+        :or {position :static
+             elevation 4}}]
     (into [paper {:class (with-style appbar-style theme position)
                   :component :header
-                  :elevation 4}]
+                  :elevation elevation}]
           (r/children (r/current-component)))))
