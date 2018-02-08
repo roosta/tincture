@@ -1,9 +1,9 @@
-(ns flora-ui.events
+(ns tonic.events
   (:import [goog.dom ViewportSizeMonitor])
   (:require [reagent.core :as r]
             [goog.events.EventType :as event-type]
             [goog.events :as gevents]
-            [flora-ui.db :as db]
+            [tonic.db :as db]
             [reagent.debug :as d]
             [re-frame.core :refer [reg-event-db reg-event-fx reg-fx inject-cofx path trim-v
                                    after debug dispatch]]
@@ -16,18 +16,17 @@
                   event-type/RESIZE
                   (fn [e]
                     (let [size (.getSize vsm)]
-                      (dispatch [:flora-ui/set-viewport-size [(.-height size) (.-width size)]])))))
+                      (dispatch [:tonic/set-viewport-size [(.-height size) (.-width size)]])))))
 
 (reg-event-db
- :flora-ui/initialize
+ :tonic/initialize
  (fn [db _]
    (let [size (.getSize vsm)]
      (-> db
-         (assoc :flora-ui/viewport-size [(.-width size)
-                                         (.-height size)])
-         (assoc :flora-ui/theme db/default-theme)))))
+         (assoc :tonic/viewport-size [(.-width size)
+                                         (.-height size)])))))
 
 (reg-event-db
- :flora-ui/set-viewport-size
+ :tonic/set-viewport-size
  (fn [db [new]]
-   (assoc db :flora-ui/viewport-size new)))
+   (assoc db :tonic/viewport-size new)))

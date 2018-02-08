@@ -1,4 +1,4 @@
-(ns flora-ui.utils
+(ns tonic.core
   (:require
    [cljs.spec.alpha :as s :include-macros true]
    [clojure.string :as string]))
@@ -105,3 +105,9 @@
    :ease-in-out-expo "cubic-bezier(1, 0, 0, 1)"
    :ease-in-out-circ "cubic-bezier(.785, .135, .15, .86)"}
   )
+
+(def breakpoints {:xs 0
+                  :sm 600
+                  :md 960
+                  :lg 1280
+                  :xl 1920})

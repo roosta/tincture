@@ -1,4 +1,4 @@
-(ns flora-ui.subs
+(ns tonic.subs
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [goog.labs.userAgent.device :as device]
@@ -6,12 +6,12 @@
 
 ;; get viewport size
 (rf/reg-sub
- :flora-ui/viewport-size
+ :tonic/viewport-size
  (fn [db _]
-   (:flora-ui/viewport-size db)))
+   (:tonic/viewport-size db)))
 
 (rf/reg-sub
- :flora-ui/device
+ :tonic/device
  (fn []
    (cond
      (device/isDesktop) :desktop
@@ -20,21 +20,14 @@
 
 ;; get viewport size
 (rf/reg-sub
- :flora-ui/viewport-width
- :<- [:flora-ui/viewport-size]
+ :tonic/viewport-width
+ :<- [:tonic/viewport-size]
  (fn [[width _]]
    width))
 
 ;; get viewport size
 (rf/reg-sub
- :flora-ui/viewport-height
- :<- [:flora-ui/viewport-size]
+ :tonic/viewport-height
+ :<- [:tonic/viewport-size]
  (fn [[_ height]]
    height))
-
-
-;; get viewport size
-(rf/reg-sub
- :flora-ui/theme
- (fn [db]
-   (:flora-ui/theme db)))

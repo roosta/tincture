@@ -1,4 +1,4 @@
-(ns flora-ui.icons
+(ns tonic.icons
   (:require
    [herb.macro :refer-macros [with-style]]
    [reagent.core :as r]))
@@ -7,8 +7,8 @@
   []
   {:display "inline-block"
    :fill "currentColor"
-   :height "24px"
-   :width "24px"
+   ;; :height "24px"
+   ;; :width "24px"
    :user-select "none"
    :flex-shrink 0
    ;; :transition ""
