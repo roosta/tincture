@@ -9,10 +9,8 @@
                  [venantius/accountant "0.2.3"]
                  [org.clojure/clojurescript "1.9.946"]
                  [herb "0.2.0-SNAPSHOT"]
-                 [facjure/mesh "0.4.0"]
                  [rm-hull/inkspot "0.2.1"]
                  [re-frame "0.10.4"]
-                 [garden "1.3.3"]
                  [reagent "0.8.0-alpha2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
