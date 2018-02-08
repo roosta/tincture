@@ -1,6 +1,7 @@
 (ns demo.core
   (:require [reagent.core :as r]
             [demo.paper :as paper-demo]
+            [demo.typography :as typo-demo]
             [devtools.core :as devtools]
             [re-frame.core :as rf]
             [flora-ui.events]
@@ -12,7 +13,11 @@
 
 (defn home-page []
   [:div [:h2 "Welcome to Flora-ui demo"]
-   [:div [:a {:href "/#paper"} "Paper demo"]]])
+   [:ul
+    [:li [:a {:href "/#paper"} "Paper demo"]]
+    [:li [:a {:href "/#typography"} "Typography demo"]]]
+   ])
+
 
 ;; -------------------------
 ;; Routes
@@ -27,6 +32,9 @@
 
 (secretary/defroute "/#paper" []
   (reset! page #'paper-demo/main))
+
+(secretary/defroute "/#typography" []
+  (reset! page #'typo-demo/main))
 
 (defn mount-root []
   (r/render [appframe] (.getElementById js/document "app")))
