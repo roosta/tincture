@@ -9,8 +9,9 @@
                  [cljs-css-modules "0.2.1" :exclusions [garden]]
                  [herb "0.2.0-SNAPSHOT"]
                  [garden "1.3.3"]
+                 [re-frame "0.10.4"]
                  ;; [cljsjs/hammer "2.0.8-0"]
-                 ; [facjure/mesh "0.4.0"]
+                 [facjure/mesh "0.4.0"]
                  [rm-hull/inkspot "0.2.1"]]
 
   :source-paths ["src"]
