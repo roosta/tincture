@@ -1,14 +1,14 @@
 (ns flora-ui.typography
+  (:require-macros [flora-ui.macro :refer [defui]])
   (:require
    [garden.units :refer [px percent]]
    [reagent.debug :as d]
+   [clojure.string :as str]
+   [herb.macro :refer-macros [with-style]]
    [cljs.spec.alpha :as s :include-macros true]
    [reagent.core :as r]
    [flora-ui.utils :as utils]
    #_[cljs-css-modules.macro :refer-macros [defstyle]]))
-
-(def font-families {:headline ["'Raleway'" "sans-serif"]
-                    :body ["'Open Sans'" "sans-serif"]})
 
 (def font-weight {:light 300
                   :regular 400
@@ -17,58 +17,6 @@
 (s/def ::valid-kinds #{:title :display1 :display2
                        :display3 :display4 :subheading
                        :headline :button :body1 :body2})
-
-(def kinds {:display1 {:font-size (px 34)
-                       :font-weight (:regular font-weight)
-                       :font-family (:headline font-families)
-                       :line-height "40px"}
-
-            :display2 {:font-size (px 45)
-                       :font-weight (:regular font-weight),
-                       :font-family (:headline font-families)
-                       :line-height (px 48)}
-
-            :display3 {:font-size (px 56)
-                       :font-weight (:regular font-weight)
-                       :font-family (:headline font-families)
-                       :letter-spacing "-.02em"
-                       :line-height 1.35}
-
-            :display4 {:font-size (px 112)
-                       :font-weight (:light font-weight)
-                       :font-family (:headline font-families)
-                       :letter-spacing "-.04em"
-                       :line-height 1}
-
-            :subheading {:font-size (px 16)
-                         :font-weight (:regular font-weight)
-                         :font-family (:body font-families)
-                         :line-height (px 24)}
-
-            :headline {:font-size (px 24)
-                       :font-weight (:regular font-weight)
-                       :font-family (:headline font-families)
-                       :line-height (px 32)}
-
-            :title {:font-size (px 21)
-                    :font-family (:headline font-families)
-                    :line-height 1
-                    :font-weight (:medium font-weight)}
-
-            :button {:font-size 14
-                     :text-transform "uppercase"
-                     :font-weight (:medium font-weight)
-                     :font-family (:body font-families)}
-
-            :body1 {:font-size (px 14)
-                    :font-weight (:regular font-weight)
-                    :font-family (:body font-families)
-                    :line-height (px 20)}
-
-            :body2 {:font-size (px 14)
-                    :font-weight (:regular font-weight)
-                    :font-family (:body font-families)
-                    :line-height (px 20)}})
 
 (def mapping
   {:display4 :h1
@@ -85,39 +33,53 @@
 (s/def ::valid-styles #{:normal :italic})
 (s/def ::valid-directions #{:ltr :rtl})
 
-#_(defstyle typography-styles
-  [:.root {}]
-  [:.display1 (:display1 kinds)]
-  [:.display2 (:display2 kinds)]
-  [:.display3 (:display3 kinds)]
-  [:.display4 (:display4 kinds)]
-  [:.subheading (:subheading kinds)]
-  [:.headline (:headline kinds)]
-  [:.title (:title kinds)]
-  [:.button (:button kinds)]
-  [:.body1 (:body1 kinds)]
-  [:.body2 (:body2 kinds)]
-  [:.ltr {:direction "ltr"}]
-  [:.rtl {:direction "rtl"}]
-  [:.italic {:font-style "italic"}]
-  [:.left {:text-align "left"}]
-  [:.right {:text-align "right"}]
-  [:.center {:text-align "center"}]
-  [:.justify {:text-align "justify"}])
+(defn typography-style
+  [theme kind align style direction elevation]
+  (let [k (str/join "-" [(name kind) (name align) (name style) (name direction) elevation])
+        kinds {:display1 (-> theme :typography :display1)
+               :display2 (-> theme :typography :display2)
+               :display3 (-> theme :typography :display3)
+               :display4 (-> theme :typography :display4)
+               :subheading (-> theme :typography :subheading)
+               :headline (-> theme :typography :headline)
+               :title (-> theme :typography :title)
+               :button (-> theme :typography :button)
+               :body1 (-> theme :typography :body1)
+               :body2 (-> theme :typography :body2)}
 
-#_(defn typography
-  [{:keys [kind align class elevation style on-click direction]
-    :or {kind :body1
-         style :normal
-         align :left
-         direction :ltr
-         elevation 0}}]
-  {:pre [(s/valid? ::valid-aligns align)
-         (s/valid? ::valid-kinds kind)
-         (s/valid? ::valid-directions direction)
-         (s/valid? ::valid-styles style)]}
-  (into
-   [(kind mapping) {:style {:text-shadow (utils/text-shadow elevation)}
-                    :on-click on-click
-                    :class (str class " " (join-classes typography-styles kind align style direction))}]
-   (r/children (r/current-component))))
+        directions {:ltr {:direction "ltr"}
+                    :rtl {:direction "rtl"}}
+
+        styles {:italic {:font-style "italic"}}
+
+        aligns {:left {:text-align "left"}
+                :right {:text-align "right"}
+                :center {:text-align "center"}
+                :justify {:text-align "justify"}}]
+
+    (with-meta
+      (merge
+       {:text-shadow (utils/text-shadow elevation)}
+       (kind kinds)
+       (direction directions)
+       (style styles)
+       (align aligns))
+      {:key k})))
+
+(defui typography
+  (fn [{:keys [theme kind align class elevation style on-click direction]
+        :or {kind :body1
+             style :normal
+             align :left
+             direction :ltr
+             elevation 0}}]
+    {:pre [(s/valid? ::valid-aligns align)
+           (s/valid? ::valid-kinds kind)
+           (s/valid? ::valid-directions direction)
+           (s/valid? ::valid-styles style)]}
+    (let [class* (with-style typography-style theme kind align style direction elevation)]
+      (into
+       [(kind mapping) {:on-click on-click
+                        :class (if class (str class " " class*)
+                                   class*)}]
+       (r/children (r/current-component))))))
