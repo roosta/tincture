@@ -1,6 +1,7 @@
 (ns tonic.icons
   (:require
    [herb.macro :refer-macros [with-style]]
+   [clojure.string :as str]
    [reagent.core :as r]))
 
 (defn svg-icon-style
@@ -16,9 +17,7 @@
 
 (defn svg-icon
   [{:keys [class viewbox]}]
-  (let [class* (if class
-                 (str class " " (with-style svg-icon-style))
-                 (with-style svg-icon-style))]
+  (let [class* (str/join " " [class (with-style svg-icon-style)])]
     (into
      [:svg {:view-box viewbox
             :class class*}]
