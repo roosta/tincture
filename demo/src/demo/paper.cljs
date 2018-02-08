@@ -11,9 +11,14 @@
   {:width (px 300)
    :height (px 200)})
 
+(defui child-comp
+  (fn []
+    [:div "I'm a child"]))
+
 (defui test-comp
   (fn [{:keys [theme prop]}]
-    [:div (str "hello " prop)]))
+    [:div (str "hello " prop)]
+    [child-comp]))
 
 (defn main
   []
