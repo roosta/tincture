@@ -66,6 +66,7 @@
        (align aligns))
       {:key k})))
 
+;; TODO Add color?
 (defui typography
   (fn [{:keys [theme kind align class elevation style on-click direction]
         :or {kind :body1

@@ -45,6 +45,8 @@
 (defn toolbar-style
   [theme]
   {:min-height (px 56)
+   :display "flex"
+   :align-items "center"
    :padding-left (px (* (-> theme :spacing :unit) 2))
    :padding-right (px (* (-> theme :spacing :unit) 2))})
 
