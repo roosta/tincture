@@ -4,6 +4,7 @@
    [re-frame.core :as rf]
    [tonic.events]
    [tonic.subs]
+   [tonic.db]
    [clojure.string :as string]))
 
 (defn join-classes
@@ -114,6 +115,7 @@
                   :md 960
                   :lg 1280
                   :xl 1920})
+
 (defn init!
   []
   (rf/dispatch-sync [:tonic/initialize]))

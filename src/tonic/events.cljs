@@ -12,21 +12,21 @@
 (defonce vsm (ViewportSizeMonitor.))
 
 (defonce vsm-listener
-  (gevents/listen vsm
-                  event-type/RESIZE
-                  (fn [e]
-                    (let [size (.getSize vsm)]
-                      (dispatch [:tonic/set-viewport-size [(.-height size) (.-width size)]])))))
+  (gevents/listen
+   vsm
+   event-type/RESIZE
+   (fn [e]
+     (let [size (.getSize vsm)]
+       (dispatch [:tonic/set-viewport-size [(.-width size) (.-height size)]])))))
 
 (reg-event-db
  :tonic/initialize
- (fn [db _]
+ (fn [db]
    (let [size (.getSize vsm)]
      (-> db
-         (assoc :tonic/viewport-size [(.-width size)
-                                         (.-height size)])))))
+         (assoc :tonic/viewport-size [(.-width size) (.-height size)])))))
 
 (reg-event-db
  :tonic/set-viewport-size
- (fn [db [new]]
+ (fn [db [_ new]]
    (assoc db :tonic/viewport-size new)))
