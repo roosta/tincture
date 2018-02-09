@@ -21,9 +21,9 @@
 
 (reg-event-db
  :tonic/initialize
- (fn [db]
+ (fn []
    (let [size (.getSize vsm)]
-     (-> db
+     (-> db/default-db
          (assoc :tonic/viewport-size [(.-width size) (.-height size)])))))
 
 (reg-event-db
