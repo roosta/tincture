@@ -1,3 +1,2 @@
-* DONE Make theme manager
-  CLOSED: [2018-02-08 Thu 15:07]
-* TODO Add buttons
+* TODO Better transition function
+* TODO Gradient fn
