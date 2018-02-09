@@ -18,8 +18,7 @@
    [:ul
     [:li [:a {:href "/#typography"}
           [typography {:kind :body1}
-           "Typography demo"]]]]
-   ])
+           "Typography demo"]]]]])
 
 
 ;; -------------------------
