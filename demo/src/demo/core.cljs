@@ -37,7 +37,6 @@
   (r/render [appframe] (.getElementById js/document "app")))
 
 (defn init! []
-  (t/init!)
   (accountant/configure-navigation!
    {:nav-handler
     (fn [path]
@@ -46,6 +45,7 @@
     (fn [path]
       (secretary/locate-route path))})
   (accountant/dispatch-current!)
-  (mount-root))
+  (mount-root)
+  (t/init!))
 
 (init!)
