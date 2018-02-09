@@ -5,7 +5,7 @@
             [reagent.debug :as d]))
 
 ;; get viewport size
-(rf/reg-sub
+#_(rf/reg-sub
  :tonic/viewport-size
  (fn [db _]
    (:tonic/viewport-size db)))
@@ -19,14 +19,14 @@
      (device/isMobile)  :mobile)))
 
 ;; get viewport size
-(rf/reg-sub
+#_(rf/reg-sub
  :tonic/viewport-width
  :<- [:tonic/viewport-size]
  (fn [[width _]]
    width))
 
 ;; get viewport size
-(rf/reg-sub
+#_(rf/reg-sub
  :tonic/viewport-height
  :<- [:tonic/viewport-size]
  (fn [[_ height]]
