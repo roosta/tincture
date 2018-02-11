@@ -4,6 +4,7 @@
             [devtools.core :as devtools]
             [re-frame.core :as rf]
             [tonic.core :as t]
+            [herb.core :refer-macros [with-style]]
             [tonic.typography :refer [typography]]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))

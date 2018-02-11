@@ -1,5 +1,5 @@
 (ns tonic.container
-  (:require [herb.macro :refer-macros [with-style]]
+  (:require [herb.core :refer-macros [with-style]]
             [reagent.core :as r]))
 
 (defn container-style

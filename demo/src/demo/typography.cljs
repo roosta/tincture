@@ -3,7 +3,7 @@
             [garden.units :refer [px]]
             [tonic.typography :refer [typography]]
             [reagent.debug :as d]
-            [herb.macro :refer-macros [with-style]]))
+            [herb.core :refer-macros [with-style]]))
 
 (defn main
   []

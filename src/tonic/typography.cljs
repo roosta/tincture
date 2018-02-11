@@ -3,7 +3,7 @@
    [garden.units :refer [px percent]]
    [reagent.debug :as d]
    [clojure.string :as str]
-   [herb.macro :refer-macros [with-style]]
+   [herb.core :refer-macros [with-style]]
    [cljs.spec.alpha :as s :include-macros true]
    [reagent.core :as r]
    [tonic.core :as t]))

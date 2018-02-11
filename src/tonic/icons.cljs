@@ -1,6 +1,6 @@
 (ns tonic.icons
   (:require
-   [herb.macro :refer-macros [with-style]]
+   [herb.core :refer-macros [with-style]]
    [clojure.string :as str]
    [reagent.core :as r]))
 
