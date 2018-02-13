@@ -1,4 +1,5 @@
 * TODO Better transition function
-* TODO Gradient fn
-* TODO Add color helpers
+* TODO Add color helpers (lighten, darken)
+* TODO Add gradients
+* TODO Add palettes (material-ui, web-safe)
 * TODO Add px->rem
