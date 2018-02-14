@@ -9,9 +9,9 @@
                                    after debug dispatch]]
             [clojure.spec.alpha :as s]) )
 
-#_(defonce vsm (ViewportSizeMonitor.))
+(defonce vsm (ViewportSizeMonitor.))
 
-#_(defonce vsm-listener
+(defonce vsm-listener
   (gevents/listen
    vsm
    event-type/RESIZE
@@ -22,12 +22,12 @@
 (reg-event-db
  :tonic/initialize
  (fn []
-   db/default-db
-   #_(let [size (.getSize vsm)]
+   ;; db/default-db
+   (let [size (.getSize vsm)]
      (-> db/default-db
          (assoc :tonic/viewport-size [(.-width size) (.-height size)])))))
 
-#_(reg-event-db
+(reg-event-db
  :tonic/set-viewport-size
  (fn [db [_ new]]
    (assoc db :tonic/viewport-size new)))
