@@ -152,4 +152,6 @@
 
 (defn init!
   []
-  (rf/dispatch-sync [:tonic/initialize]))
+  (rf/dispatch-sync [:tonic/initialize])
+  (rf/dispatch-sync [:tonic/set-font-families {:headline ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]
+                                               :body ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]))

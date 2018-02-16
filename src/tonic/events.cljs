@@ -31,3 +31,12 @@
  :tonic/set-viewport-size
  (fn [db [_ new]]
    (assoc db :tonic/viewport-size new)))
+
+
+(reg-event-db
+ :tonic/set-font-families
+ (fn [db [_ fonts]]
+   (assoc db :tonic/font-families fonts)))
+
+
+;; Lato,'Helvetica Neue',Arial,Helvetica,sans-serif
