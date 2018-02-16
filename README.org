@@ -19,3 +19,5 @@
 
   Just ensure that script is on your ~source path~ which it is in this project
   already
+"gradients.json" sourced from: https://github.com/Ghosh/uiGradients/
+Gradient macro lifted from https://github.com/rm-hull/inkspot
