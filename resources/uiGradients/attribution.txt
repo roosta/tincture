@@ -1,2 +1,0 @@
-"gradients.json" sourced from: https://github.com/Ghosh/uiGradients/
-Gradient macro lifted from https://github.com/rm-hull/inkspot
