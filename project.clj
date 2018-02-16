@@ -6,7 +6,7 @@
 
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [herb "0.3.1-SNAPSHOT"]
+                 [herb "0.3.3-SNAPSHOT"]
                  [prismatic/dommy "1.1.0"]
                  [re-frame "0.10.4"]
                  [rm-hull/inkspot "0.2.1"]]
