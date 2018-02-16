@@ -21,10 +21,10 @@
 
 (reg-event-db
  :tonic/initialize
- (fn []
-   ;; db/default-db
+ (fn [db]
    (let [size (.getSize vsm)]
-     (-> db/default-db
+     (-> db
+         (merge db/default-db)
          (assoc :tonic/viewport-size [(.-width size) (.-height size)])))))
 
 (reg-event-db
