@@ -26,7 +26,7 @@
    [:cljsbuild :builds :app :compiler :output-dir]
    [:cljsbuild :builds :app :compiler :output-to]]
 
-  :resource-paths ["public"]
+  :resource-paths ["public" "../resources"]
 
   :source-paths ["src" "../src"]
 

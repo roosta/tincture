@@ -4,11 +4,11 @@
    [re-frame.core :as rf]
    [tonic.events]
    [tonic.subs]
-   [inkspot.util :as util]
+   [inkspot.util :as ink-util]
    [tonic.db]
    [clojure.string :as string])
   (:require-macros
-   [inkspot.macros :as macros])
+   [inkspot.macros :as ink-macros])
   )
 
 (defn join-classes
@@ -122,30 +122,14 @@
 
 (defn gradient
   [direction & colors]
-  #{"-webkit-linear-gradient(to right, #ffd89b, #19547b)"}
-  )
+  #{"-webkit-linear-gradient(to right, #ffd89b, #19547b)"})
 
 (def ui-gradient
   "Loads gradients from a JSON source as per format here:
-   https://github.com/Ghosh/uiGradients/blob/master/gradients.json
-   Valid gradient names (may be specified as strings or keywords):
-       :a-lost-memory :almost :amethyst :aqua-marine :aqualicious :army
-       :ash :aubergine :autumn :behongo :bloody-mary :blurry-beach :bora-bora
-       :bourbon :calm-darya :candy :cheer-up-emo-kid :cherry :cherryblossoms
-       :clouds :dance-to-forget :day-tripper :dirty-fog :dracula :earthly
-       :electric-violet :emerald-water :facebook-messenger :forever-lost
-       :frozen :horizon :influenza :jonquil :juicy-orange :kashmir :kyoto
-       :lemon-twist :man-of-steel :mango-pulp :mantle :miaka :midnight-city
-       :mirage :misty-meadow :mojito :moonrise :moor :moss :mystic :namn
-       :neon-life :opa :parklife :peach :petrichor :pinky :pinot-noir
-       :purple-paradise :red-mist :reef :rose-water :sea-blizz :sea-weed
-       :shadow-night :shore :shrimpy :shroom-haze :sirius-tamed :soundcloud
-       :starfall :steel-gray :stellar :sunrise :teal-love :the-strain :titanium
-       :vasily :venice-blue :virgin :winter
-   nil is returned if a gradient name is not found."
-  (let [gradients (macros/ui-gradients "uiGradients/gradients.json")]
+   https://github.com/Ghosh/uiGradients/blob/master/gradients.json "
+  (let [gradients (ink-macros/ui-gradients "gradients.json")]
     (fn [name steps]
-      (let [k (util/name->kword name)
+      (let [k (ink-util/name->kword name)
             [col1 col2] (k gradients)]
         (when (and col1 col2)
           [col1 col2])))))
