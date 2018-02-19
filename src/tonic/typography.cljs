@@ -70,8 +70,9 @@
            :body2 {:font-size (px 14)
                    :font-weight (:regular font-weight)
                    :font-family (:body font-families)
-                   :line-height (px 20)}}))
-)(def mapping
+                   :line-height (px 20)}})))
+
+(def mapping
   {:display4 :h1
    :display3 :h1
    :display2 :h1
