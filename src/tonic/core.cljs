@@ -4,11 +4,10 @@
    [re-frame.core :as rf]
    [tonic.events]
    [tonic.subs]
-   [inkspot.util :as ink-util]
    [tonic.db]
-   [clojure.string :as string])
+   [clojure.string :as str])
   (:require-macros
-   [inkspot.macros :as ink-macros])
+   [tonic.macros :as macros])
   )
 
 (defn join-classes
@@ -16,11 +15,23 @@
   [styles & classes]
   (->> (select-keys styles classes)
        vals
-       (string/join " ")))
+       (str/join " ")))
 
 (defn clamp
   [n a b]
   (max (min n b) a))
+
+(defn name->kword
+  "Converts strings into punctuation-free keywords
+  source: https://github.com/rm-hull/inkspot"
+  [s]
+  (->
+   (name s)
+   (str/replace #"\W" " ")
+   (str/trim)
+   (str/replace #" +" "-")
+   (str/lower-case)
+   (keyword)))
 
 ;; TODO deal with function values and multiples.
 (s/def ::valid-timing-fns #{"ease" "ease-in" "ease-out" "ease-in-out" "linear" "step-start" "step-end"})
@@ -126,10 +137,11 @@
 
 (def ui-gradient
   "Loads gradients from a JSON source as per format here:
-   https://github.com/Ghosh/uiGradients/blob/master/gradients.json "
-  (let [gradients (ink-macros/ui-gradients "gradients.json")]
+   https://github.com/Ghosh/uiGradients/blob/master/gradients.json
+  source: https://github.com/rm-hull/inkspot"
+  (let [gradients (macros/ui-gradients "gradients.json")]
     (fn [name steps]
-      (let [k (ink-util/name->kword name)
+      (let [k (name->kword name)
             [col1 col2] (k gradients)]
         (when (and col1 col2)
           [col1 col2])))))
