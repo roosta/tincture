@@ -1,4 +1,4 @@
-(defproject tonic "0.1.2-SNAPSHOT"
+(defproject tonic "0.1.3-SNAPSHOT"
   :description "Various frontend tools to ease development"
   :url "https://github.com/roosta/tonic"
   :license {:name "Eclipse Public License"
