@@ -12,7 +12,6 @@
 
                  [prismatic/dommy "1.1.0"]
 
-                 [rm-hull/inkspot "0.2.1"]
                  [re-frame "0.10.4"]
                  [reagent "0.8.0-alpha2"]]
 

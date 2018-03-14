@@ -8,9 +8,7 @@
                  [org.clojure/clojurescript "1.9.946"]
                  [herb "0.4.0-SNAPSHOT"]
                  [prismatic/dommy "1.1.0"]
-                 [re-frame "0.10.5"]
-                 ; [rm-hull/inkspot "0.2.1"]
-                 ]
+                 [re-frame "0.10.5"]]
 
   :source-paths ["src"]
 
