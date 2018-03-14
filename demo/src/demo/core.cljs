@@ -3,9 +3,9 @@
             [demo.typography :as typo-demo]
             [devtools.core :as devtools]
             [re-frame.core :as rf]
-            [tonic.core :as t]
+            [tincture.core :as t]
             [herb.core :refer-macros [with-style]]
-            [tonic.typography :refer [typography]]
+            [tincture.typography :refer [typography]]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
 
@@ -14,7 +14,7 @@
 (defn home-page []
   [:div
    [typography {:kind :headline}
-    "Welcome to the Tonic demo"]
+    "Welcome to the tincture demo"]
    [:ul
     [:li [:a {:href "/#typography"}
           [typography {:kind :body1}

@@ -1,4 +1,4 @@
-(ns tonic.icons
+(ns tincture.icons
   (:require
    [herb.core :refer-macros [with-style]]
    [clojure.string :as str]

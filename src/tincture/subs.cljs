@@ -1,4 +1,4 @@
-(ns tonic.subs
+(ns tincture.subs
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
             [goog.labs.userAgent.device :as device]
@@ -6,17 +6,17 @@
 
 ;; get viewport size
 (rf/reg-sub
- :tonic/viewport-size
+ :tincture/viewport-size
  (fn [db _]
-   (:tonic/viewport-size db)))
+   (:tincture/viewport-size db)))
 
 (rf/reg-sub
- :tonic/font-families
+ :tincture/font-families
  (fn [db _]
-   (:tonic/font-families db)))
+   (:tincture/font-families db)))
 
 (rf/reg-sub
- :tonic/device
+ :tincture/device
  (fn []
    (cond
      (device/isDesktop) :desktop
@@ -25,14 +25,14 @@
 
 ;; get viewport size
 (rf/reg-sub
- :tonic/viewport-width
- :<- [:tonic/viewport-size]
+ :tincture/viewport-width
+ :<- [:tincture/viewport-size]
  (fn [[width _]]
    width))
 
 ;; get viewport size
 (rf/reg-sub
- :tonic/viewport-height
- :<- [:tonic/viewport-size]
+ :tincture/viewport-height
+ :<- [:tincture/viewport-size]
  (fn [[_ height]]
    height))

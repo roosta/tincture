@@ -1,4 +1,4 @@
-(ns tonic.macros
+(ns tincture.macros
   (:require
    [clojure.data.json :as json]
    [tonic.utils :as utils]

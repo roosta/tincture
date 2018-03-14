@@ -1,7 +1,7 @@
 (ns demo.typography
   (:require [reagent.core :as r]
             [garden.units :refer [px]]
-            [tonic.typography :refer [typography]]
+            [tincture.typography :refer [typography]]
             [reagent.debug :as d]
             [herb.core :refer-macros [with-style]]))
 

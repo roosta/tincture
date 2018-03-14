@@ -1,13 +1,13 @@
-(ns tonic.core
+(ns tincture.core
   (:require
    [cljs.spec.alpha :as s :include-macros true]
    [re-frame.core :as rf]
-   [tonic.events]
-   [tonic.subs]
-   [tonic.db]
+   [tincture.events]
+   [tincture.subs]
+   [tincture.db]
    [clojure.string :as str])
   (:require-macros
-   [tonic.macros :as macros])
+   [tincture.macros :as macros])
   )
 
 (defn join-classes
@@ -148,4 +148,4 @@
 
 (defn init!
   []
-  (rf/dispatch-sync [:tonic/initialize]))
+  (rf/dispatch-sync [:tincture/initialize]))
