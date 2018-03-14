@@ -1,4 +1,4 @@
-(ns tonic.typography
+(ns tincture.typography
   (:require
    [garden.units :refer [px percent]]
    [reagent.debug :as d]
@@ -6,7 +6,7 @@
    [herb.core :refer-macros [with-style]]
    [cljs.spec.alpha :as s :include-macros true]
    [reagent.core :as r]
-   [tonic.core :as t]
+   [tincture.core :as t]
    [re-frame.core :as rf]))
 
 (def font-weight {:light 300
@@ -19,7 +19,7 @@
 
 (defn kinds
   [kind]
-  (let [font-families @(rf/subscribe [:tonic/font-families])]
+  (let [font-families @(rf/subscribe [:tincture/font-families])]
     (kind {:display1 {:font-size (px 34)
                       :font-weight (:regular font-weight)
                       :font-family (:headline font-families)

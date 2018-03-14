@@ -1,6 +1,6 @@
-(defproject tonic "0.1.3-SNAPSHOT"
+(defproject tincture "0.1.3-SNAPSHOT"
   :description "Various frontend tools to ease development"
-  :url "https://github.com/roosta/tonic"
+  :url "https://github.com/roosta/tincture"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -21,8 +21,8 @@
                                    :optimizations :none
                                    :pretty-print true
                                    :source-map true
-                                   :main tonic.runner}}
+                                   :main tincture.runner}}
                        {:id "prod"
                         :source-paths ["src"]
-                        :compiler {:output-to "tonic.js"
+                        :compiler {:output-to "tincture.js"
                                    :optimizations :advanced}}]})

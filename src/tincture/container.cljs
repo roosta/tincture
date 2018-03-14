@@ -1,4 +1,4 @@
-(ns tonic.container
+(ns tincture.container
   (:require [herb.core :refer-macros [with-style]]
             [garden.units :refer [em rem]]
             [reagent.core :as r]))
