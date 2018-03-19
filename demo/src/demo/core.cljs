@@ -6,6 +6,7 @@
             [tincture.core :as t]
             [herb.core :refer-macros [with-style]]
             [tincture.typography :refer [typography]]
+            [demo.slide :refer [slide-demo]]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
 
@@ -18,7 +19,11 @@
    [:ul
     [:li [:a {:href "/#typography"}
           [typography {:kind :body1}
-           "Typography demo"]]]]])
+           "Typography demo"]]]
+    [:li [:a {:href "/#slide"}
+          [typography {:kind :body1}
+           "Slide demo"]]]
+    ]])
 
 ;; -------------------------
 ;; Routes
@@ -33,6 +38,9 @@
 
 (secretary/defroute "/#typography" []
   (reset! page #'typo-demo/main))
+
+(secretary/defroute "/#slide" []
+  (reset! page #'slide-demo))
 
 (defn mount-root []
   (r/render [appframe] (.getElementById js/document "app")))
