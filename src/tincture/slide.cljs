@@ -1,60 +1,97 @@
-; ----------------------
-; Slide component
-; ----------------------
-; Each child must have a unique key for css-transition-group to work.
-; Also each child needs a predefined height and width. Dynamic stuff won't work.
-; I might spec this component, to ensure this someday
-(ns flora-ui.slide
-  #_(:require [goog.object :as gobj]
-            [reagent.core :as r]
-            [cljs-css-modules.macro :refer-macros [defstyle]]
-            [audioskop.components.transition :refer [css-transition transition-group]]
-            [reagent.debug :as d]))
+(ns tincture.slide
+  (:require [cljsjs.react-transition-group]
+            [clojure.spec.alpha :as s]
+            [tincture.core :refer [easing create-transition]]
+            [clojure.string :as str]
+            [reagent.core :as r]))
 
-;; NOTE: An element that is to be slided needs to have a height defined on the
-;; root slide container. Originally the height value in root below is
-;; suppose to be a fallback, but the way JSS works its hard to control
-;; precedence in two different classes
-#_(defstyle slide-style
-  [:.root {:position "relative"
-           :height "100%"
-           :width    "100%"
-           :overflow "hidden"}]
-  [:.enter-left         {:transform "translate(100%, 0)"}]
-  [:.enter-right        {:transform "translate(-100%, 0)"}]
-  [:.enter-up           {:transform "translate(0, 100%)"}]
-  [:.enter-down         {:transform "translate(0, -100%)"}]
-  [:.enter-active       {:transform "translate(0, 0)"}]
-  [:.exit               {:transform "translate(0, 0)"}]
-  [:.exit-active-up     {:transform "translate(0, -100%)"}]
-  [:.exit-active-down   {:transform "translate(0, 100%)"}]
-  [:.exit-active-left   {:transform "translate(-100%, 0)"}]
-  [:.exit-active-right  {:transform "translate(100%, 0)"}]
-  [:.child {:left       0
-            :top        0
-            :width      "100%"
-            :height     "100%"
-            :position   "absolute"
-            :transition "opacity 400ms ease-out, transform 400ms ease-out"}])
+(def Transition (r/adapt-react-class (.-Transition js/ReactTransitionGroup)))
+(def TransitionGroup (r/adapt-react-class (.-TransitionGroup js/ReactTransitionGroup)))
+(def CSSTransition (r/adapt-react-class (.-CSSTransition js/ReactTransitionGroup)))
 
-#_(defn slide
-  [{:keys [direction]
-    :or {direction "left"}}]
-  (into
-   [transition-group {:class (:root slide-style)}]
-   (map
-    (fn [child]
-      (let [k (or (:key (second child))
-                  (:key (meta child)))]
-        (assert k "You need to provide a key for child elements")
-        [css-transition
-         {:timeout 500
-          :key k
-          :class (:child slide-style)
-          :class-names {:enter ((keyword (str "enter-" direction)) slide-style)
-                        :enter-active (:enter-active slide-style)
-                        :exit (:exit slide-style)
-                        :exit-active ((keyword (str "exit-active-" direction)) slide-style)}}
-         [:div
-          child]]))
-    (r/children (r/current-component)))))
+;; TODO Fix this, use Herb
+(defn- get-style
+  [state direction easing duration]
+  (let [duration (str duration "ms")]
+    (merge
+     (case state
+       "entering" {:transform (direction {:left "translate(100%, 0)"
+                                          :right "translate(-100%, 0)"
+                                          :up "translate(0, 100%)"
+                                          :down "translate(0, -100%)"})
+                   :opacity 0.01}
+       "entered" {:transform "translate(0, 0)"
+                  :opacity 1}
+       "exiting" {:transform (direction {:left "translate(-100%, 0)"
+                                         :right "translate(100%, 0)"
+                                         :up "translate(0, -100%)"
+                                         :down "translate(0, 100%)"})
+                  :opacity 0.01}
+       "exited" {:opacity 0})
+     {:left 0
+      :top 0
+      :width "100%"
+      :height "100%"
+      :position "absolute"
+      :transition (create-transition {:properties ["transform" "opacity"]
+                                      :durations [duration duration]
+                                      :easings [easing easing]})})))
+
+(defn- slide-child
+  [{:keys
+    [duration timeout on-exit on-exited on-enter on-entered unmount-on-exit
+     mount-on-enter easing appear direction children in]}]
+   [Transition {:in in
+                :timeout timeout
+                :unmountOnExit unmount-on-exit
+                :mountOnEnter mount-on-enter
+                :appear appear
+                :onExit on-exit
+                :onEnter on-enter
+                :onExited on-exited
+                :onEntered on-entered}
+    (fn [state]
+        (r/as-element
+         (into [:div {:style (get-style state direction easing duration)}]
+               children)))])
+
+(s/def ::direction #{:up :down :left :right})
+
+(defn slide
+  [{:keys [direction class duration timeout unmount-on-exit mount-on-enter
+           easing appear enter exit on-exit on-exited on-enter on-entered]
+    :or {direction :left duration 500 timeout 500 mount-on-enter false
+         unmount-on-exit true easing :ease-in-out-cubic appear? false
+         enter? true exit? true on-enter #() on-exit #() on-exited #() on-entered #()}}]
+  {:pre [(s/valid? ::direction direction)]}
+  (let [children (r/children (r/current-component))
+        k (-> children first meta :key)]
+    [TransitionGroup {:class class
+                      :enter enter
+                      :exit exit
+                      :style {:position "relative"
+                              :height "100%"
+                              :width "100%"
+                              :overflow "hidden"}
+
+                      ;; Since the direction should change for exiting children
+                      ;; as well, we need to reactivly update them
+                      :childFactory (fn [child]
+                                      (js/React.cloneElement child #js {:direction direction}))}
+
+     ;; to access the passed props of transition group we need to create a react
+     ;; component from the carousel-child transition.
+     (let [child (r/reactify-component slide-child)]
+       (r/create-element child #js {:key k
+                                    :duration duration
+                                    :timeout timeout
+                                    :on-exit on-exit
+                                    :on-exited on-exited
+                                    :on-enter on-enter
+                                    :on-entered on-entered
+                                    :unmount-on-exit unmount-on-exit
+                                    :mount-on-enter mount-on-enter
+                                    :easing easing
+                                    :appear appear
+                                    :direction direction
+                                    :children children}))]))
