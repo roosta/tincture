@@ -12,6 +12,7 @@
 
                  [prismatic/dommy "1.1.0"]
 
+                 [cljsjs/react-transition-group "2.2.1-1"]
                  [figwheel-sidecar "0.5.15"]
                  [re-frame "0.10.4"]
                  [reagent "0.8.0-alpha2"]]
