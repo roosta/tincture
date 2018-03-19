@@ -1,7 +1,7 @@
 (ns tincture.macros
   (:require
    [clojure.data.json :as json]
-   [tonic.utils :as utils]
+   [tincture.utils :as utils]
    [clojure.java.io :as io]))
 
 (defn ^:private load-json [json-str]

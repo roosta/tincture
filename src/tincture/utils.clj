@@ -1,4 +1,4 @@
-(ns tonic.utils
+(ns tincture.utils
   (:require [clojure.string :as str]))
 
 (defn name->kword
