@@ -30,8 +30,6 @@
        "exited" {:opacity 0})
      {:left 0
       :top 0
-      :width "100%"
-      :height "100%"
       :position "absolute"
       :transition (create-transition {:properties ["transform" "opacity"]
                                       :durations [duration duration]
@@ -70,8 +68,6 @@
                       :enter enter
                       :exit exit
                       :style {:position "relative"
-                              :height "100%"
-                              :width "100%"
                               :overflow "hidden"}
 
                       ;; Since the direction should change for exiting children
