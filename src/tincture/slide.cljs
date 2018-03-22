@@ -2,6 +2,7 @@
   (:require [cljsjs.react-transition-group]
             [clojure.spec.alpha :as s]
             [tincture.core :refer [easing create-transition]]
+            [reagent.debug :refer [log]]
             [clojure.string :as str]
             [reagent.core :as r]))
 
@@ -38,9 +39,10 @@
 (defn- slide-child
   [{:keys
     [duration timeout on-exit on-exited on-enter on-entered unmount-on-exit
-     mount-on-enter easing appear direction children in]}]
+     mount-on-enter easing appear direction children in child-class transition-class]}]
    [Transition {:in in
                 :timeout timeout
+                :class transition-class
                 :unmountOnExit unmount-on-exit
                 :mountOnEnter mount-on-enter
                 :appear appear
@@ -50,22 +52,27 @@
                 :onEntered on-entered}
     (fn [state]
         (r/as-element
-         (into [:div {:style (get-style state direction easing duration)}]
+         (into [:div {:class child-class
+                      :style (get-style state direction easing duration)}]
                children)))])
 
 (s/def ::direction #{:up :down :left :right})
 
 (defn slide
-  [{:keys [direction class duration timeout unmount-on-exit mount-on-enter
-           easing appear enter exit on-exit on-exited on-enter on-entered]
+  [{:keys [direction duration timeout unmount-on-exit mount-on-enter
+           easing appear enter exit on-exit on-exited on-enter on-entered classes]
     :or {direction :left duration 500 timeout 500 mount-on-enter false
          unmount-on-exit true easing :ease-in-out-cubic appear? false
          enter? true exit? true on-enter #() on-exit #() on-exited #() on-entered #()}}]
   {:pre [(s/valid? ::direction direction)]}
-  (let [children (r/children (r/current-component))
+  (let [{root-class :transition-group
+         transition-class :transition
+         child-class :child-container} classes
+        children (r/children (r/current-component))
         k (or (-> children first meta :key)
               (-> children first second :key))]
-    [TransitionGroup {:enter enter
+    [TransitionGroup {:class root-class
+                      :enter enter
                       :exit exit
                       :style {:position "relative"
                               :overflow "hidden"}
@@ -80,6 +87,8 @@
      (let [child (r/reactify-component slide-child)]
        (r/create-element child #js {:key k
                                     :duration duration
+                                    :child-class child-class
+                                    :transition-class transition-class
                                     :timeout timeout
                                     :on-exit on-exit
                                     :on-exited on-exited
