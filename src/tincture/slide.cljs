@@ -63,9 +63,9 @@
          enter? true exit? true on-enter #() on-exit #() on-exited #() on-entered #()}}]
   {:pre [(s/valid? ::direction direction)]}
   (let [children (r/children (r/current-component))
-        k (-> children first meta :key)]
-    [TransitionGroup {:class class
-                      :enter enter
+        k (or (-> children first meta :key)
+              (-> children first second :key))]
+    [TransitionGroup {:enter enter
                       :exit exit
                       :style {:position "relative"
                               :overflow "hidden"}
