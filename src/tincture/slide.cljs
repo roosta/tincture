@@ -40,11 +40,12 @@
 
 (defn- slide-child
   [{:keys
-    [duration timeout on-exit on-exited on-enter on-entered unmount-on-exit
+    [duration style class timeout on-exit on-exited on-enter on-entered unmount-on-exit
      mount-on-enter easing appear direction children in child-class transition-class]}]
    [Transition {:in in
+                :style style
                 :timeout timeout
-                :class transition-class
+                :class class
                 :unmountOnExit unmount-on-exit
                 :mountOnEnter mount-on-enter
                 :appear appear
@@ -61,19 +62,18 @@
 (s/def ::direction #{:up :down :left :right})
 
 (defn slide
-  [{:keys [direction duration timeout unmount-on-exit mount-on-enter
+  [{:keys [direction duration timeout unmount-on-exit mount-on-enter class
            easing appear enter exit on-exit on-exited on-enter on-entered classes]
     :or {direction :left duration 500 timeout 500 mount-on-enter false
          unmount-on-exit true easing :ease-in-out-cubic appear? false
          enter? true exit? true on-enter #() on-exit #() on-exited #() on-entered #()}}]
   {:pre [(s/valid? ::direction direction)]}
-  (let [{root-class :transition-group
-         transition-class :transition
+  (let [{transition-class :transition
          child-class :child-container} classes
         children (r/children (r/current-component))
         k (or (-> children first meta :key)
               (-> children first second :key))]
-    [TransitionGroup {:class root-class
+    [TransitionGroup {:class class
                       :enter enter
                       :exit exit
                       :style {:position "relative"
