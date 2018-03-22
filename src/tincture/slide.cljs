@@ -31,8 +31,6 @@
        "exited" {:opacity 0})
      {:left 0
       :top 0
-      :width "100%"
-      :height "100%"
       :position "absolute"
       :transition (create-transition {:properties ["transform" "opacity"]
                                       :durations [duration duration]
@@ -40,12 +38,12 @@
 
 (defn- slide-child
   [{:keys
-    [duration style class timeout on-exit on-exited on-enter on-entered unmount-on-exit
-     mount-on-enter easing appear direction children in child-class transition-class]}]
+    [duration style timeout on-exit on-exited on-enter on-entered unmount-on-exit
+     mount-on-enter easing appear direction children in child-container-class transition-class]}]
    [Transition {:in in
                 :style style
                 :timeout timeout
-                :class class
+                :class transition-class
                 :unmountOnExit unmount-on-exit
                 :mountOnEnter mount-on-enter
                 :appear appear
@@ -55,7 +53,7 @@
                 :onEntered on-entered}
     (fn [state]
         (r/as-element
-         (into [:div {:class child-class
+         (into [:div {:class child-container-class
                       :style (get-style state direction easing duration)}]
                children)))])
 
@@ -69,7 +67,7 @@
          enter? true exit? true on-enter #() on-exit #() on-exited #() on-entered #()}}]
   {:pre [(s/valid? ::direction direction)]}
   (let [{transition-class :transition
-         child-class :child-container} classes
+         child-container-class :child-container} classes
         children (r/children (r/current-component))
         k (or (-> children first meta :key)
               (-> children first second :key))]
@@ -77,8 +75,6 @@
                       :enter enter
                       :exit exit
                       :style {:position "relative"
-                              :width "100%"
-                              :height "100%"
                               :overflow "hidden"}
 
                       ;; Since the direction should change for exiting children
@@ -91,7 +87,7 @@
      (let [child (r/reactify-component slide-child)]
        (r/create-element child #js {:key k
                                     :duration duration
-                                    :child-class child-class
+                                    :child-container-class child-container-class
                                     :transition-class transition-class
                                     :timeout timeout
                                     :on-exit on-exit
