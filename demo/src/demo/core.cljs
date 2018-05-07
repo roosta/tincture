@@ -4,11 +4,17 @@
             [devtools.core :as devtools]
             [re-frame.core :as rf]
             [tincture.core :as t]
-            [herb.core :refer-macros [<class]]
+            [herb.core
+             :refer-macros [<class]
+             :refer [global-style!]]
             [tincture.typography :refer [typography]]
             [demo.slide :refer [slide-demo]]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
+
+(def global-style
+  [:body {:margin 0
+          :font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]}])
 
 (devtools/install!)
 
@@ -22,8 +28,7 @@
            "Typography demo"]]]
     [:li [:a {:href "/#slide"}
           [typography {:kind :body1}
-           "Slide demo"]]]
-    ]])
+           "Slide demo"]]]]])
 
 ;; -------------------------
 ;; Routes
@@ -46,6 +51,7 @@
   (r/render [appframe] (.getElementById js/document "app")))
 
 (defn init! []
+  (global-style! global-style)
   (accountant/configure-navigation!
    {:nav-handler
     (fn [path]
