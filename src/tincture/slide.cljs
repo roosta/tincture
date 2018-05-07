@@ -38,8 +38,9 @@
 
 (defn- slide-child
   [{:keys
-    [duration style timeout on-exit on-exited on-enter on-entered unmount-on-exit
-     mount-on-enter easing appear direction children in child-container-class transition-class]}]
+    [duration style timeout on-exit on-exited on-enter on-entered
+     unmount-on-exit mount-on-enter easing appear direction children in
+     child-container-class transition-class]}]
    [Transition {:in in
                 :style style
                 :timeout timeout
