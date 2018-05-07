@@ -8,7 +8,7 @@
                  [secretary "1.2.3"]
                  [venantius/accountant "0.2.3"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [herb "0.4.0-SNAPSHOT"]
+                 [herb "0.5.0-SNAPSHOT"]
 
                  [prismatic/dommy "1.1.0"]
 

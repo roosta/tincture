@@ -3,7 +3,7 @@
             [garden.units :refer [px]]
             [tincture.typography :refer [typography]]
             [reagent.debug :as d]
-            [herb.core :refer-macros [with-style]]))
+            [herb.core :refer-macros [<class]]))
 
 (defn main
   []

@@ -1,6 +1,6 @@
 (ns tincture.icons
   (:require
-   [herb.core :refer-macros [with-style]]
+   [herb.core :refer-macros [<class]]
    [clojure.string :as str]
    [reagent.core :as r]))
 
@@ -17,7 +17,7 @@
 
 (defn svg-icon
   [{:keys [class viewbox]}]
-  (let [class* (str/join " " [class (with-style svg-icon-style)])]
+  (let [class* (str/join " " [class (<class svg-icon-style)])]
     (into
      [:svg {:view-box viewbox
             :class class*}]

@@ -3,7 +3,7 @@
    [garden.units :refer [px percent]]
    [reagent.debug :as d]
    [clojure.string :as str]
-   [herb.core :refer-macros [with-style]]
+   [herb.core :refer-macros [<class]]
    [cljs.spec.alpha :as s :include-macros true]
    [reagent.core :as r]
    [tincture.core :as t]
@@ -132,7 +132,7 @@
          (s/valid? ::valid-kinds kind)
          (s/valid? ::valid-directions direction)
          (s/valid? ::valid-styles style)]}
-  (let [class* (with-style typography-style kind align style direction elevation)]
+  (let [class* (<class typography-style kind align style direction elevation)]
     (into
      [(kind mapping) {:on-click on-click
                       :class (if class (str class " " class*)

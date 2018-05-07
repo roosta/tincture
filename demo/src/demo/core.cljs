@@ -4,7 +4,7 @@
             [devtools.core :as devtools]
             [re-frame.core :as rf]
             [tincture.core :as t]
-            [herb.core :refer-macros [with-style]]
+            [herb.core :refer-macros [<class]]
             [tincture.typography :refer [typography]]
             [demo.slide :refer [slide-demo]]
             [secretary.core :as secretary :include-macros true]

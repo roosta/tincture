@@ -5,7 +5,7 @@
                        chevron-up
                        chevron-down]]
    [reagent.debug :refer [log]]
-   [herb.core :refer [<class]]
+   [herb.core :refer-macros [<class defgroup]]
    [tincture.core :as core]
    [garden.units :refer [px]]
    [tincture.slide :refer [slide]]
