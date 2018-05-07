@@ -1,5 +1,7 @@
 (ns tincture.container
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core
+             :refer-macros [<class]
+             :refer [join-classes]]
             [garden.units :refer [em rem]]
             [reagent.core :as r]))
 
@@ -19,8 +21,8 @@
    :margin-left "auto"})
 
 (defn container
-  []
-  (into [:div {:class (<class container-style)}]
+  [{:keys [class]}]
+  (into [:div {:class (join-classes class (<class container-style))}]
         (r/children (r/current-component))))
 
 (defn container-fluid
