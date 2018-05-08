@@ -4,6 +4,7 @@
             [devtools.core :as devtools]
             [re-frame.core :as rf]
             [tincture.core :as t]
+            [tincture.container :refer [container]]
             [herb.core
              :refer-macros [<class]
              :refer [global-style!]]
@@ -19,15 +20,15 @@
 (devtools/install!)
 
 (defn home-page []
-  [:div
-   [typography {:kind :headline}
+  [container
+   [typography {:variant :headline}
     "Welcome to the tincture demo"]
    [:ul
     [:li [:a {:href "/#typography"}
-          [typography {:kind :body1}
+          [typography {:variant :body1}
            "Typography demo"]]]
     [:li [:a {:href "/#slide"}
-          [typography {:kind :body1}
+          [typography {:variant :body1}
            "Slide demo"]]]]])
 
 ;; -------------------------
