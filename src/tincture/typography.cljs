@@ -80,6 +80,7 @@
    :headline :h1
    :title :h2
    :subheading :h3
+   :button :span
    :body2 :aside
    :body1 :p})
 
