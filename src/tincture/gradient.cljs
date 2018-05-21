@@ -2,19 +2,15 @@
   (:require
    [cljs.spec.alpha :as s :include-macros true]
    [clojure.string :as str]
-   [orchestra-cljs.spec.test :as st]
    [tincture.utils :as utils])
   (:require-macros
    [tincture.macros :as macros]))
 
-(defn- ui-gradient
-  [name]
-  "Loads gradients from a JSON source as per format here:
-   https://github.com/Ghosh/uiGradients/blob/master/gradients.json
-  source: https://github.com/rm-hull/inkspot"
-  (let [gradients (macros/ui-gradients "gradients.json")
-        k (utils/name->kword name)]
-    (k gradients)))
+(def gradients (macros/ui-gradients "gradients.json"))
+
+(s/def ::ui-gradient-keyword (->> gradients (map key) set))
+(s/def ::directions #{:left :right :up :down})
+(s/def ::hex-color (s/and string? #(re-matches #"^#(?:[0-9a-fA-F]{3}){1,2}$" %)))
 
 (defn- css-gradient
   "Takes a direction and a vector of colors and returns a set with CSS strings"
@@ -33,14 +29,18 @@
   Example
   `(garden.core/css [:h2 {:background (gradent :vice-city :left)}])`"
   [name direction]
-  (let [colors (ui-gradient name)]
+  (let [kw (utils/name->kword name)
+        colors (kw gradients)]
     (css-gradient direction colors)))
 
-(s/def ::valid-directions #{:left :right :up :down})
+(s/fdef gradient
+  :args (s/cat :name (s/or :keyword ::ui-gradient-keyword
+                           :name (s/and string? #(s/valid? ::ui-gradient-keyword (utils/name->kword %))))
+               :direction ::directions)
+  :ret (s/coll-of string? :kind set? :min-count 3))
 
 (s/fdef css-gradient
-  :args (s/cat :direction ::valid-directions
-               :colors (s/coll-of string? :kind vector? :min-count 2 :distinct true)))
+  :args (s/cat :direction ::directions
+               :colors (s/coll-of ::hex-color :kind vector? :min-count 2 :distinct true))
+  :ret (s/coll-of string? :kind set? :min-count 3))
 
-
-(st/instrument)
