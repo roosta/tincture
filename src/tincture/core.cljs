@@ -122,21 +122,6 @@
                   :lg 1280
                   :xl 1920})
 
-(defn gradient
-  [direction & colors]
-  #{"-webkit-linear-gradient(to right, #ffd89b, #19547b)"})
-
-(def ui-gradient
-  "Loads gradients from a JSON source as per format here:
-   https://github.com/Ghosh/uiGradients/blob/master/gradients.json
-  source: https://github.com/rm-hull/inkspot"
-  (let [gradients (macros/ui-gradients "gradients.json")]
-    (fn [name steps]
-      (let [k (utils/name->kword name)
-            [col1 col2] (k gradients)]
-        (when (and col1 col2)
-          [col1 col2])))))
-
 (defn init!
   []
   (rf/dispatch-sync [:tincture/initialize]))
