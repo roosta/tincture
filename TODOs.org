@@ -1,5 +1,10 @@
+#+SEQ_TODO: TODO(d) | CANCELLED(c) DONE(o)
 * TODO Better transition function
-* TODO Add color helpers (lighten, darken)
+* CANCELLED Add color helpers (lighten, darken)
+  CLOSED: [2018-05-21 Mon 20:42]
+  Already in Garden
 * TODO Add gradients
 * TODO Add palettes (material-ui, web-safe)
-* TODO Add px->rem
+* CANCELLED Add px->rem
+  CLOSED: [2018-05-21 Mon 20:55]
+  Already in garden
