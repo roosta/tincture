@@ -4,11 +4,13 @@
             [devtools.core :as devtools]
             [re-frame.core :as rf]
             [tincture.core :as t]
+            [orchestra-cljs.spec.test :as st]
             [tincture.container :refer [container]]
             [herb.core
              :refer-macros [<class]
              :refer [global-style!]]
             [tincture.typography :refer [typography]]
+            [demo.gradient :refer [gradient-demo]]
             [demo.slide :refer [slide-demo]]
             [secretary.core :as secretary :include-macros true]
             [accountant.core :as accountant]))
@@ -21,15 +23,21 @@
 
 (defn home-page []
   [container
-   [typography {:variant :headline}
-    "Welcome to the tincture demo"]
+   [typography {:variant :display1}
+    "Welcome to the Tincture demo"]
+   [typography {:variant :body1}
+    "Tincture is a frontend toolkit for ClojureScript that provides several
+    utility functions, and definitions to aid/speed up developing web page visuals."]
    [:ul
     [:li [:a {:href "/#typography"}
           [typography {:variant :body1}
            "Typography demo"]]]
     [:li [:a {:href "/#slide"}
           [typography {:variant :body1}
-           "Slide demo"]]]]])
+           "Slide demo"]]]
+    [:li [:a {:href "/#gradient"}
+          [typography {:variant :body1}
+           "Gradient demo"]]]]])
 
 ;; -------------------------
 ;; Routes
@@ -48,6 +56,9 @@
 (secretary/defroute "/#slide" []
   (reset! page #'slide-demo))
 
+(secretary/defroute "/#gradient" []
+  (reset! page #'gradient-demo))
+
 (defn mount-root []
   (r/render [appframe] (.getElementById js/document "app")))
 
@@ -65,3 +76,5 @@
   (t/init!))
 
 (init!)
+
+(st/instrument)
