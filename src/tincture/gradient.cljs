@@ -8,17 +8,14 @@
 
 (def gradients (macros/ui-gradients "gradients.json"))
 
-(s/def ::ui-gradient-keyword (->> gradients (map key) set))
-(s/def ::directions #{:left :right :up :down})
-(s/def ::hex-color (s/and string? #(re-matches #"^#(?:[0-9a-fA-F]{3}){1,2}$" %)))
-
 (defn- css-gradient
   "Takes a direction and a vector of colors and returns a set with CSS strings"
   [direction colors]
-  (let [color-str (str/join ", " colors)]
+  (let [color-str (str/join ", " colors)
+        gradient-str (str "linear-gradient(to " (name direction) ", " color-str ")")]
     #{(first colors)
-      (str "-webkit-linear-gradient(to right, " color-str ")")
-      (str "linear-gradient(to right, " color-str ")")}))
+      (str "-webkit-" gradient-str)
+      gradient-str}))
 
 (defn gradient
   "Takes a name, that should correspond with gradients listed at uigradients.com
@@ -33,14 +30,19 @@
         colors (kw gradients)]
     (css-gradient direction colors)))
 
+(s/def ::ui-gradient-keyword (->> gradients (map key) set))
+(s/def ::directions #{:left :right :up :down})
+(s/def ::hex-color (s/and string? #(re-matches #"^#(?:[0-9a-fA-F]{3}){1,2}$" %)))
+(s/def ::css-set (s/coll-of string? :kind set? :min-count 3))
+
 (s/fdef gradient
   :args (s/cat :name (s/or :keyword ::ui-gradient-keyword
                            :name (s/and string? #(s/valid? ::ui-gradient-keyword (utils/name->kword %))))
                :direction ::directions)
-  :ret (s/coll-of string? :kind set? :min-count 3))
+  :ret ::css-set)
 
 (s/fdef css-gradient
   :args (s/cat :direction ::directions
                :colors (s/coll-of ::hex-color :kind vector? :min-count 2 :distinct true))
-  :ret (s/coll-of string? :kind set? :min-count 3))
+  :ret ::css-set)
 
