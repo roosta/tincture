@@ -11,8 +11,7 @@
 (defn- css-gradient
   "Takes a direction and a vector of colors and returns a set with CSS strings"
   [direction colors]
-  (let [color-str (str/join ", " colors)
-        gradient-str (str "linear-gradient(to " (name direction) ", " color-str ")")]
+  (let [gradient-str (str "linear-gradient(to " (name direction) ", " (str/join ", " colors) ")")]
     #{(first colors)
       (str "-webkit-" gradient-str)
       gradient-str}))
