@@ -1,14 +1,10 @@
 (ns tincture.slide
-  (:require [cljsjs.react-transition-group]
+  (:require [tincture.transitions :refer [Transition TransitionGroup CSSTransition]]
             [clojure.spec.alpha :as s]
             [tincture.core :refer [easing create-transition]]
             [reagent.debug :refer [log]]
             [clojure.string :as str]
             [reagent.core :as r]))
-
-(def Transition (r/adapt-react-class (.-Transition js/ReactTransitionGroup)))
-(def TransitionGroup (r/adapt-react-class (.-TransitionGroup js/ReactTransitionGroup)))
-(def CSSTransition (r/adapt-react-class (.-CSSTransition js/ReactTransitionGroup)))
 
 ;; TODO Fix this, use Herb
 (defn- get-style
