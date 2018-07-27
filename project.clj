@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
                  [cljsjs/react-transition-group "2.4.0-0"]
-                 [herb "0.5.0-SNAPSHOT"]
+                 [herb "0.5.0"]
                  [prismatic/dommy "1.1.0"]
                  [re-frame "0.10.5"]]
   :source-paths ["src"])
