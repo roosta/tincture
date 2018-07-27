@@ -7,10 +7,10 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [secretary "1.2.3"]
                  [venantius/accountant "0.2.4"]
-                 [org.clojure/clojurescript "1.10.238"]
+                 [org.clojure/clojurescript "1.10.339"]
                  [herb "0.5.0-SNAPSHOT"]
                  [prismatic/dommy "1.1.0"]
-                 [cljsjs/react-transition-group "2.3.1-0"]
+                 [cljsjs/react-transition-group "2.4.0-0"]
                  [figwheel-sidecar "0.5.16"]
                  [re-frame "0.10.5"]
                  [reagent "0.8.1"]]
@@ -32,7 +32,6 @@
   :figwheel {:http-server-root "."
              :nrepl-port       7899
              :server-port      3460
-             :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
              :css-dirs         ["public/css"]}
 
   :cljsbuild {:builds {:app
@@ -54,6 +53,5 @@
                                   [figwheel-sidecar "0.5.16"]
                                   [org.clojure/tools.nrepl "0.2.13"]
                                   [day8.re-frame/re-frame-10x "0.3.3-react16"]
-                                  [orchestra "2017.11.12-1"]
-                                  [cider/piggieback "0.3.5"]]
+                                  [orchestra "2017.11.12-1"]]
                    :source-paths ["script"]}})
