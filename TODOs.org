@@ -3,9 +3,11 @@
 * CANCELLED Add color helpers (lighten, darken)
   CLOSED: [2018-05-21 Mon 20:42]
   Already in Garden
-* TODO Add gradients
+* DONE Add gradients
+  CLOSED: [2018-09-15 Sat 20:08]
 * TODO Add palettes (material-ui, web-safe)
 * CANCELLED Add px->rem
   CLOSED: [2018-05-21 Mon 20:55]
   Already in garden
 * TODO Add prod build
+* TODO Add easing function that returns a string with passed args
