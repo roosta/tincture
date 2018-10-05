@@ -61,6 +61,7 @@
 
 (s/def ::valid-box-shadow-elevation (set (range 25)))
 
+;; TODO Allow for argument padding. If you're supplying two props but only one duration, use that duration
 (defn create-transition
   "Helper function that generates a transition string for multiple properties"
   [{:keys [properties durations delays easings]
