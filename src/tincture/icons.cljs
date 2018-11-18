@@ -17,11 +17,10 @@
 
 (defn svg-icon
   [{:keys [class viewbox]}]
-  (let [class* (str/join " " [class (<class svg-icon-style)])]
-    (into
-     [:svg {:view-box viewbox
-            :class class*}]
-     (r/children (r/current-component)))))
+  (into
+   [:svg {:view-box viewbox
+          :class [class (<class svg-icon-style)]}]
+   (r/children (r/current-component))))
 
 (defn mail
   [{:keys [class]}]
