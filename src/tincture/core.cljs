@@ -106,8 +106,7 @@
     ;; offset-x | offset-y | blur-radius | color
     1 "1px 1px 2px rgba(0, 0, 0, 0.3)"
     2 "2px 2px 4px rgba(0, 0, 0, 0.3)"
-    3 "4px 4px 8px rgba(0, 0, 0, 0.3)"
-    ))
+    3 "4px 4px 8px rgba(0, 0, 0, 0.3)"))
 
 (def breakpoints {:xs 0
                   :sm 600
@@ -115,6 +114,5 @@
                   :lg 1280
                   :xl 1920})
 
-(defn init!
-  []
+(defn init! []
   (rf/dispatch-sync [:tincture/initialize]))

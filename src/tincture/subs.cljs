@@ -36,3 +36,17 @@
  :<- [:tincture/viewport-size]
  (fn [[_ height]]
    height))
+
+(rf/reg-sub
+ :tincture/breakpoint-down
+ :<- [:utils/viewport-width]
+ (fn [width [_ breakpoint]]
+   (let [b (get tincture.core/breakpoints breakpoint)]
+     (<= width b))))
+
+(rf/reg-sub
+ :tincture/breakpoint-up
+ :<- [:utils/viewport-width]
+ (fn [width [_ breakpoint]]
+   (let [b (get tincture.core/breakpoints breakpoint)]
+     (> width b))))
