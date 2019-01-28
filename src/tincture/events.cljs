@@ -3,6 +3,7 @@
   (:require [reagent.core :as r]
             [goog.events.EventType :as event-type]
             [goog.events :as gevents]
+            [tincture.async :as async]
             [tincture.db :as db]
             [reagent.debug :as d]
             [re-frame.core :refer [reg-event-db reg-event-fx reg-fx inject-cofx path trim-v
@@ -11,13 +12,15 @@
 
 (defonce vsm (ViewportSizeMonitor.))
 
+(defn on-resize [e]
+  (let [size (.getSize vsm)]
+    (dispatch [:tincture/set-viewport-size [(.-width size) (.-height size)]])))
+
 (defonce vsm-listener
-  (gevents/listen
-   vsm
-   event-type/RESIZE
-   (fn [e]
-     (let [size (.getSize vsm)]
-       (dispatch [:tincture/set-viewport-size [(.-width size) (.-height size)]])))))
+  (gevents/listen vsm event-type/RESIZE
+   (async/debounce
+    on-resize
+    200)))
 
 (reg-event-db
  :tincture/initialize
