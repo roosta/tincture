@@ -54,6 +54,8 @@
                   :figwheel {:on-jsload "site.core/mount-root"}
                   :compiler {:main "site.dev"
                              :asset-path "/js/out"
+                             :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true}
+                             :preloads             [day8.re-frame-10x.preload]
                              :output-to "target/cljsbuild/public/js/app.js"
                              :output-dir "target/cljsbuild/public/js/out"
                              :source-map true
