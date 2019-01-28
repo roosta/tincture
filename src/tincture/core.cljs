@@ -8,8 +8,7 @@
    [tincture.db]
    [clojure.string :as str])
   (:require-macros
-   [tincture.macros :as macros])
-  )
+   [tincture.macros :as macros]))
 
 (def easing
   "https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d"
