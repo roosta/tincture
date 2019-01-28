@@ -1,4 +1,4 @@
-(ns demo.gradient
+(ns site.gradient
   (:require
    [tincture.container :refer [container]]
    [tincture.typography :refer [typography]]

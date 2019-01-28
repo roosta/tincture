@@ -35,13 +35,6 @@
    :ease-in-out-circ "cubic-bezier(.785, .135, .15, .86)"}
   )
 
-(defn join-classes
-  "take variable number of map keys and return classnames joined as a string "
-  [styles & classes]
-  (->> (select-keys styles classes)
-       vals
-       (str/join " ")))
-
 (defn clamp
   [n a b]
   (max (min n b) a))

@@ -1,6 +1,7 @@
 /target
 /classes
 /checkouts
+target
 profiles.clj
 pom.xml
 pom.xml.asc
@@ -8,9 +9,8 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
-/resources/public/js
-/public/js
 /out
 /.repl
 *.log
 /.env
+/.sass-cache

@@ -1,4 +1,4 @@
-(ns demo.slide
+(ns site.slide
   (:require
    [tincture.icons :refer [chevron-left
                        chevron-right

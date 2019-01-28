@@ -1,4 +1,4 @@
-(ns demo.typography
+(ns site.typography
   (:require [reagent.core :as r]
             [garden.units :refer [px]]
             [tincture.typography :refer [typography]]
