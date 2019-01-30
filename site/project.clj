@@ -49,8 +49,7 @@
                              :source-map       "target/cljsbuild/public/js/app.js.map"
                              :optimizations :advanced
                              :pretty-print  false}}
-            :app {:source-paths ["src" "env/dev"]
-                  :watch-paths ["../src"]
+            :app {:source-paths ["src" "env/dev" "../src"]
                   :figwheel {:on-jsload "site.core/mount-root"}
                   :compiler {:main "site.dev"
                              :asset-path "/js/out"
