@@ -1,8 +1,11 @@
 (ns tincture.subs
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
+            [clojure.spec.alpha :as s]
             [goog.labs.userAgent.device :as device]
             [reagent.debug :as d]))
+
+(s/def ::valid-breakpoints #{:xs :sm :md :lg :xl})
 
 ;; get viewport size
 (rf/reg-sub
@@ -41,12 +44,18 @@
  :tincture/breakpoint-down
  :<- [:utils/viewport-width]
  (fn [width [_ breakpoint]]
-   (let [b (get tincture.core/breakpoints breakpoint)]
-     (<= width b))))
+   (let [parsed (s/conform ::valid-breakpoints breakpoint)]
+     (if (= parsed ::s/invalid)
+       (throw (ex-info "Invalid input" (s/explain-data ::valid-breakpoints breakpoint)))
+       (let [b (get tincture.core/breakpoints breakpoint)]
+         (<= width b))))))
 
 (rf/reg-sub
  :tincture/breakpoint-up
  :<- [:utils/viewport-width]
  (fn [width [_ breakpoint]]
-   (let [b (get tincture.core/breakpoints breakpoint)]
-     (> width b))))
+   (let [parsed (s/conform ::valid-breakpoints breakpoint)]
+     (if (= parsed ::s/invalid)
+       (throw (ex-info "Invalid input" (s/explain-data ::valid-breakpoints breakpoint)))
+       (let [b (get tincture.core/breakpoints breakpoint)]
+         (> width b))))))
