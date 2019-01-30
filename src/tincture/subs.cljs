@@ -42,20 +42,20 @@
 
 (rf/reg-sub
  :tincture/breakpoint-down
- :<- [:utils/viewport-width]
+ :<- [:tincture/viewport-width]
  (fn [width [_ breakpoint]]
    (let [parsed (s/conform ::valid-breakpoints breakpoint)]
      (if (= parsed ::s/invalid)
-       (throw (ex-info "Invalid input" (s/explain-data ::valid-breakpoints breakpoint)))
+       (throw (ex-info "Invalid breakpoint" (s/explain-data ::valid-breakpoints breakpoint)))
        (let [b (get tincture.core/breakpoints breakpoint)]
          (<= width b))))))
 
 (rf/reg-sub
  :tincture/breakpoint-up
- :<- [:utils/viewport-width]
+ :<- [:tincture/viewport-width]
  (fn [width [_ breakpoint]]
    (let [parsed (s/conform ::valid-breakpoints breakpoint)]
      (if (= parsed ::s/invalid)
-       (throw (ex-info "Invalid input" (s/explain-data ::valid-breakpoints breakpoint)))
+       (throw (ex-info "Invalid breakpoint" (s/explain-data ::valid-breakpoints breakpoint)))
        (let [b (get tincture.core/breakpoints breakpoint)]
          (> width b))))))
