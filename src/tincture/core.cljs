@@ -1,4 +1,5 @@
 (ns tincture.core
+  (:require-macros [garden.def :refer [defcssfn]])
   (:require
    [cljs.spec.alpha :as s :include-macros true]
    [re-frame.core :as rf]
@@ -9,6 +10,10 @@
    [clojure.string :as str])
   (:require-macros
    [tincture.macros :as macros]))
+
+(defcssfn rgb
+  ([c1 c2 c3] [c1 c2 c3])
+  ([c1 c2 c3 a] [c1 c2 c3 a]))
 
 (def easing
   "https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d"
