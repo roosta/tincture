@@ -4,6 +4,7 @@
    [re-frame.core :as rf]
    [tincture.events]
    [tincture.utils :as utils]
+   [tincture.grid :as grid]
    [tincture.subs]
    [tincture.db]
    [clojure.string :as str])
@@ -109,11 +110,7 @@
     2 "2px 2px 4px rgba(0, 0, 0, 0.3)"
     3 "4px 4px 8px rgba(0, 0, 0, 0.3)"))
 
-(def breakpoints {:xs 0
-                  :sm 600
-                  :md 960
-                  :lg 1280
-                  :xl 1920})
+(def breakpoints grid/breakpoints)
 
 (defn init! []
   (rf/dispatch-sync [:tincture/initialize]))

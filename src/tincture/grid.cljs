@@ -1,7 +1,6 @@
 (ns tincture.grid
   (:require
    [garden.units :refer [percent]]
-   [tincture.core :refer [breakpoints]]
    [tincture.cssfns :refer [rgb linear-gradient]]
    [reagent.core :as r]
    [herb.core :refer-macros [<class defgroup]]
@@ -9,7 +8,11 @@
 
 (def sizes #{"auto" true 1 2 3 4 5 6 7 8 9 10 11 12})
 (def gutters #{0 8 16 24 32 40})
-
+(def breakpoints {:xs 0
+                  :sm 600
+                  :md 960
+                  :lg 1280
+                  :xl 1920})
 (def base-style
   {:box-sizing :border-box})
 
