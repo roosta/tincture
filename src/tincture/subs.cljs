@@ -1,6 +1,7 @@
 (ns tincture.subs
   (:require [reagent.core :as r]
             [re-frame.core :as rf]
+            [tincture.grid :as grid]
             [clojure.spec.alpha :as s]
             [goog.labs.userAgent.device :as device]
             [reagent.debug :as d]))
@@ -47,7 +48,7 @@
    (let [parsed (s/conform ::valid-breakpoints breakpoint)]
      (if (= parsed ::s/invalid)
        (throw (ex-info "Invalid breakpoint" (s/explain-data ::valid-breakpoints breakpoint)))
-       (let [b (get tincture.core/breakpoints breakpoint)]
+       (let [b (get grid/breakpoints breakpoint)]
          (<= width b))))))
 
 (rf/reg-sub
@@ -57,5 +58,5 @@
    (let [parsed (s/conform ::valid-breakpoints breakpoint)]
      (if (= parsed ::s/invalid)
        (throw (ex-info "Invalid breakpoint" (s/explain-data ::valid-breakpoints breakpoint)))
-       (let [b (get tincture.core/breakpoints breakpoint)]
+       (let [b (get grid/breakpoints breakpoint)]
          (> width b))))))
