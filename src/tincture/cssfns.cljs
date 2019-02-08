@@ -10,3 +10,7 @@
   ([c1 c2 c3 a] [c1 c2 c3 a]))
 
 (defcssfn url)
+
+(defcssfn calc
+  [& args]
+  [args])
