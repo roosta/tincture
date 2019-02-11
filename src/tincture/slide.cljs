@@ -60,8 +60,8 @@
   [{:keys [direction duration timeout unmount-on-exit mount-on-enter class
            easing appear enter exit on-exit on-exited on-enter on-entered classes]
     :or {direction :left duration 500 timeout 500 mount-on-enter false
-         unmount-on-exit true easing :ease-in-out-cubic appear? false
-         enter? true exit? true on-enter #() on-exit #() on-exited #() on-entered #()}}]
+         unmount-on-exit true easing :ease-in-out-cubic appear false
+         enter true exit true on-enter #() on-exit #() on-exited #() on-entered #()}}]
   {:pre [(s/valid? ::direction direction)]}
   (let [{transition-class :transition
          child-container-class :child-container} classes
