@@ -74,6 +74,7 @@
                                   [orchestra "2018.12.06-2"]
                                   [ring/ring-mock "0.3.2"]
                                   [ring/ring-devel "1.7.1"]
+                                  [philoskim/debux "0.5.5"]
                                   [prone "1.6.1"]
                                   [figwheel-sidecar "0.5.18"]
                                   [day8.re-frame/re-frame-10x "0.3.6-react16"]
@@ -91,6 +92,7 @@
              :uberjar {
                        ;; :hooks [minify-assets.plugin/hooks]
                        :source-paths ["env/prod"]
+                       :dependencies [[philoskim/debux-stubs "0.5.5"]]
                        :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
                        :env {:production true}
                        :aot :all
