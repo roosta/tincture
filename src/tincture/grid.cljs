@@ -13,6 +13,7 @@
                   :md 960
                   :lg 1280
                   :xl 1920})
+
 (def base-style
   {:box-sizing :border-box})
 
@@ -23,6 +24,19 @@
 
 (def item-style
   {:margin 0})
+
+(def step 5)
+(def unit px)
+
+(defn up [k]
+  {:min-width (unit (get breakpoints k))})
+
+(defn down [k]
+  (if (= k :xl)
+    (up :xs)
+    (let [end-index (+ (.indexOf (keys breakpoints) k) 1)
+          upper-bound (get breakpoints (nth (keys breakpoints) end-index))]
+      {:max-width (unit (- upper-bound (/ step 100)))})))
 
 (defn generate-grid [breakpoint]
   (into {} (map (fn [size]
@@ -115,8 +129,7 @@
          md false
          sm false
          xl false
-         xs false
-         }}]
+         xs false}}]
   (let [class* (<class container? item?)]
     (into
      [:div {:id id
