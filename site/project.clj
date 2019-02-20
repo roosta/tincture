@@ -13,7 +13,7 @@
                  [ring/ring-defaults "0.3.2"]
                  [hiccup "1.0.5"]
                  [yogthos/config "1.1.1"]
-                 [org.clojure/clojurescript "1.10.439"
+                 [org.clojure/clojurescript "1.10.520"
                   :scope "provided"]
                  [metosin/reitit "0.2.13"]
                  [pez/clerk "1.0.0"]
@@ -69,16 +69,16 @@
              :ring-handler site.handler/app}
 
   :profiles {:dev {:repl-options {:init-ns site.repl}
-                   :dependencies [[cider/piggieback "0.3.10"]
+                   :dependencies [[cider/piggieback "0.4.0"]
                                   [binaryage/devtools "0.9.10"]
-                                  [orchestra "2018.12.06-2"]
+                                  [orchestra "2019.02.06-1"]
                                   [ring/ring-mock "0.3.2"]
                                   [ring/ring-devel "1.7.1"]
                                   [philoskim/debux "0.5.5"]
                                   [prone "1.6.1"]
                                   [figwheel-sidecar "0.5.18"]
-                                  [day8.re-frame/re-frame-10x "0.3.6-react16"]
-                                  [nrepl "0.5.3"]
+                                  [day8.re-frame/re-frame-10x "0.3.7-react16"]
+                                  [nrepl "0.6.0"]
                                   [pjstadig/humane-test-output "0.9.0"]]
 
                    :source-paths ["env/dev"]
