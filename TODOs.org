@@ -14,3 +14,4 @@
 * [[https://github.com/noprompt/garden/issues/13][CSS3 Transitions, Transforms, Animation, Filters and such · Issue #13 · noprompt/garden]]
 * TODO Grid system
 * TODO Update typography variants
+** [[https://material.io/design/typography/the-type-system.html#applying-the-type-scale][The type system - Material Design]]
