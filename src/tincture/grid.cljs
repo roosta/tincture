@@ -93,8 +93,12 @@
            (get styles (keyword (str "align-items-" (name align-items))))
            (when container? (:container styles))
            (get styles (keyword (str "direction-" (name direction))))
+           ;; Spacing here
+           (when item? (:item styles))
+           (get styles (keyword (str "justify-content-" (name justify-content))))
+           (get styles (keyword (str "wrap-" (name wrap))))
            )
-    gutters
+    ;; gutters
 
     #_(with-meta
       {}
