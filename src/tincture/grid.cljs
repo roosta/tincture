@@ -14,18 +14,6 @@
                   :md 960
                   :lg 1280
                   :xl 1920})
-
-(def base-style
-  {:box-sizing :border-box})
-
-(def container-style
-  {:display :flex
-   :flex-wrap :wrap
-   :width (percent 100)})
-
-(def item-style
-  {:margin 0})
-
 (def step 5)
 (def unit px)
 
