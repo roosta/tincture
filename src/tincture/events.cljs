@@ -5,6 +5,7 @@
             [goog.events :as gevents]
             [tincture.async :as async]
             [tincture.db :as db]
+            [tincture.grid :as grid]
             [reagent.debug :as d]
             [re-frame.core :refer [reg-event-db reg-event-fx reg-fx inject-cofx path trim-v
                                    after debug dispatch]]
@@ -22,13 +23,14 @@
     on-resize
     200)))
 
-(reg-event-db
+(reg-event-fx
  :tincture/initialize
- (fn [db]
+ (fn [{:keys [db]}]
    (let [size (.getSize vsm)]
-     (-> db
-         (merge db/default-db)
-         (assoc :tincture/viewport-size [(.-width size) (.-height size)])))))
+     {:db (-> db
+              (merge db/default-db)
+              (assoc :tincture/viewport-size [(.-width size) (.-height size)]))
+      :attach-grid nil})))
 
 (reg-event-db
  :tincture/set-viewport-size

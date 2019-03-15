@@ -2,10 +2,16 @@
   (:require
    [garden.units :refer [percent px]]
    [tincture.cssfns :refer [rgb linear-gradient calc]]
+   [garden.core :refer [css]]
    [debux.cs.core :refer-macros [clog]]
+   [goog.object :as gobj]
+   [goog.dom :as dom]
    [reagent.core :as r]
-   [herb.core :refer-macros [<class defgroup]]
-   [clojure.string :as str]))
+   [garden.stylesheet :refer [at-media]]
+   [herb.core :refer-macros [<class defgroup defglobal]]
+   [clojure.string :as str]
+   [re-frame.core :as rf]))
+
 
 (def sizes #{:auto true 1 2 3 4 5 6 7 8 9 10 11 12})
 (def gutters #{0 8 16 24 32 40})
@@ -29,21 +35,26 @@
 
 
 (defn generate-grid [breakpoint]
-  (into {} (map (fn [size]
-                  (let [kw (keyword (str "grid-" (name breakpoint) "-" (if (keyword? size) (name size) size)))
-                        style (case size
-                                true {:flex-basis 0
-                                      :flex-grow 1
-                                      :max-width "100%"}
-                                :auto {:flex-basis "auto"
-                                       :flex-grow 0
-                                       :max-width "none"}
-                                (let [width (/ (.round js/Math (* (/ size 12) 10e7) 10e5) 10e5)]
-                                  {:flex-basis (str width "%")
-                                   :flex-grow 0
-                                   :max-width (str width "px")}))]
-                    [kw style]))
-                sizes)))
+  (let [styles
+        (mapv (fn [size]
+                (let [kw (keyword (str "grid-" (name breakpoint) "-" (if (keyword? size) (name size) size)))
+                      style (case size
+                              true {:flex-basis 0
+                                    :flex-grow 1
+                                    :max-width "100%"}
+                              :auto {:flex-basis "auto"
+                                     :flex-grow 0
+                                     :max-width "none"}
+                              (let [width (/ (.round js/Math (* (/ size 12) 10e7) 10e5) 10e5)]
+                                {:flex-basis (str width "%")
+                                 :flex-grow 0
+                                 :max-width (str width "px")}))]
+                  [(keyword (str "." (name kw))) style]))
+              sizes)]
+    (if (= breakpoint :xs)
+      styles
+      (at-media (up breakpoint) styles)
+      )))
 
 (defn generate-gutter [breakpoint]
   (into {} (map
@@ -52,6 +63,25 @@
                {:margin (str (/ (- spacing) 2) "px") #_(px (/ (- spacing) 2))
                 :width #_(calc (percent 100) '+ (px spacing)) (str "calc(100% + " spacing "px)")}])
                (rest gutters))))
+
+(defonce global-style (atom nil))
+
+(defn attach-grid! []
+  (let [el (dom/getElement "flexboxgrid")
+        head (.-head js/document)
+        css-str (css (mapv generate-grid (keys breakpoints)))]
+    (if el
+      (set! (.-innerHTML el) css-str)
+      (let [el (.createElement js/document "style")]
+        (set! (.-innerHTML el) css-str)
+        (set! (.-id el) "flexboxgrid")
+        (.setAttribute el "type" "text/css")
+        (.appendChild head el)))))
+
+(rf/reg-fx
+ :attach-grid
+ (fn []
+   (attach-grid!)))
 
 (def styles
   {:container {:box-sizing :border-box
