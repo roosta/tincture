@@ -1,4 +1,9 @@
 (ns tincture.grid
+  "Grid component implementing flexbox grid.
+  Inspiration:
+  - https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css
+  - https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js
+  - https://github.com/roylee0704/react-flexbox-grid"
   (:require
    [garden.units :refer [percent px]]
    [tincture.cssfns :refer [rgb linear-gradient calc]]
@@ -53,13 +58,12 @@
               sizes)]
     (if (= breakpoint :xs)
       styles
-      (at-media (up breakpoint) styles)
-      )))
+      (at-media (up breakpoint) styles))))
 
-(defn generate-gutter [breakpoint]
+(defn generate-gutter []
   (into {} (map
             (fn [spacing]
-              [(keyword (str "spacing-" (name breakpoint) "-" spacing))
+              [(keyword (str "spacing-" spacing))
                {:margin (str (/ (- spacing) 2) "px") #_(px (/ (- spacing) 2))
                 :width #_(calc (percent 100) '+ (px spacing)) (str "calc(100% + " spacing "px)")}])
                (rest gutters))))
@@ -113,25 +117,18 @@
 
 (defn grid-style
   [align-content align-items container? direction
-   spacing item? justify-content wrap xl lg md sm xs]
-  (let [gutters (zipmap (keys breakpoints) (map generate-gutter (keys breakpoints)))
-        k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
-                         (str spacing) (str item?) (name justify-content) (name wrap)
-                         (str lg) (str md) (str sm) (str xl) (str xs)])]
-
-    (merge (get styles (keyword (str "align-content-" (name align-content))))
-           (get styles (keyword (str "align-items-" (name align-items))))
-           (when container? (:container styles))
-           (get styles (keyword (str "direction-" (name direction))))
-           ;; Spacing here
-           (when item? (:item styles))
-           (get styles (keyword (str "justify-content-" (name justify-content))))
-           (get styles (keyword (str "wrap-" (name wrap))))
-           )
-    ;; gutters
-
-    #_(with-meta
-      {}
+   spacing item? justify-content wrap]
+  (let [k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
+                         (str spacing) (str item?) (name justify-content) (name wrap)])
+        styles (merge (get styles (keyword (str "align-content-" (name align-content))))
+                      (get styles (keyword (str "align-items-" (name align-items))))
+                      (when container? (:container styles))
+                      (get styles (keyword (str "direction-" (name direction))))
+                      (when item? (:item styles))
+                      (get styles (keyword (str "justify-content-" (name justify-content))))
+                      (get styles (keyword (str "wrap-" (name wrap)))))]
+    (with-meta
+      styles
       {:key k
        :group true})))
 
@@ -146,8 +143,7 @@
            item?
            justify-content
            wrap
-           lg md sm xl xs
-           ]
+           lg md sm xl xs]
     :or {align-content :stretch
          align-items :stretch
          container? false
@@ -169,10 +165,15 @@
                        spacing
                        item?
                        justify-content
-                       wrap
-                       xl lg md sm xs)]
+                       wrap)]
     (into
      [:div {:id id
-            :class [class* class]}]
+            :class [class*
+                    class
+                    (when (not xs) (str "grid-xs" (if (keyword? xs) (name xs) xs)))
+                    (when (not sm) (str "grid-sm" (if (keyword? sm) (name sm) sm)))
+                    (when (not md) (str "grid-md" (if (keyword? md) (name md) md)))
+                    (when (not lg) (str "grid-lg" (if (keyword? lg) (name lg) lg)))
+                    (when (not xl) (str "grid-xl" (if (keyword? xl) (name xl) xl)))]}]
      (r/children (r/current-component))))
   )
