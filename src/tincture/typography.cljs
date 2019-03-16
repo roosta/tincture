@@ -1,4 +1,8 @@
 (ns tincture.typography
+  "Typography component
+  Inspiration:
+  - https://material.io/design/typography/the-type-system.html#type-scale
+  - https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Typography/Typography.js"
   (:require
    [garden.units :refer [px percent]]
    [reagent.debug :as d]
