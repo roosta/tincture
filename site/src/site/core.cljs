@@ -4,6 +4,7 @@
             [site.gradient :refer [gradient-demo]]
             [reagent.session :as session]
             [site.typography :as typo-demo]
+            [site.paper :as paper-demo]
             [reitit.frontend :as reitit]
             [tincture.container :refer [container]]
             [tincture.typography :refer [typography]]
@@ -24,7 +25,8 @@
    [["/" :index]
     ["/typography" :typography]
     ["/slide" :slide]
-    ["/gradient" :gradient]]))
+    ["/gradient" :gradient]
+    ["/paper" :paper]]))
 
 (defn path-for [route & [params]]
   (if params
@@ -51,7 +53,11 @@
            "Slide demo"]]]
     [:li [:a {:href "/gradient"}
           [typography {:variant :body1}
-           "Gradient demo"]]]]])
+           "Gradient demo"]]]
+    [:li [:a {:href "/paper"}
+          [typography {:variant :body1}
+           "Paper demo"]]]
+    ]])
 
 ;; -------------------------
 ;; Translate routes -> page components
@@ -61,8 +67,8 @@
     :index #'home-page
     :typography #'typo-demo/main
     :slide #'slide-demo
+    :paper #'paper-demo/main
     :gradient #'gradient-demo))
-
 
 ;; -------------------------
 ;; Page mounting component

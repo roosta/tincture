@@ -33,7 +33,8 @@
     [["/" {:get {:handler index-handler}}]
      ["/typography" {:get {:handler index-handler}}]
      ["/slide" {:get {:handler index-handler}}]
-     ["/gradient" {:get {:handler index-handler}}]]
+     ["/gradient" {:get {:handler index-handler}}]
+     ["/paper" {:get {:handler index-handler}}]]
     {:data {:middleware middleware}})
    (reitit-ring/routes
     (reitit-ring/create-resource-handler {:path "/" :root "/public"})
