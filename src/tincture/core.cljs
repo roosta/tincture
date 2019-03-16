@@ -113,4 +113,5 @@
 (def breakpoints grid/breakpoints)
 
 (defn init! []
-  (rf/dispatch-sync [:tincture/initialize]))
+  (rf/dispatch-sync [:tincture/initialize])
+  (rf/dispatch-sync [:tincture.grid/initialize]))

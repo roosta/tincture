@@ -83,9 +83,15 @@
         (.appendChild head el)))))
 
 (rf/reg-fx
- :attach-grid
+ :tincture.grid/attach
  (fn []
    (attach-grid!)))
+
+(rf/reg-event-fx
+ :tincture.grid/initialize
+ (fn [{:keys [db]}]
+   {:db db
+    :tincture.grid/attach nil}))
 
 (def styles
   {:container {:box-sizing :border-box

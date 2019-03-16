@@ -29,8 +29,7 @@
    (let [size (.getSize vsm)]
      {:db (-> db
               (merge db/default-db)
-              (assoc :tincture/viewport-size [(.-width size) (.-height size)]))
-      :attach-grid nil})))
+              (assoc :tincture/viewport-size [(.-width size) (.-height size)]))})))
 
 (reg-event-db
  :tincture/set-viewport-size
