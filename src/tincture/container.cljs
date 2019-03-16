@@ -22,7 +22,7 @@
 
 (defn container
   [{:keys [class]}]
-  (into [:div {:class (join class (<class container-style))}]
+  (into [:div {:class [class (<class container-style)]}]
         (r/children (r/current-component))))
 
 (defn container-fluid
