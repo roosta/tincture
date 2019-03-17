@@ -17,7 +17,6 @@
    [clojure.string :as str]
    [re-frame.core :as rf]))
 
-
 (def sizes #{:auto true 1 2 3 4 5 6 7 8 9 10 11 12})
 (def gutters #{0 8 16 24 32 40})
 (def breakpoints {:xs 0
@@ -66,7 +65,7 @@
               [(keyword (str "spacing-" spacing))
                {:margin (str (/ (- spacing) 2) "px") #_(px (/ (- spacing) 2))
                 :width #_(calc (percent 100) '+ (px spacing)) (str "calc(100% + " spacing "px)")}])
-               (rest gutters))))
+            (rest gutters))))
 
 (defonce global-style (atom nil))
 
@@ -124,10 +123,12 @@
 (defn grid-style
   [align-content align-items container? direction
    spacing item? justify-content wrap]
-  (let [k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
+  (let [gutter (generate-gutter)
+        k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
                          (str spacing) (str item?) (name justify-content) (name wrap)])
         styles (merge (get styles (keyword (str "align-content-" (name align-content))))
                       (get styles (keyword (str "align-items-" (name align-items))))
+                      (when (not= spacing 0) (get gutter (keyword (str "spacing-") spacing)))
                       (when container? (:container styles))
                       (get styles (keyword (str "direction-" (name direction))))
                       (when item? (:item styles))
@@ -135,8 +136,11 @@
                       (get styles (keyword (str "wrap-" (name wrap)))))]
     (with-meta
       styles
-      {:key k
-       :group true})))
+      (cond-> {:key k
+               :group true}
+        (not= spacing 0)
+        (assoc :combinators {[:> :.flexbox-item]
+                             {:padding (px (/ spacing 2)) }})))))
 
 (defn grid
   [{:keys [align-content
@@ -176,10 +180,11 @@
      [:div {:id id
             :class [class*
                     class
-                    (when (not xs) (str "grid-xs" (if (keyword? xs) (name xs) xs)))
-                    (when (not sm) (str "grid-sm" (if (keyword? sm) (name sm) sm)))
-                    (when (not md) (str "grid-md" (if (keyword? md) (name md) md)))
-                    (when (not lg) (str "grid-lg" (if (keyword? lg) (name lg) lg)))
-                    (when (not xl) (str "grid-xl" (if (keyword? xl) (name xl) xl)))]}]
+                    (when item? "flexbox-item")
+                    (when (not xs) (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
+                    (when (not sm) (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
+                    (when (not md) (str "grid-md-" (if (keyword? md) (name md) md)))
+                    (when (not lg) (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
+                    (when (not xl) (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
      (r/children (r/current-component))))
   )
