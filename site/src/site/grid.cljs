@@ -7,6 +7,13 @@
    [reagent.debug :refer [log]]
    [garden.units :refer [px]]))
 
+
 (defn main []
   [container
-   "hello"])
+   [grid {:container? true
+          :align-content :center
+          :spacing 8
+          :justify :center}
+    [grid {:item? true
+           :xs 12}
+     "hello world"]]])

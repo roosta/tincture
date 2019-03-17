@@ -122,25 +122,25 @@
 
 (defn grid-style
   [align-content align-items container? direction
-   spacing item? justify-content wrap]
+   spacing item? justify wrap]
   (let [gutter (generate-gutter)
         k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
-                         (str spacing) (str item?) (name justify-content) (name wrap)])
+                         (str spacing) (str item?) (name justify) (name wrap)])
         styles (merge (get styles (keyword (str "align-content-" (name align-content))))
                       (get styles (keyword (str "align-items-" (name align-items))))
-                      (when (not= spacing 0) (get gutter (keyword (str "spacing-") spacing)))
+                      (when (not= spacing 0) (get gutter (keyword (str "spacing-" spacing))))
                       (when container? (:container styles))
                       (get styles (keyword (str "direction-" (name direction))))
                       (when item? (:item styles))
-                      (get styles (keyword (str "justify-content-" (name justify-content))))
+                      (get styles (keyword (str "justify-" (name justify))))
                       (get styles (keyword (str "wrap-" (name wrap)))))]
     (with-meta
-      styles
-      (cond-> {:key k
-               :group true}
-        (not= spacing 0)
-        (assoc :combinators {[:> :.flexbox-item]
-                             {:padding (px (/ spacing 2)) }})))))
+        styles
+        (cond-> {:key k
+                 :group true}
+          (not= spacing 0)
+          (assoc :combinators {[:> :.flexbox-item]
+                               {:padding (px (/ spacing 2)) }})))))
 
 (defn grid
   [{:keys [align-content
@@ -151,7 +151,7 @@
            direction
            spacing
            item?
-           justify-content
+           justify
            wrap
            lg md sm xl xs]
     :or {align-content :stretch
@@ -159,8 +159,8 @@
          container? false
          direction :row
          spacing 0
-         item false
-         justify-content :flex-start
+         item? false
+         justify :flex-start
          wrap :wrap
          xl false
          lg false
@@ -174,7 +174,7 @@
                        direction
                        spacing
                        item?
-                       justify-content
+                       justify
                        wrap)]
     (into
      [:div {:id id
