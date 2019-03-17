@@ -5,6 +5,7 @@
             [reagent.session :as session]
             [site.typography :as typo-demo]
             [site.paper :as paper-demo]
+            [site.grid :as grid-demo]
             [reitit.frontend :as reitit]
             [tincture.container :refer [container]]
             [tincture.typography :refer [typography]]
@@ -26,14 +27,14 @@
     ["/typography" :typography]
     ["/slide" :slide]
     ["/gradient" :gradient]
-    ["/paper" :paper]]))
+    ["/paper" :paper]
+    ["/grid" :grid]]))
 
 (defn path-for [route & [params]]
   (if params
     (:path (reitit/match-by-name router route params))
     (:path (reitit/match-by-name router route))))
 
-(path-for :about)
 ;; -------------------------
 ;; Page components
 
@@ -57,6 +58,9 @@
     [:li [:a {:href "/paper"}
           [typography {:variant :body1}
            "Paper demo"]]]
+    [:li [:a {:href "/grid"}
+          [typography {:variant :body1}
+           "Grid demo"]]]
     ]])
 
 ;; -------------------------
@@ -68,7 +72,8 @@
     :typography #'typo-demo/main
     :slide #'slide-demo
     :paper #'paper-demo/main
-    :gradient #'gradient-demo))
+    :gradient #'gradient-demo
+    :grid #'grid-demo/main))
 
 ;; -------------------------
 ;; Page mounting component
