@@ -1,3 +1,4 @@
 {:known-macros [flora-ui.macro/defui
-                herb.core/defgroup]
+                herb.core/defgroup
+                garden.def/defcssfn]
  :ignored-unused-namespaces [reagent.debug]}
