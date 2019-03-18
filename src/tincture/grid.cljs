@@ -67,9 +67,10 @@
                 :width #_(calc (percent 100) '+ (px spacing)) (str "calc(100% + " spacing "px)")}])
             (rest gutters))))
 
-(defonce global-style (atom nil))
+(defglobal flexbox-grid
+  (mapv generate-grid (keys breakpoints)))
 
-(defn attach-grid! []
+#_(defn attach-grid! []
   (let [el (dom/getElement "flexboxgrid")
         head (.-head js/document)
         css-str (css (mapv generate-grid (keys breakpoints)))]
@@ -81,12 +82,12 @@
         (.setAttribute el "type" "text/css")
         (.appendChild head el)))))
 
-(rf/reg-fx
+#_(rf/reg-fx
  :tincture.grid/attach
  (fn []
    (attach-grid!)))
 
-(rf/reg-event-fx
+#_(rf/reg-event-fx
  :tincture.grid/initialize
  (fn [{:keys [db]}]
    {:db db
