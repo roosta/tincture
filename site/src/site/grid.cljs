@@ -12,25 +12,23 @@
    [reagent.core :as r]))
 
 (defn paper-style []
-  {:width "100%"
-   :background "white"
-   :height "140px"})
+  {:background "white"
+   :height "140px"
+   :width "100px"})
 
 (defn control-paper []
   ^{:extend paper-style}
   {:margin-top (px 16)
    :padding (px 16)
-   :height "auto"})
+   :height "auto"
+   :width "auto"})
 
-(defgroup styles
-  {:container {}
-   :grid-container {:height "400px"
-                    :background "#eee"}
+(defgroup spacing-styles
+  {:root {:flex-grow 1
+          :padding (px 16)}
+   :grid-container {}
    :heading {:color (rgb 0 0 0 0.54)}
-   :label {:margin-left (px 8)}
-   :paper {:width "100%"
-           :background "white"
-           :height "140px"}})
+   :label {:margin-left (px 8)}})
 
 (defn radio-group [state]
   [:form {:on-change (fn [e]
@@ -40,7 +38,7 @@
     (doall
      (for [g (sort gutters)]
        ^{:key g}
-       [:label {:class (<class styles :label)}
+       [:label {:class (<class spacing-styles :label)}
         [:input {:type "radio"
                  :value g
                  :name "spacing"
@@ -52,28 +50,34 @@
   (let [state (r/atom 8)]
     (fn []
       [grid {:container? true
-             :class (<class styles :grid-container)
-             :align-content :center
-             :spacing @state
-             :justify :center}
+             :spacing 16
+             :class (<class spacing-styles :root)}
        [grid {:item? true
-              :xs 2}
-        [paper {:class (<class paper-style)}]]
+              :xs 12}
+        [grid {:container? true
+               :class (<class spacing-styles :grid-container)
+               :spacing @state
+               :justify :center}
+         [grid {:item? true}
+          [paper {:class (<class paper-style)}]]
+         [grid {:item? true}
+          [paper {:class (<class paper-style)}]]
+         [grid {:item? true}
+          [paper {:class (<class paper-style)}]]]]
        [grid {:item? true
-              :xs 2}
-        [paper {:class (<class paper-style)}]]
-       [grid {:item? true
-              :xs 2}
-        [paper {:class (<class paper-style)}]]
-       [grid {:item? true
-              :xs 10}
+              :xs 12}
         [paper {:class (<class control-paper)}
-         [typography {:class (<class styles :heading)
+         [typography {:class (<class spacing-styles :heading)
                       :variant :subheading}
           "Spacing"]
-         [radio-group state]]]])))
+         [radio-group state]]]
+       ])))
+
+(defn container-style
+  []
+  {:background "#eee"})
 
 (defn main []
-  [container {:class (<class styles :container)}
+  [container {:class (<class container-style)}
    [spacing]
    ])
