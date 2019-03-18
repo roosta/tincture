@@ -123,25 +123,27 @@
 
 (defn grid-style
   [align-content align-items container? direction
-   spacing item? justify wrap]
+   spacing item? justify wrap zero-min-width?]
   (let [gutter (generate-gutter)
         k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
                          (str spacing) (str item?) (name justify) (name wrap)])
-        styles (merge (get styles (keyword (str "align-content-" (name align-content))))
-                      (get styles (keyword (str "align-items-" (name align-items))))
-                      (when (not= spacing 0) (get gutter (keyword (str "spacing-" spacing))))
-                      (when container? (:container styles))
-                      (get styles (keyword (str "direction-" (name direction))))
-                      (when item? (:item styles))
-                      (get styles (keyword (str "justify-" (name justify))))
-                      (get styles (keyword (str "wrap-" (name wrap)))))]
+        styles (merge
+                (when container? (:container styles))
+                (when item? (:item styles))
+                (when zero-min-width? (:zero-min-width styles))
+                (when (not= spacing 0) (get gutter (keyword (str "spacing-" spacing))))
+                (get styles (keyword (str "direction-" (name direction))))
+                (get styles (keyword (str "wrap-" (name wrap))))
+                (get styles (keyword (str "align-items-" (name align-items))))
+                (get styles (keyword (str "align-content-" (name align-content))))
+                (get styles (keyword (str "justify-" (name justify)))))]
     (with-meta
-        styles
-        (cond-> {:key k
-                 :group true}
-          (not= spacing 0)
-          (assoc :combinators {[:> :.flexbox-item]
-                               {:padding (px (/ spacing 2)) }})))))
+      styles
+      (cond-> {:key k
+               :group true}
+        (not= spacing 0)
+        (assoc :combinators {[:> :.flexbox-item]
+                             {:padding (px (/ spacing 2)) }})))))
 
 (defn grid
   [{:keys [align-content
@@ -154,6 +156,7 @@
            item?
            justify
            wrap
+           zero-min-width?
            lg md sm xl xs]
     :or {align-content :stretch
          align-items :stretch
@@ -163,6 +166,7 @@
          item? false
          justify :flex-start
          wrap :wrap
+         zero-min-width? false
          xl false
          lg false
          md false
@@ -176,7 +180,8 @@
                        spacing
                        item?
                        justify
-                       wrap)]
+                       wrap
+                       zero-min-width?)]
     (into
      [:div {:id id
             :class [class*
