@@ -52,7 +52,7 @@
                               (let [width (/ (.round js/Math (* (/ size 12) 10e7) 10e5) 10e5)]
                                 {:flex-basis (str width "%")
                                  :flex-grow 0
-                                 :max-width (str width "px")}))]
+                                 :max-width (str width "%")}))]
                   [(keyword (str "." (name kw))) style]))
               sizes)]
     (if (= breakpoint :xs)
@@ -187,10 +187,10 @@
             :class [class*
                     class
                     (when item? "flexbox-item")
-                    (when (not xs) (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
-                    (when (not sm) (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
-                    (when (not md) (str "grid-md-" (if (keyword? md) (name md) md)))
-                    (when (not lg) (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
-                    (when (not xl) (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
+                    (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
+                    (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
+                    (when md (str "grid-md-" (if (keyword? md) (name md) md)))
+                    (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
+                    (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
      (r/children (r/current-component))))
   )
