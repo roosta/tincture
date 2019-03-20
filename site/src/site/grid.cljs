@@ -25,19 +25,21 @@
 
 (defgroup spacing-styles
   {:root {:flex-grow 1
-               :background "#eee"
-               :padding (px 16)}
+          :background "#eee"
+          :padding (px 16)}
    :grid-container {}
-   :heading {:color (rgb 0 0 0 0.54)}
-   :label {:margin-right (px 8)}})
+   :heading {:color (rgb 0 0 0 0.54)}})
 
-(defn radio-group [state]
+(defgroup radio-group-styles
+  {:label {:margin-right (px 8)}})
+
+(defn radio-group [state coll]
   [:form
    [:div
     (doall
-     (for [g (sort gutters)]
+     (for [g (sort coll)]
        ^{:key g}
-       [:label {:class (<class spacing-styles :label)}
+       [:label {:class (<class radio-group-styles :label)}
         [:input {:type "radio"
                  :value g
                  :on-change (fn [e]
@@ -72,7 +74,7 @@
           [typography {:class (<class spacing-styles :heading)
                        :variant :subheading}
            "Spacing"]
-          [radio-group state]]]
+          [radio-group state gutters]]]
         ])))
 
 (defgroup grid-style
