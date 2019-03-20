@@ -46,38 +46,44 @@
                  }]
        g]))]])
 
+(defn container-style
+  []
+  {:background "#eee"
+   :margin-top (px 32)})
+
 (defn spacing []
   (let [state (r/atom 8)]
     (fn []
-      [grid {:container? true
-             :spacing 16
-             :class (<class spacing-styles :root)}
-       [grid {:item? true
-              :xs 12}
-        [grid {:container? true
-               :class (<class spacing-styles :grid-container)
-               :spacing @state
-               :justify :center}
-         [grid {:item? true}
-          [paper {:class (<class paper-style)}]]
-         [grid {:item? true}
-          [paper {:class (<class paper-style)}]]
-         [grid {:item? true}
-          [paper {:class (<class paper-style)}]]]]
-       [grid {:item? true
-              :xs 12}
-        [paper {:class (<class control-paper)}
-         [typography {:class (<class spacing-styles :heading)
-                      :variant :subheading}
-          "Spacing"]
-         [radio-group state]]]
-       ])))
+      [:div {:class (<class container-style)}
+       [grid {:container? true
+              :spacing 16
+              :class (<class spacing-styles :root)}
+        [grid {:item? true
+               :xs 12}
+         [grid {:container? true
+                :class (<class spacing-styles :grid-container)
+                :spacing @state
+                :justify :center}
+          [grid {:item? true}
+           [paper {:class (<class paper-style)}]]
+          [grid {:item? true}
+           [paper {:class (<class paper-style)}]]
+          [grid {:item? true}
+           [paper {:class (<class paper-style)}]]]]
+        [grid {:item? true
+               :xs 12}
+         [paper {:class (<class control-paper)}
+          [typography {:class (<class spacing-styles :heading)
+                       :variant :subheading}
+           "Spacing"]
+          [radio-group state]]]
+        ]])))
 
-(defn container-style
-  []
-  {:background "#eee"})
 
 (defn main []
-  [container {:class (<class container-style)}
-   [spacing]
+  [container
+   [typography {:variant :headline
+                :align :center}
+     "Spacing"]
+    [spacing]
    ])
