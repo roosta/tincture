@@ -75,10 +75,10 @@
           [radio-group state]]]
         ])))
 
-(defgroup basic-grid-style
+(defgroup grid-style
   {:root {:flex-grow 1
-               :background "#eee"
-               :padding (px 16)}
+          :background "#eee"
+          :padding (px 16)}
    :paper {:padding (px 16)
            :background "white"
            :color (rgb 0 0 0 0.54)
@@ -86,37 +86,76 @@
 
 (defn basic-grid []
    [grid {:container? true
-          :class (<class basic-grid-style :root)
+          :class (<class grid-style :root)
           :spacing 24}
     [grid {:item? true
            :xs 12}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=12"]]
     [grid {:item? true
            :xs 6}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=6"]]
     [grid {:item? true
            :xs 6}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=6"]]
     [grid {:item? true
            :xs 3}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=3"]]
     [grid {:item? true
            :xs 3}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=3"]]
     [grid {:item? true
            :xs 3}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=3"]]
     [grid {:item? true
            :xs 3}
-     [paper {:class (<class basic-grid-style :paper)}
+     [paper {:class (<class grid-style :paper)}
       "xs=3"]]])
 
+
+(defn grid-with-breakpoints []
+  [grid {:container? true
+         :class (<class grid-style :root)
+         :spacing 24}
+   [grid {:item? true
+          :xs 12}
+    [paper {:class (<class grid-style :paper)}
+     "xs=12"]]
+   [grid {:item? true
+          :xs 12
+          :sm 6}
+    [paper {:class (<class grid-style :paper)}
+     "xs=12 sm=6"]]
+   [grid {:item? true
+          :xs 12
+          :sm 6}
+    [paper {:class (<class grid-style :paper)}
+     "xs=12 sm=6"]]
+   [grid {:item? true
+          :xs 6
+          :sm 3}
+    [paper {:class (<class grid-style :paper)}
+     "xs=6 sm=3"]]
+   [grid {:item? true
+          :xs 6
+          :sm 3}
+    [paper {:class (<class grid-style :paper)}
+     "xs=6 sm=3"]]
+   [grid {:item? true
+          :xs 6
+          :sm 3}
+    [paper {:class (<class grid-style :paper)}
+     "xs=6 sm=3"]]
+   [grid {:item? true
+          :xs 6
+          :sm 3}
+    [paper {:class (<class grid-style :paper)}
+     "xs=6 sm=3"]]])
 
 (defn main []
   [container
@@ -133,5 +172,11 @@
      [typography {:variant :headline
                   :align :center}
       "Basic grid"]
-     [basic-grid]]]
+     [basic-grid]]
+    [grid {:item? true
+           :xs 12}
+     [typography {:variant :headline
+                  :align :center}
+      "Grid with breakpoints"]
+     [grid-with-breakpoints]]]
    ])
