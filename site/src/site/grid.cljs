@@ -24,16 +24,16 @@
    :width "auto"})
 
 (defgroup spacing-styles
-  {:root {:flex-grow 1
-          :padding (px 16)}
+  {:root {}
+   :container {:flex-grow 1
+               :background "#eee"
+               :padding (px 16)}
    :grid-container {}
    :heading {:color (rgb 0 0 0 0.54)}
    :label {:margin-left (px 8)}})
 
 (defn radio-group [state]
-  [:form {:on-change (fn [e]
-                       (let [v (js/parseInt (.. e -target -value))]
-                         (reset! state v)))}
+  [:form
    [:div
     (doall
      (for [g (sort gutters)]
@@ -41,23 +41,24 @@
        [:label {:class (<class spacing-styles :label)}
         [:input {:type "radio"
                  :value g
+                 :on-change (fn [e]
+                              (let [v (js/parseInt (.. e -target -value))]
+                                (reset! state v)))
                  :name "spacing"
                  :checked (= @state g)
                  }]
        g]))]])
 
-(defn container-style
-  []
-  {:background "#eee"
-   :margin-top (px 32)})
-
 (defn spacing []
   (let [state (r/atom 8)]
     (fn []
-      [:div {:class (<class container-style)}
+      [:div {:class (<class spacing-styles :root)}
+       [typography {:variant :headline
+                    :align :center}
+        "Spacing"]
        [grid {:container? true
               :spacing 16
-              :class (<class spacing-styles :root)}
+              :class (<class spacing-styles :container)}
         [grid {:item? true
                :xs 12}
          [grid {:container? true
@@ -79,11 +80,60 @@
           [radio-group state]]]
         ]])))
 
+(defgroup basic-grid-style
+  {:root {}
+   :container {:flex-grow 1
+               :background "#eee"
+               :padding (px 16)}
+   :paper {:padding (px 16)
+           :background "white"
+           :color (rgb 0 0 0 0.54)
+           :text-align :center}})
+
+(defn basic-grid []
+  [:div {:class (<class basic-grid-style :root)}
+   [typography {:variant :headline
+                :align :center}
+    "Basic grid"]
+
+   [grid {:container? true
+          :class (<class basic-grid-style :container)
+          :spacing 24}
+    [grid {:item? true
+           :xs 12}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=12"]]
+    [grid {:item? true
+           :xs 6}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=6"]]
+    [grid {:item? true
+           :xs 6}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=6"]]
+    [grid {:item? true
+           :xs 3}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=3"]]
+    [grid {:item? true
+           :xs 3}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=3"]]
+    [grid {:item? true
+           :xs 3}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=3"]]
+    [grid {:item? true
+           :xs 3}
+     [paper {:class (<class basic-grid-style :paper)}
+      "xs=3"]]
+    ]]
+
+  )
+
 
 (defn main []
   [container
-   [typography {:variant :headline
-                :align :center}
-     "Spacing"]
-    [spacing]
+   [spacing]
+   [basic-grid]
    ])
