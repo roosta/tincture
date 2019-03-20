@@ -29,7 +29,7 @@
                :padding (px 16)}
    :grid-container {}
    :heading {:color (rgb 0 0 0 0.54)}
-   :label {:margin-left (px 8)}})
+   :label {:margin-right (px 8)}})
 
 (defn radio-group [state]
   [:form
