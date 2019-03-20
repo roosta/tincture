@@ -2,8 +2,7 @@
   "Grid component implementing flexbox grid.
   Inspiration:
   - https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css
-  - https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js
-  - https://github.com/roylee0704/react-flexbox-grid"
+  - https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js"
   (:require
    [garden.units :refer [percent px]]
    [tincture.cssfns :refer [rgb linear-gradient calc]]
@@ -11,6 +10,7 @@
    [debux.cs.core :refer-macros [clog]]
    [goog.object :as gobj]
    [goog.dom :as dom]
+   [clojure.spec.alpha :as s]
    [reagent.core :as r]
    [garden.stylesheet :refer [at-media]]
    [herb.core :refer-macros [<class defgroup defglobal]]
@@ -18,6 +18,11 @@
    [re-frame.core :as rf]))
 
 (def sizes #{:auto true 1 2 3 4 5 6 7 8 9 10 11 12})
+(def direction #{:row :row-reverse :column :column-reverse})
+(def justify #{:flex-start :center :flex-end :space-between :space-around :space-evenly})
+(def align-items #{:flex-start :center :flex-end :stretch :baseline})
+(def align-content #{:stretch :center :flex-start :flex-end :space-between :space-around})
+(def wrap #{:nowrap :wrap :wrap-reverse})
 (def gutters #{0 8 16 24 32 40})
 (def breakpoints {:xs 0
                   :sm 600
@@ -26,6 +31,23 @@
                   :xl 1920})
 (def step 5)
 (def unit px)
+
+(s/def ::xs (s/or :size sizes :false false?))
+(s/def ::sm (s/or :size sizes :false false?))
+(s/def ::md (s/or :size sizes :false false?))
+(s/def ::lg (s/or :size sizes :false false?))
+(s/def ::xl (s/or :size sizes :false false?))
+(s/def ::direction direction)
+(s/def ::justify justify)
+(s/def ::align-items align-items)
+(s/def ::align-content align-content)
+(s/def ::item? boolean?)
+(s/def ::container? boolean?)
+(s/def ::zero-min-width? boolean?)
+(s/def ::spacing gutters)
+(s/def ::class (s/nilable string?))
+(s/def ::wrap wrap)
+(s/def ::id (s/nilable string?))
 
 (defn up [k]
   {:min-width (unit (get breakpoints k))})
@@ -145,6 +167,15 @@
         (assoc :combinators {[:> :.flexbox-item]
                              {:padding (px (/ spacing 2)) }})))))
 
+(defn check-spec
+  "Throw an exception if value doesn't match the spec"
+  [spec value]
+  ()
+  (let [parsed (s/conform spec value)]
+    (if (= parsed ::s/invalid)
+      (throw (ex-info "Invalid value " (s/explain-data spec value)))
+      (s/unform spec parsed))))
+
 (defn grid
   [{:keys [align-content
            align-items
@@ -158,39 +189,56 @@
            wrap
            zero-min-width?
            lg md sm xl xs]
-    :or {align-content :stretch
-         align-items :stretch
-         container? false
-         direction :row
-         spacing 0
-         item? false
-         justify :flex-start
-         wrap :wrap
-         zero-min-width? false
-         xl false
-         lg false
-         md false
-         sm false
-         xs false}}]
-  (let [class* (<class grid-style
-                       align-content
-                       align-items
-                       container?
-                       direction
-                       spacing
-                       item?
-                       justify
-                       wrap
-                       zero-min-width?)]
-    (into
-     [:div {:id id
-            :class [class*
-                    class
-                    (when item? "flexbox-item")
-                    (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
-                    (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
-                    (when md (str "grid-md-" (if (keyword? md) (name md) md)))
-                    (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
-                    (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
-     (r/children (r/current-component))))
+    :or   {align-content   :stretch
+           align-items     :stretch
+           container?      false
+           direction       :row
+           spacing         0
+           item?           false
+           justify         :flex-start
+           wrap            :wrap
+           zero-min-width? false
+           xl              false
+           lg              false
+           md              false
+           sm              false
+           xs              false}}]
+  (let [align-content   (check-spec ::align-content align-content)
+        align-items     (check-spec ::align-items align-items)
+        class           (check-spec ::class class)
+        container?      (check-spec ::container? container?)
+        id              (check-spec ::id id)
+        direction       (check-spec ::direction direction)
+        spacing         (check-spec ::spacing spacing)
+        item?           (check-spec ::item? item?)
+        justify         (check-spec ::justify justify)
+        wrap            (check-spec ::wrap wrap)
+        zero-min-width? (check-spec ::zero-min-width? zero-min-width?)
+        lg              (check-spec ::lg lg)
+        md              (check-spec ::md md)
+        sm              (check-spec ::sm sm)
+        xl              (check-spec ::xl xl)
+        xs              (check-spec ::xs xs)]
+    (let [class* (<class
+                  grid-style
+                  align-content
+                  align-items
+                  container?
+                  direction
+                  spacing
+                  item?
+                  justify
+                  wrap
+                  zero-min-width?)]
+      (into
+       [:div {:id    id
+              :class [class*
+                      class
+                      (when item? "flexbox-item")
+                      (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
+                      (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
+                      (when md (str "grid-md-" (if (keyword? md) (name md) md)))
+                      (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
+                      (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
+       (r/children (r/current-component)))))
   )
