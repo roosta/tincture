@@ -170,11 +170,9 @@
 (defn check-spec
   "Throw an exception if value doesn't match the spec"
   [spec value]
-  ()
-  (let [parsed (s/conform spec value)]
-    (if (= parsed ::s/invalid)
-      (throw (ex-info "Invalid value " (s/explain-data spec value)))
-      (s/unform spec parsed))))
+  (if-not (s/valid? spec value)
+    (throw (ex-info "Invalid value " (s/explain-data spec value)))
+    value))
 
 (defn grid
   [{:keys [align-content
