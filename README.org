@@ -1,23 +1,27 @@
 #+TITLE: Tincture
-* Development
-  You can start development mode by calling:
-  #+BEGIN_SRC sh
-    lein figwheel
-  #+END_SRC
 
-  Figwheel will automatically push cljs changes to the browser. Once Figwheel
-  starts up, you should be able to open the public/index.html page in the
-  browser, or go to http://localhost:3333 for the development server.
+Tincture is a frontend toolkit for ClojureScript that provides several utility
+functions, components, and definitions to aid/speed up developing web page visuals.
 
-  Another option is calling ~script/repl.clj~ from Emacs on
-  ~cider-jack-in-clojurescript~ by including this in your Emacs config:
+** Requirements
 
-  #+BEGIN_SRC elisp
-    (setq
-     cider-cljs-lein-repl "(require 'repl)")
-  #+END_SRC
+   Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of
+   [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various input. Tincture's components are built
+   with [[%5B%5Bhttps://github.com/reagent-project/reagent%5D%5Breagent-project/reagent: A minimalistic ClojureScript interface to React.js%5D%5D][Reagent]] in mind but its just hiccup.
 
-  Just ensure that script is on your ~source path~ which it is in this project
-  already
-"gradients.json" sourced from: https://github.com/Ghosh/uiGradients/
-Gradient macro lifted from https://github.com/rm-hull/inkspot
+** Development
+   Navigate to [[https://github.com/roosta/tincture/tree/master/site][site]] and start figwheel
+   #+BEGIN_SRC sh
+     lein figwheel
+   #+END_SRC
+
+   Figwheel will automatically push cljs changes to the browser. Once Figwheel
+   starts up, you should be able to open the public/index.html page in the
+   browser, or go to http://localhost:3333 for the development server.
+
+   The library was developed with the site as a testing ground and demo.
+
+** Sources
+   - [[https://github.com/roosta/tincture/blob/master/resources/gradients.json][gradients.json]] sourced from: https://github.com/Ghosh/uiGradients/
+   - [[https://github.com/roosta/tincture/blob/0b90def186907c7f4879b1d5930603fa9bc3d6ef/src/tincture/macros.clj#L13][Gradient macro]] sourced from https://github.com/rm-hull/inkspot
+   - Tincture grid is heavily inspired by [[https://material-ui.com/layout/grid/][Material-ui Grid]]
