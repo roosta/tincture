@@ -3,7 +3,7 @@
    [tincture.container :refer [container]]
    [tincture.typography :refer [typography]]
    [debux.cs.core :refer [clog]]
-   [tincture.grid :refer [grid gutters]]
+   [tincture.grid :refer [grid gutters justify direction align-items]]
    [tincture.paper :refer [paper]]
    [tincture.cssfns :refer [rgb]]
    [herb.core :refer [<class defgroup]]
@@ -45,7 +45,7 @@
 (defgroup radio-group-styles
   {:label {:margin-right (px 8)}})
 
-(defn radio-group [state coll]
+(defn radio-group [checked? coll on-change]
   [:form
    [:div
     (doall
@@ -56,9 +56,9 @@
                  :value g
                  :on-change (fn [e]
                               (let [v (.. e -target -value)]
-                                (reset! state v)))
+                                (on-change v)))
                  :name "spacing"
-                 :checked (= @state (str g))}]
+                 :checked (checked? g)}]
        g]))]])
 
 (defn spacing []
@@ -85,7 +85,7 @@
           [typography {:class (<class spacing-styles :heading)
                        :variant :subheading}
            "Spacing"]
-          [radio-group state gutters]]]
+          [radio-group #(= @state %) gutters #(reset! state (js/parseInt %))]]]
         ])))
 
 (defgroup grid-style
@@ -121,9 +121,22 @@
            [grid {:item true}
             [paper {:class (<class paper-interactive-style n)}
              (str "Cell " (inc n))
-             ]])]]]
-      ))
-  )
+             ]])]]
+       [grid {:item true
+              :xs 12}
+        [paper {:class (<class control-paper)}
+         [typography {:class (<class spacing-styles :heading)
+                      :variant :subheading}
+          "direction"]
+         [radio-group #(= (:direction @state) %) direction #(swap! state assoc :direction (keyword %))]
+         [typography {:class (<class spacing-styles :heading)
+                      :variant :subheading}
+          "justify"]
+         [radio-group #(= (:justify @state) %) justify #(swap! state assoc :justify (keyword %))]
+         [typography {:class (<class spacing-styles :heading)
+                      :variant :subheading}
+          "align-items"]
+         [radio-group #(= (:align-items @state) %) align-items #(swap! state assoc :align-items (keyword %))]]]])))
 
 (defn basic-grid []
    [grid {:container true
