@@ -43,9 +43,9 @@
 (s/def ::justify justify)
 (s/def ::align-items align-items)
 (s/def ::align-content align-content)
-(s/def ::item? boolean?)
-(s/def ::container? boolean?)
-(s/def ::zero-min-width? boolean?)
+(s/def ::item boolean?)
+(s/def ::container boolean?)
+(s/def ::zero-min-width boolean?)
 (s/def ::spacing gutters)
 (s/def ::class (s/nilable string?))
 (s/def ::wrap wrap)
@@ -146,15 +146,15 @@
    :justify-space-evenly {:justify-content :space-evenly}})
 
 (defn grid-style
-  [align-content align-items container? direction
-   spacing item? justify wrap zero-min-width?]
+  [align-content align-items container direction
+   spacing item justify wrap zero-min-width]
   (let [gutter (generate-gutter)
-        k (str/join "-" [(name align-content) (name align-items) (str container?) (name direction)
-                         (str spacing) (str item?) (name justify) (name wrap)])
+        k (str/join "-" [(name align-content) (name align-items) (str container) (name direction)
+                         (str spacing) (str item) (name justify) (name wrap)])
         styles (merge
-                (when container? (:container styles))
-                (when item? (:item styles))
-                (when zero-min-width? (:zero-min-width styles))
+                (when container (:container styles))
+                (when item (:item styles))
+                (when zero-min-width (:zero-min-width styles))
                 (when (not= spacing 0) (get gutter (keyword (str "spacing-" spacing))))
                 (get styles (keyword (str "direction-" (name direction))))
                 (get styles (keyword (str "wrap-" (name wrap))))
@@ -192,13 +192,13 @@
 (def defaults
   {:align-content   :stretch
    :align-items     :stretch
-   :container?      false
+   :container      false
    :direction       :row
    :spacing         0
-   :item?           false
+   :item           false
    :justify         :flex-start
    :wrap            :wrap
-   :zero-min-width? false
+   :zero-min-width false
    :xl              false
    :lg              false
    :md              false
@@ -209,62 +209,62 @@
   [{:keys [align-content
            align-items
            class
-           container?
+           container
            id
            direction
            spacing
-           item?
+           item
            justify
            wrap
-           zero-min-width?
+           zero-min-width
            lg md sm xl xs]
     :or   {align-content   :stretch
            align-items     :stretch
-           container?      false
+           container      false
            direction       :row
            spacing         0
-           item?           false
+           item           false
            justify         :flex-start
            wrap            :wrap
-           zero-min-width? false
+           zero-min-width false
            xl              false
            lg              false
            md              false
            sm              false
            xs              false}
     :as props}]
-  (let [align-content   (-> align-content (check-spec ::align-content) (require-prop props :container? :align-content))
-        align-items     (-> align-items (check-spec ::align-items) (require-prop props :container? :align-items))
+  (let [align-content   (-> align-content (check-spec ::align-content) (require-prop props :container :align-content))
+        align-items     (-> align-items (check-spec ::align-items) (require-prop props :container :align-items))
         class           (check-spec class ::class)
-        container?      (check-spec container? ::container?)
+        container      (check-spec container ::container)
         id              (check-spec id ::id)
-        direction       (-> direction (check-spec ::direction) (require-prop props :container? :direction))
-        spacing         (-> spacing (check-spec ::spacing) (require-prop props :container? :spacing))
-        item?           (check-spec item? ::item?)
-        justify         (-> justify (check-spec ::justify) (require-prop props :container? :justify))
-        wrap            (-> wrap (check-spec ::wrap) (require-prop props :container? :justify))
-        zero-min-width? (check-spec zero-min-width? ::zero-min-width?)
-        lg              (-> lg (check-spec ::lg) (require-prop props :item? :lg))
-        md              (-> md (check-spec ::md) (require-prop props :item? :md))
-        sm              (-> sm (check-spec ::sm) (require-prop props :item? :sm))
-        xl              (-> xl (check-spec ::xl) (require-prop props :item? :xl))
-        xs              (-> xs (check-spec ::xs) (require-prop props :item? :xs))]
+        direction       (-> direction (check-spec ::direction) (require-prop props :container :direction))
+        spacing         (-> spacing (check-spec ::spacing) (require-prop props :container :spacing))
+        item           (check-spec item ::item)
+        justify         (-> justify (check-spec ::justify) (require-prop props :container :justify))
+        wrap            (-> wrap (check-spec ::wrap) (require-prop props :container :justify))
+        zero-min-width (check-spec zero-min-width ::zero-min-width)
+        lg              (-> lg (check-spec ::lg) (require-prop props :item :lg))
+        md              (-> md (check-spec ::md) (require-prop props :item :md))
+        sm              (-> sm (check-spec ::sm) (require-prop props :item :sm))
+        xl              (-> xl (check-spec ::xl) (require-prop props :item :xl))
+        xs              (-> xs (check-spec ::xs) (require-prop props :item :xs))]
     (let [class* (<class
                   grid-style
                   align-content
                   align-items
-                  container?
+                  container
                   direction
                   spacing
-                  item?
+                  item
                   justify
                   wrap
-                  zero-min-width?)]
+                  zero-min-width)]
       (into
        [:div {:id    id
               :class [class*
                       class
-                      (when item? "flexbox-item")
+                      (when item "flexbox-item")
                       (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
                       (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
                       (when md (str "grid-md-" (if (keyword? md) (name md) md)))
