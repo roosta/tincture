@@ -25,3 +25,4 @@ functions, components, and definitions to aid/speed up developing web page visua
    - [[https://github.com/roosta/tincture/blob/master/resources/gradients.json][gradients.json]] sourced from: https://github.com/Ghosh/uiGradients/
    - [[https://github.com/roosta/tincture/blob/0b90def186907c7f4879b1d5930603fa9bc3d6ef/src/tincture/macros.clj#L13][Gradient macro]] sourced from https://github.com/rm-hull/inkspot
    - Tincture grid is heavily inspired by [[https://material-ui.com/layout/grid/][Material-ui Grid]]
+   - Tincture typography is heavily inspired by [[https://material-ui.com/style/typography/][Material-ui Typography]]
