@@ -1,4 +1,4 @@
-(defproject tincture "0.1.9-SNAPSHOT"
+(defproject tincture "0.2.0"
   :description "Frontend development toolkit"
   :url "https://github.com/roosta/tincture"
   :license {:name "Eclipse Public License"
@@ -7,6 +7,6 @@
                  [org.clojure/clojurescript "1.10.439" :scope "provided"]
                  [cljsjs/react-transition-group "2.4.0-0"]
                  [herb "0.7.3-SNAPSHOT"]
-                 [prismatic/dommy "1.1.0"]
+                 ;; [prismatic/dommy "1.1.0"]
                  [re-frame "0.10.6"]]
   :source-paths ["src"])
