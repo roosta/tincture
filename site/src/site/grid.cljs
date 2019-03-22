@@ -43,11 +43,10 @@
         [:input {:type "radio"
                  :value g
                  :on-change (fn [e]
-                              (let [v (js/parseInt (.. e -target -value))]
+                              (let [v (.. e -target -value)]
                                 (reset! state v)))
                  :name "spacing"
-                 :checked (= @state g)
-                 }]
+                 :checked (= @state (str g))}]
        g]))]])
 
 (defn spacing []
