@@ -238,5 +238,4 @@
      [typography {:variant :headline
                   :align :center}
       "Interactive"]
-     [interactive]]]
-   ])
+     [interactive]]]])
