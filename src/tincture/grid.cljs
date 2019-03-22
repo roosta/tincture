@@ -176,7 +176,9 @@
     (throw (ex-info "Invalid value " (s/explain-data spec value)))
     value))
 
-(defn require-prop [value props requires prop-name]
+(defn require-prop
+  "Thow an exception if a propery doesn't have the required flags set (container, item)"
+  [value props requires prop-name]
   (if (prop-name props)
     (if-not (requires props)
       (throw (ex-info (str "The property " prop-name " of tincture.grid must be used on " requires)
