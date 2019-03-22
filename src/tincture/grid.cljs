@@ -22,6 +22,8 @@
 (def justify #{:flex-start :center :flex-end :space-between :space-around :space-evenly})
 (def align-items #{:flex-start :center :flex-end :stretch :baseline})
 (def align-content #{:stretch :center :flex-start :flex-end :space-between :space-around})
+(def container-props #{:align-content :align-items :direction :justify :spacing :wrap})
+(def item-props #{:xs :sm :md :lg :xl})
 (def wrap #{:nowrap :wrap :wrap-reverse})
 (def gutters #{0 8 16 24 32 40})
 (def breakpoints {:xs 0
@@ -169,10 +171,37 @@
 
 (defn check-spec
   "Throw an exception if value doesn't match the spec"
-  [spec value]
+  [value spec]
   (if-not (s/valid? spec value)
     (throw (ex-info "Invalid value " (s/explain-data spec value)))
     value))
+
+(defn require-prop [value props requires prop-name]
+  (if (prop-name props)
+    (if-not (requires props)
+      (throw (ex-info (str "The property " prop-name " of tincture.grid must be used on " requires)
+                      {:value value
+                       :props props
+                       :requires requires
+                       :prop-name prop-name}))
+      value)
+    value))
+
+(def defaults
+  {:align-content   :stretch
+   :align-items     :stretch
+   :container?      false
+   :direction       :row
+   :spacing         0
+   :item?           false
+   :justify         :flex-start
+   :wrap            :wrap
+   :zero-min-width? false
+   :xl              false
+   :lg              false
+   :md              false
+   :sm              false
+   :xs              false})
 
 (defn grid
   [{:keys [align-content
@@ -200,23 +229,24 @@
            lg              false
            md              false
            sm              false
-           xs              false}}]
-  (let [align-content   (check-spec ::align-content align-content)
-        align-items     (check-spec ::align-items align-items)
-        class           (check-spec ::class class)
-        container?      (check-spec ::container? container?)
-        id              (check-spec ::id id)
-        direction       (check-spec ::direction direction)
-        spacing         (check-spec ::spacing spacing)
-        item?           (check-spec ::item? item?)
-        justify         (check-spec ::justify justify)
-        wrap            (check-spec ::wrap wrap)
-        zero-min-width? (check-spec ::zero-min-width? zero-min-width?)
-        lg              (check-spec ::lg lg)
-        md              (check-spec ::md md)
-        sm              (check-spec ::sm sm)
-        xl              (check-spec ::xl xl)
-        xs              (check-spec ::xs xs)]
+           xs              false}
+    :as props}]
+  (let [align-content   (-> align-content (check-spec ::align-content) (require-prop props :container? :align-content))
+        align-items     (-> align-items (check-spec ::align-items) (require-prop props :container? :align-items))
+        class           (check-spec class ::class)
+        container?      (check-spec container? ::container?)
+        id              (check-spec id ::id)
+        direction       (-> direction (check-spec ::direction) (require-prop props :container? :direction))
+        spacing         (-> spacing (check-spec ::spacing) (require-prop props :container? :spacing))
+        item?           (check-spec item? ::item?)
+        justify         (-> justify (check-spec ::justify) (require-prop props :container? :justify))
+        wrap            (-> wrap (check-spec ::wrap) (require-prop props :container? :justify))
+        zero-min-width? (check-spec zero-min-width? ::zero-min-width?)
+        lg              (-> lg (check-spec ::lg) (require-prop props :item? :lg))
+        md              (-> md (check-spec ::md) (require-prop props :item? :md))
+        sm              (-> sm (check-spec ::sm) (require-prop props :item? :sm))
+        xl              (-> xl (check-spec ::xl) (require-prop props :item? :xl))
+        xs              (-> xs (check-spec ::xs) (require-prop props :item? :xs))]
     (let [class* (<class
                   grid-style
                   align-content
