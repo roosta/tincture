@@ -1,13 +1,14 @@
 (ns tincture.grid
-  "Grid component implementing flexbox grid.
-  Inspiration:
-  - https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css
-  - https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js"
+  "Grid component implementing flexbox grid 12 columns responsive layout.
+
+  **Inspiration**: \n
+  * [Flexboxgrid](https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css)
+  * [Material-ui Grid](https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js)
+  "
   (:require
    [garden.units :refer [percent px]]
    [tincture.cssfns :refer [rgb linear-gradient calc]]
    [garden.core :refer [css]]
-   [debux.cs.core :refer-macros [clog]]
    [goog.object :as gobj]
    [goog.dom :as dom]
    [clojure.spec.alpha :as s]
@@ -24,9 +25,15 @@
 (def ^:private align-content #{:stretch :center :flex-start :flex-end :space-between :space-around})
 (def ^:private wrap #{:nowrap :wrap :wrap-reverse})
 (def ^:private gutters #{0 8 16 24 32 40})
-(def ^:private breakpoints {:xs 0 :sm 600 :md 960 :lg 1280 :xl 1920})
 (def ^:private step 5)
-(def ^:private unit px)
+(def
+  ^{:doc "Unit used when generating media queries, defaults to px"}
+  unit px)
+(def
+  ^{:doc
+    "Map of breakpoints to be used in media queries"}
+  breakpoints
+  {:xs 0 :sm 600 :md 960 :lg 1280 :xl 1920})
 
 (s/def ::xs (s/or :size sizes :false false?))
 (s/def ::sm (s/or :size sizes :false false?))
@@ -45,18 +52,44 @@
 (s/def ::wrap wrap)
 (s/def ::id (s/nilable string?))
 
-(defn up [k]
-  {:min-width (unit (get breakpoints k))})
+(defn up
+  "
+  Takes a breakpoint key (:xs :sm :md :lg :xl). Returns a media query that
+  applies to everything above given breakpoint
+  ```clojure
+  (up :md)
+  ;;=> {:min-width {:unit :px, :magnitude 960}}
+  ```
+  To be used in garden.stylesheet/at-media:
+  ```clojure
+  (at-media (up :md) {:color \"red\"})
+  ```
+  "
+  [breakpoint-key]
+  {:min-width (unit (get breakpoints breakpoint-key))})
 
-(defn down [k]
-  (if (= k :xl)
+(defn down
+  "
+  Takes a breakpoint key (:xs :sm :md :lg :xl). Returns a media query that applies
+  to everything below given breakpoint.
+  ```clojure
+  (down :md)
+  ;;=> {:max-width {:unit :px, :magnitude 1279.95}}
+  ```
+  To be used in garden.stylesheet/at-media:
+  ```clojure
+  (at-media (down :md) {:color \"red\"})
+  ```
+  "
+  [breakpoint-key]
+  (if (= breakpoint-key :xl)
     (up :xs)
-    (let [end-index (+ (.indexOf (keys breakpoints) k) 1)
+    (let [end-index (+ (.indexOf (keys breakpoints) breakpoint-key) 1)
           upper-bound (get breakpoints (nth (keys breakpoints) end-index))]
       {:max-width (unit (- upper-bound (/ step 100)))})))
 
 
-(defn generate-grid [breakpoint]
+(defn- generate-grid [breakpoint]
   (let [styles
         (mapv (fn [size]
                 (let [kw (keyword (str "grid-" (name breakpoint) "-" (if (keyword? size) (name size) size)))
@@ -77,7 +110,7 @@
       styles
       (at-media (up breakpoint) styles))))
 
-(defn generate-gutter []
+(defn- generate-gutter []
   (into {} (map
             (fn [spacing]
               [(keyword (str "spacing-" spacing))
@@ -111,35 +144,36 @@
    {:db db
     :tincture.grid/attach nil}))
 
-(def styles
-  {:container {:box-sizing :border-box
-               :display :flex
-               :flex-wrap :wrap
-               :width (percent 100)}
-   :item {:box-sizing :border-box
-          :margin 0}
-   :zero-min-width {:min-width 0}
-   :direction-column {:flex-direction :column}
-   :direction-column-reverse {:flex-direction :column-reverse}
-   :direction-row-reverse {:flex-direction :row-reverse}
-   :wrap-nowrap {:flex-wrap :nowrap}
-   :wrap-wrap-reverse {:flex-wrap :wrap-reverse}
-   :align-items-center {:align-items :center}
-   :align-items-flex-start {:align-items :flex-start}
-   :align-items-flex-end {:align-items :flex-end}
-   :align-items-baseline {:align-items :baseline}
-   :align-content-center {:align-content :center}
-   :align-content-flex-start {:align-content :flex-start}
-   :align-content-flex-end {:align-content :flex-end}
-   :align-content-space-between {:align-content :space-between}
-   :align-content-space-around {:align-content :space-around}
-   :justify-center {:justify-content :center}
-   :justify-flex-end {:justify-content :flex-end}
-   :justify-space-between {:justify-content :space-between}
-   :justify-space-around{:justify-content :space-around}
-   :justify-space-evenly {:justify-content :space-evenly}})
+(def
+  ^:private
+  styles {:container {:box-sizing :border-box
+                      :display :flex
+                      :flex-wrap :wrap
+                      :width (percent 100)}
+          :item {:box-sizing :border-box
+                 :margin 0}
+          :zero-min-width {:min-width 0}
+          :direction-column {:flex-direction :column}
+          :direction-column-reverse {:flex-direction :column-reverse}
+          :direction-row-reverse {:flex-direction :row-reverse}
+          :wrap-nowrap {:flex-wrap :nowrap}
+          :wrap-wrap-reverse {:flex-wrap :wrap-reverse}
+          :align-items-center {:align-items :center}
+          :align-items-flex-start {:align-items :flex-start}
+          :align-items-flex-end {:align-items :flex-end}
+          :align-items-baseline {:align-items :baseline}
+          :align-content-center {:align-content :center}
+          :align-content-flex-start {:align-content :flex-start}
+          :align-content-flex-end {:align-content :flex-end}
+          :align-content-space-between {:align-content :space-between}
+          :align-content-space-around {:align-content :space-around}
+          :justify-center {:justify-content :center}
+          :justify-flex-end {:justify-content :flex-end}
+          :justify-space-between {:justify-content :space-between}
+          :justify-space-around{:justify-content :space-around}
+          :justify-space-evenly {:justify-content :space-evenly}})
 
-(defn grid-style
+(defn- grid-style
   [align-content align-items container direction
    spacing item justify wrap zero-min-width]
   (let [gutter (generate-gutter)
@@ -163,14 +197,14 @@
         (assoc :combinators {[:> :.flexbox-item]
                              {:padding (px (/ spacing 2)) }})))))
 
-(defn check-spec
+(defn- check-spec
   "Throw an exception if value doesn't match the spec"
   [value spec]
   (if-not (s/valid? spec value)
     (throw (ex-info "Invalid value " (s/explain-data spec value)))
     value))
 
-(defn require-prop
+(defn- require-prop
   "Thow an exception if a propery doesn't have the required flags set (container, item)"
   [value props requires prop-name]
   (if (prop-name props)
