@@ -217,38 +217,40 @@
            justify
            wrap
            zero-min-width
+           component
            lg md sm xl xs]
-    :or   {align-content   :stretch
-           align-items     :stretch
+    :or   {align-content  :stretch
+           align-items    :stretch
            container      false
-           direction       :row
-           spacing         0
+           direction      :row
+           spacing        0
            item           false
-           justify         :flex-start
-           wrap            :wrap
+           justify        :flex-start
+           wrap           :wrap
            zero-min-width false
-           xl              false
-           lg              false
-           md              false
-           sm              false
-           xs              false}
-    :as props}]
-  (let [align-content   (-> align-content (check-spec ::align-content) (require-prop props :container :align-content))
-        align-items     (-> align-items (check-spec ::align-items) (require-prop props :container :align-items))
-        class           (check-spec class ::class)
+           component      :div
+           xl             false
+           lg             false
+           md             false
+           sm             false
+           xs             false}
+    :as   props}]
+  (let [align-content  (-> align-content (check-spec ::align-content) (require-prop props :container :align-content))
+        align-items    (-> align-items (check-spec ::align-items) (require-prop props :container :align-items))
+        class          (check-spec class ::class)
         container      (check-spec container ::container)
-        id              (check-spec id ::id)
-        direction       (-> direction (check-spec ::direction) (require-prop props :container :direction))
-        spacing         (-> spacing (check-spec ::spacing) (require-prop props :container :spacing))
+        id             (check-spec id ::id)
+        direction      (-> direction (check-spec ::direction) (require-prop props :container :direction))
+        spacing        (-> spacing (check-spec ::spacing) (require-prop props :container :spacing))
         item           (check-spec item ::item)
-        justify         (-> justify (check-spec ::justify) (require-prop props :container :justify))
-        wrap            (-> wrap (check-spec ::wrap) (require-prop props :container :justify))
+        justify        (-> justify (check-spec ::justify) (require-prop props :container :justify))
+        wrap           (-> wrap (check-spec ::wrap) (require-prop props :container :justify))
         zero-min-width (check-spec zero-min-width ::zero-min-width)
-        lg              (-> lg (check-spec ::lg) (require-prop props :item :lg))
-        md              (-> md (check-spec ::md) (require-prop props :item :md))
-        sm              (-> sm (check-spec ::sm) (require-prop props :item :sm))
-        xl              (-> xl (check-spec ::xl) (require-prop props :item :xl))
-        xs              (-> xs (check-spec ::xs) (require-prop props :item :xs))]
+        lg             (-> lg (check-spec ::lg) (require-prop props :item :lg))
+        md             (-> md (check-spec ::md) (require-prop props :item :md))
+        sm             (-> sm (check-spec ::sm) (require-prop props :item :sm))
+        xl             (-> xl (check-spec ::xl) (require-prop props :item :xl))
+        xs             (-> xs (check-spec ::xs) (require-prop props :item :xs))]
     (let [class* (<class
                   grid-style
                   align-content
@@ -261,14 +263,13 @@
                   wrap
                   zero-min-width)]
       (into
-       [:div {:id    id
-              :class [class*
-                      class
-                      (when item "flexbox-item")
-                      (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
-                      (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
-                      (when md (str "grid-md-" (if (keyword? md) (name md) md)))
-                      (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
-                      (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
-       (r/children (r/current-component)))))
-  )
+       [component {:id    id
+                   :class [class*
+                           class
+                           (when item "flexbox-item")
+                           (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
+                           (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
+                           (when md (str "grid-md-" (if (keyword? md) (name md) md)))
+                           (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
+                           (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
+       (r/children (r/current-component))))))
