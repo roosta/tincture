@@ -85,7 +85,7 @@
           [typography {:class (<class spacing-styles :heading)
                        :variant :subheading}
            "Spacing"]
-          [radio-group #(= @state %) gutters #(reset! state (js/parseInt %))]]]
+          [radio-group #(= @state %) (deref #'tincture.grid/gutters) #(reset! state (js/parseInt %))]]]
         ])))
 
 (defgroup grid-style
@@ -128,15 +128,23 @@
          [typography {:class (<class spacing-styles :heading)
                       :variant :subheading}
           "direction"]
-         [radio-group #(= (:direction @state) %) direction #(swap! state assoc :direction (keyword %))]
+         [radio-group
+          #(= (:direction @state) %)
+          (deref #'tincture.grid/direction)
+          #(swap! state assoc :direction (keyword %))]
          [typography {:class (<class spacing-styles :heading)
                       :variant :subheading}
           "justify"]
-         [radio-group #(= (:justify @state) %) justify #(swap! state assoc :justify (keyword %))]
+         [radio-group
+          #(= (:justify @state) %)
+          (deref #'tincture.grid/justify)
+          #(swap! state assoc :justify (keyword %))]
          [typography {:class (<class spacing-styles :heading)
                       :variant :subheading}
           "align-items"]
-         [radio-group #(= (:align-items @state) %) align-items #(swap! state assoc :align-items (keyword %))]]]])))
+         [radio-group #(= (:align-items @state) %)
+          (deref #'tincture.grid/align-items)
+          #(swap! state assoc :align-items (keyword %))]]]])))
 
 (defn basic-grid []
    [grid {:container true

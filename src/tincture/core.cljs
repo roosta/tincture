@@ -110,7 +110,7 @@
     2 "2px 2px 4px rgba(0, 0, 0, 0.3)"
     3 "4px 4px 8px rgba(0, 0, 0, 0.3)"))
 
-(def breakpoints grid/breakpoints)
+(def breakpoints (deref #'grid/breakpoints))
 
 (defn init! []
   (rf/dispatch-sync [:tincture/initialize]))

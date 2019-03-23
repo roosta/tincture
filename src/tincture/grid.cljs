@@ -17,20 +17,16 @@
    [clojure.string :as str]
    [re-frame.core :as rf]))
 
-(def sizes #{:auto true 1 2 3 4 5 6 7 8 9 10 11 12})
-(def direction #{:row :row-reverse :column :column-reverse})
-(def justify #{:flex-start :center :flex-end :space-between :space-around :space-evenly})
-(def align-items #{:flex-start :center :flex-end :stretch :baseline})
-(def align-content #{:stretch :center :flex-start :flex-end :space-between :space-around})
-(def wrap #{:nowrap :wrap :wrap-reverse})
-(def gutters #{0 8 16 24 32 40})
-(def breakpoints {:xs 0
-                  :sm 600
-                  :md 960
-                  :lg 1280
-                  :xl 1920})
-(def step 5)
-(def unit px)
+(def ^:private sizes #{:auto true 1 2 3 4 5 6 7 8 9 10 11 12})
+(def ^:private direction #{:row :row-reverse :column :column-reverse})
+(def ^:private justify #{:flex-start :center :flex-end :space-between :space-around :space-evenly})
+(def ^:private align-items #{:flex-start :center :flex-end :stretch :baseline})
+(def ^:private align-content #{:stretch :center :flex-start :flex-end :space-between :space-around})
+(def ^:private wrap #{:nowrap :wrap :wrap-reverse})
+(def ^:private gutters #{0 8 16 24 32 40})
+(def ^:private breakpoints {:xs 0 :sm 600 :md 960 :lg 1280 :xl 1920})
+(def ^:private step 5)
+(def ^:private unit px)
 
 (s/def ::xs (s/or :size sizes :false false?))
 (s/def ::sm (s/or :size sizes :false false?))
