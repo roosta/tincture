@@ -85,8 +85,8 @@
   (into {} (map
             (fn [spacing]
               [(keyword (str "spacing-" spacing))
-               {:margin (str (/ (- spacing) 2) "px") #_(px (/ (- spacing) 2))
-                :width #_(calc (percent 100) '+ (px spacing)) (str "calc(100% + " spacing "px)")}])
+               {:margin  (px (/ (- spacing) 2))
+                :width (calc (percent 100) '+ (px spacing))}])
             (rest gutters))))
 
 (defglobal flexbox-grid
