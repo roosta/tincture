@@ -22,8 +22,6 @@
 (def justify #{:flex-start :center :flex-end :space-between :space-around :space-evenly})
 (def align-items #{:flex-start :center :flex-end :stretch :baseline})
 (def align-content #{:stretch :center :flex-start :flex-end :space-between :space-around})
-(def container-props #{:align-content :align-items :direction :justify :spacing :wrap})
-(def item-props #{:xs :sm :md :lg :xl})
 (def wrap #{:nowrap :wrap :wrap-reverse})
 (def gutters #{0 8 16 24 32 40})
 (def breakpoints {:xs 0
@@ -189,23 +187,8 @@
       value)
     value))
 
-(def defaults
-  {:align-content   :stretch
-   :align-items     :stretch
-   :container      false
-   :direction       :row
-   :spacing         0
-   :item           false
-   :justify         :flex-start
-   :wrap            :wrap
-   :zero-min-width false
-   :xl              false
-   :lg              false
-   :md              false
-   :sm              false
-   :xs              false})
-
 (defn grid
+  "Responsive 12 column grid component "
   [{:keys [align-content
            align-items
            class
