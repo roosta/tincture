@@ -4,7 +4,6 @@
             [goog.events.EventType :as event-type]
             [goog.events :as gevents]
             [tincture.async :as async]
-            [tincture.db :as db]
             [tincture.grid :as grid]
             [reagent.debug :as d]
             [re-frame.core :refer [reg-event-db reg-event-fx reg-fx inject-cofx path trim-v
@@ -12,6 +11,11 @@
             [clojure.spec.alpha :as s]) )
 
 (defonce vsm (ViewportSizeMonitor.))
+
+(def ^:private default-db
+  {:tincture/viewport-size nil
+   :tincture/font-families {:headline ["'Raleway'" "sans-serif"]
+                            :body ["'Open Sans'" "sans-serif"]}})
 
 (defn on-resize [e]
   (let [size (.getSize vsm)]
@@ -28,7 +32,7 @@
  (fn [{:keys [db]}]
    (let [size (.getSize vsm)]
      {:db (-> db
-              (merge db/default-db)
+              (merge default-db)
               (assoc :tincture/viewport-size [(.-width size) (.-height size)]))})))
 
 (reg-event-db
