@@ -10,18 +10,18 @@
                                    after debug dispatch]]
             [clojure.spec.alpha :as s]) )
 
-(defonce vsm (ViewportSizeMonitor.))
+(defonce ^:private vsm (ViewportSizeMonitor.))
 
 (def ^:private default-db
   {:tincture/viewport-size nil
    :tincture/font-families {:headline ["'Raleway'" "sans-serif"]
                             :body ["'Open Sans'" "sans-serif"]}})
 
-(defn on-resize [e]
+(defn- on-resize [e]
   (let [size (.getSize vsm)]
     (dispatch [:tincture/set-viewport-size [(.-width size) (.-height size)]])))
 
-(defonce vsm-listener
+(defonce ^:private vsm-listener
   (gevents/listen vsm event-type/RESIZE
    (async/debounce
     on-resize
