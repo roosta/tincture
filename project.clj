@@ -1,5 +1,5 @@
 (defproject tincture "0.2.0"
-  :description "Frontend development toolkit"
+  :description "Frontend development toolkit for ClojureScript"
   :url "https://github.com/roosta/tincture"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
