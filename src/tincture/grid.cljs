@@ -2,8 +2,8 @@
   "Grid component implementing flexbox grid 12 columns responsive layout.
 
   **Inspiration**: \n
-  * [Flexboxgrid](https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css)
   * [Material-ui Grid](https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js)
+  * [Flexboxgrid](https://github.com/kristoferjoseph/flexboxgrid/blob/master/src/css/flexboxgrid.css)
   "
   (:require
    [garden.units :refer [percent px]]
@@ -89,7 +89,9 @@
       {:max-width (unit (- upper-bound (/ step 100)))})))
 
 
-(defn- generate-grid [breakpoint]
+(defn- generate-grid
+  "Generate a global grid, using breakpoints to achive responsiveness"
+  [breakpoint]
   (let [styles
         (mapv (fn [size]
                 (let [kw (keyword (str "grid-" (name breakpoint) "-" (if (keyword? size) (name size) size)))
@@ -118,7 +120,7 @@
                 :width (calc (percent 100) '+ (px spacing))}])
             (rest gutters))))
 
-(defglobal flexbox-grid
+(defglobal ^:private flexbox-grid
   (mapv generate-grid (keys breakpoints)))
 
 #_(defn attach-grid! []
@@ -218,7 +220,100 @@
     value))
 
 (defn grid
-  "Responsive 12 column grid component "
+  " Responsive 12 column grid component that adapts to screen size, using the [CSS
+  flexible box module](https://www.w3.org/TR/css-flexbox-1/).
+
+  * There are two types of layouts,  `container` and `item`
+  * Item widths are set in percentages, so they’re always fluid and sized relative to their parent element.
+  * Items have padding to create the spacing between individual items.
+  * There are five grid breakpoints: `xs`, `sm`, `md`, `lg`, and `xl`.
+
+  **Properties**
+
+  The grid component takes a map of properties, where each property can be one
+  of a `set` of possible values:
+
+  * `:align-content`, one of:
+  `#{:stretch :center :flex-start :flex-end :space-between :space-around}`.
+  Default: `:stretch`. Defines the `align-content` style property. It's applied for
+  all screen sizes.
+
+  * `:align-items`, one of:
+  `#{:flex-start :center :flex-end :stretch :baseline}`. Default: `:stretch`
+  Defines the `align-items` style property. It's applied for all screen sizes.
+
+  * `:container`, one of: `#{true false}`. Default: `true`. If `true`, the
+  component will have the flex container behavior. You should be wrapping *items*
+  with a *container*.
+
+  * `:direction`, one of: `#{:row :row-reverse :column :column-reverse}`.
+  Default `:row`. Defines the `:flex-direction` style property. It is applied
+  for all screen sizes.
+
+  * `:spacing`, one of: `#{0 8 16 24 32 40}`. Default: `0`. Defines the space
+  between the type `item` component. It can only be used on a type `container`
+  component.
+
+  * `:item`, one of: `#{true false}`. Default `false`. If `true`, the component
+  will have the flex *item* behavior. You should be wrapping *items* with a
+  *container*.
+
+  * `:justify`, one of:
+  `#{:flex-start :center :flex-end :space-between :space-around :space-evenly}`.
+  Default `:flex-start`. Defines the `justify-content` style property. It is
+  applied for all screen sizes.
+
+  * `:wrap`, one of: `#{:nowrap :wrap :wrap-reverse}`. Default `:wrap`. Defines
+  the `flex-wrap` style property. It's applied for all screen sizes.
+
+  * `:zero-min-width`, one of: #{true false}`. Default `false`, If `true`, it
+  sets `min-width: 0` on the item.
+
+  * `:xs`, one of: `#{:auto true false 1 2 3 4 5 6 7 8 9 10 11 12}`. Default
+  `false`. Defines the number of grids the component is going to use. It's
+  applied for all the screen sizes with the lowest priority.
+
+  * `:sm`, one of: `#{:auto true false 1 2 3 4 5 6 7 8 9 10 11 12}`. Default
+  `false`. Defines the number of grids the component is going to use. It's
+  applied for the `sm` breakpoint and wider screens.
+
+  * `:md`, one of: `#{:auto true false 1 2 3 4 5 6 7 8 9 10 11 12}`. Default
+  `false`. Defines the number of grids the component is going to use. It's
+  applied for the `md` breakpoint and wider screens.
+
+  * `:lg`, one of: `#{:auto true false 1 2 3 4 5 6 7 8 9 10 11 12}`. Default
+  `false`. Defines the number of grids the component is going to use. It's
+  applied for the `lg` breakpoint and wider screens.
+
+  * `:xl`, one of: `#{:auto true false 1 2 3 4 5 6 7 8 9 10 11 12}`. Default
+  `false`. Defines the number of grids the component is going to use. It's
+  applied for the `xl` breakpoint and wider screens.
+
+  Additionally:
+  * `:class` a string class name to be applied to the grid component
+  * `:id` a string id to be applied to the grid component
+  * `:component` the component to be used, default `:div`
+
+  Example usage:
+  ```clojure
+  [grid {:container true
+         :class \"my-class-name\"
+         :spacing 16
+         :justify :center}
+   [grid {:item true
+          :xs 12
+          :sm 6}
+    [:span \"column 1\"]]
+   [grid {:item true
+          :xs 12
+          :sm 6}
+    [span \"column 2\"]]
+   [grid {:item true
+          :xs 12
+          :sm 6}
+    [:span \"column 3\"]]]
+  ```
+  "
   [{:keys [align-content
            align-items
            class
