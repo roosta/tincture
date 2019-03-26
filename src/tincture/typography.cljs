@@ -4,112 +4,132 @@
   **Inspiration**: \n
   - [Material-ui Typography](https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Typography/Typography.js)"
   (:require
-   [garden.units :refer [px percent]]
+   [garden.units :refer [px percent rem em]]
    [reagent.debug :as d]
    [clojure.string :as str]
+   [tincture.cssfns :refer [rgb]]
    [herb.core :refer-macros [<class]]
    [cljs.spec.alpha :as s :include-macros true]
    [reagent.core :as r]
    [tincture.core :as t]
    [re-frame.core :as rf]))
 
-(def font-weight {:light 300
-                  :regular 400
-                  :medium 500})
+(def ^:private font-weight {:light 300
+                            :regular 400
+                            :medium 500})
 
-(s/def ::valid-variants #{:title :display1 :display2
-                          :display3 :display4 :subheading
-                          :headline :button :body1 :body2})
+(s/def ::valid-variants
+  #{:h1 :h2 :h3 :h4 :h5 :h6 :subtitle1 :subtitle2 :body1 :body2 :caption :button
+   :overline :sr-only :inherit})
 
-(defn variants
+(defn- variants
   [variant]
   (let [font-families @(rf/subscribe [:tincture/font-families])]
-    (variant {:display1 {:font-size (px 34)
-                         :font-weight (:regular font-weight)
-                         :font-family (:headline font-families)
-                         :line-height "40px"}
+    (variant {:h1 {:color (rgb 0 0 0 0.87)
+                   :font-family (:headline font-families)
+                   :font-size (rem 6)
+                   :font-weight (:light font-weight)
+                   :line-height 1}
 
-              :display2 {:font-size (px 45)
-                         :font-weight (:regular font-weight),
-                         :font-family (:headline font-families)
-                         :line-height (px 48)}
+              :h2 {:color (rgb 0 0 0 0.87)
+                   :font-family (:headline font-families)
+                   :font-size (rem 3.75)
+                   :font-weight (:light font-weight),
+                   :line-height 1}
 
-              :display3 {:font-size (px 56)
-                         :font-weight (:regular font-weight)
-                         :font-family (:headline font-families)
-                         :letter-spacing "-.02em"
-                         :line-height 1.35}
+              :h3 {:color (rgb 0 0 0 0.87)
+                   :font-family (:headline font-families)
+                   :font-size (rem 3)
+                   :font-weight (:regular font-weight)
+                   :line-height 1.04}
 
-              :display4 {:font-size (px 112)
-                         :font-weight (:light font-weight)
-                         :font-family (:headline font-families)
-                         :letter-spacing "-.04em"
-                         :line-height 1}
+              :h4 {:color (rgb 0 0 0 0.87)
+                   :font-family (:headline font-families)
+                   :font-size (rem 2.125)
+                   :font-weight (:regular font-weight)
+                   :line-height 1.17}
 
-              :subheading {:font-size (px 16)
-                           :font-weight (:regular font-weight)
-                           :font-family (:body font-families)
-                           :line-height (px 24)}
+              :h5 {:color (rgb 0 0 0 0.87)
+                   :font-family (:headline font-families)
+                   :font-size (rem 1.5)
+                   :font-weight (:regular font-weight)
+                   :line-height 1.33}
 
-              :headline {:font-size (px 24)
-                         :font-weight (:regular font-weight)
-                         :font-family (:headline font-families)
-                         :line-height (px 32)}
+              :h6 {:color (rgb 0 0 0 0.87)
+                   :font-family (:headline font-families)
+                   :font-size (rem 1.25)
+                   :font-weight (:medium font-weight)
+                   :line-height 1.6}
 
-              :title {:font-size (px 21)
-                      :font-family (:headline font-families)
-                      :line-height 1
-                      :font-weight (:medium font-weight)}
+              :subtitle1 {:color (rgb 0 0 0 0.87)
+                          :font-family (:body font-families)
+                          :font-size (rem 1)
+                          :font-weight (:regular font-weight)
+                          :line-height 1.75}
 
-              :button {:font-size 14
-                       :text-transform "uppercase"
+              :subtitle2 {:color (rgb 0 0 0 0.87)
+                          :font-family (:body font-families)
+                          :font-size (rem 0.875)
+                          :font-weight (:medium font-weight)
+                          :line-height 1.57}
+
+              :body1 {:color (rgb 0 0 0 0.87)
+                      :font-family (:body font-families)
+                      :font-size (rem 1)
+                      :font-weight (:regular font-weight)
+                      :line-height 1.5}
+
+              :body2 {:color (rgb 0 0 0 0.87)
+                      :font-family (:body font-families)
+                      :font-size (rem 0.875)
+                      :font-weight (:regular font-weight)
+                      :line-height 1.5}
+
+              :caption {:color (rgb 0 0 0 0.87)
+                        :font-family (:body font-families)
+                        :font-size (rem 0.75)
+                        :font-weight (:regular font-weight)
+                        :line-height 1.66}
+
+              :button {:color (rgb 0 0 0 0.87)
+                       :font-family (:body font-families)
+                       :font-size (rem 0.875)
                        :font-weight (:medium font-weight)
-                       :font-family (:body font-families)}
+                       :text-transform :uppercase
+                       :line-height 1.75}
 
-              :body1 {:font-size (px 14)
-                      :font-weight (:regular font-weight)
-                      :font-family (:body font-families)
-                      :line-height (px 20)}
+              :overline {:color (rgb 0 0 0 0.87)
+                         :font-family (:body font-families)
+                         :font-size (rem 0.75)
+                         :font-weight (:regular font-weight)
+                         :text-transform :uppercase
+                         :line-height 2.66}})))
 
-              :body2 {:font-size (px 14)
-                      :font-weight (:regular font-weight)
-                      :font-family (:body font-families)
-                      :line-height (px 20)}})))
 
-(def mapping
-  {:display4 :h1
-   :display3 :h1
-   :display2 :h1
-   :display1 :h1
-   :headline :h1
-   :title :h2
-   :subheading :h3
-   :button :span
-   :body2 :aside
-   :body1 :p})
+(def ^:private mapping
+  {:h1 :h1
+   :h2 :h2
+   :h3 :h3
+   :h4 :h4
+   :h5 :h5
+   :h6 :h6
+   :subtitle1 :h6
+   :subtitle2 :h6
+   :body1 :p
+   :body2 :p})
 
-(s/def ::valid-aligns #{:left :right :center :justify})
-(s/def ::valid-styles #{:normal :italic})
+(s/def ::valid-aligns #{:inherit :left :right :center :justify})
+(s/def ::valid-font-styles #{:normal :italic})
 (s/def ::valid-directions #{:ltr :rtl})
 
-(defn typography-style
-  [variant align style direction elevation]
-  (let [k (str/join "-" [(name variant) (name align) (name style) (name direction) elevation])
-        variants {:display1 (variants :display1)
-                  :display2 (variants :display2)
-                  :display3 (variants :display3)
-                  :display4 (variants :display4)
-                  :subheading (variants :subheading)
-                  :headline (variants :headline)
-                  :title (variants :title)
-                  :button (variants :button)
-                  :body1 (variants :body1)
-                  :body2 (variants :body2)}
+(defn- typography-style
+  [variant align font-style direction elevation]
+  (let [k (str/join "-" [(name variant) (name align) (name font-style) (name direction) elevation])
 
         directions {:ltr {:direction "ltr"}
                     :rtl {:direction "rtl"}}
 
-        styles {:italic {:font-style "italic"}}
+        font-styles {:italic {:font-style "italic"}}
 
         aligns {:left {:text-align "left"}
                 :right {:text-align "right"}
@@ -119,27 +139,26 @@
     (with-meta
       (merge
        {:text-shadow (t/text-shadow elevation)}
-       (variant variants)
+       (variants variant)
        (direction directions)
-       (style styles)
+       (font-style font-styles)
        (align aligns))
       {:key k})))
 
-;; TODO Add color?
 (defn typography
-  [{:keys [variant align class elevation style on-click direction]
-    :or {variant :body1
-         style :normal
+  [{:keys [variant align class elevation font-style on-click direction component]
+    :or {variant :body2
+         font-style :normal
          align :left
          direction :ltr
          elevation 0}}]
   {:pre [(s/valid? ::valid-aligns align)
          (s/valid? ::valid-variants variant)
          (s/valid? ::valid-directions direction)
-         (s/valid? ::valid-styles style)]}
-  (let [class* (<class typography-style variant align style direction elevation)]
+         (s/valid? ::valid-font-styles font-style)]}
+  (let [class* (<class typography-style variant align font-style direction elevation)]
     (into
-     [(variant mapping) {:on-click on-click
-                         :class (if class (str class " " class*)
-                                    class*)}]
+     [(or component (variant mapping))
+      {:on-click on-click
+       :class [class class*]}]
      (r/children (r/current-component)))))
