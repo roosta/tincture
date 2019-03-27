@@ -1,13 +1,15 @@
 (ns tincture.typography
   "Typography component implementing [Material Design](https://material.io/design/typography/the-type-system.html#) guidelines.
 
-  **Inspiration**: \n
+  **Inspiration**:
+
   - [Material-ui Typography](https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Typography/Typography.js)"
   (:require
    [garden.units :refer [px percent rem em]]
    [reagent.debug :as d]
    [clojure.string :as str]
    [tincture.cssfns :refer [rgb]]
+   [tincture.spec :refer [check-spec]]
    [herb.core :refer-macros [<class]]
    [cljs.spec.alpha :as s :include-macros true]
    [reagent.core :as r]

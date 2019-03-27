@@ -12,6 +12,7 @@
    [goog.object :as gobj]
    [goog.dom :as dom]
    [clojure.spec.alpha :as s]
+   [tincture.spec :refer [check-spec]]
    [reagent.core :as r]
    [garden.stylesheet :refer [at-media]]
    [herb.core :refer-macros [<class defgroup defglobal]]
@@ -198,13 +199,6 @@
         (not= spacing 0)
         (assoc :combinators {[:> :.flexbox-item]
                              {:padding (px (/ spacing 2)) }})))))
-
-(defn- check-spec
-  "Throw an exception if value doesn't match the spec"
-  [value spec]
-  (if-not (s/valid? spec value)
-    (throw (ex-info "Invalid value " (s/explain-data spec value)))
-    value))
 
 (defn- require-prop
   "Thow an exception if a propery doesn't have the required flags set (container, item)"
