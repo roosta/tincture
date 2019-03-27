@@ -91,7 +91,7 @@
 
 
 (defn- generate-grid
-  "Generate a global grid, using breakpoints to achive responsiveness"
+  "Generate a global grid, using breakpoints to achieve responsiveness"
   [breakpoint]
   (let [styles
         (mapv (fn [size]
