@@ -123,6 +123,9 @@
 (s/def ::valid-aligns #{:inherit :left :right :center :justify})
 (s/def ::valid-font-styles #{:normal :italic})
 (s/def ::valid-directions #{:ltr :rtl})
+(s/def ::class (s/nilable string?))
+(s/def ::id (s/nilable string?))
+(s/def ::on-click (s/nilable fn?))
 
 (defn- typography-style
   [variant align font-style direction elevation]
@@ -154,13 +157,16 @@
          align :left
          direction :ltr
          elevation 0}}]
-  {:pre [(s/valid? ::valid-aligns align)
-         (s/valid? ::valid-variants variant)
-         (s/valid? ::valid-directions direction)
-         (s/valid? ::valid-font-styles font-style)]}
-  (let [class* (<class typography-style variant align font-style direction elevation)]
-    (into
-     [(or component (variant mapping))
-      {:on-click on-click
-       :class [class class*]}]
-     (r/children (r/current-component)))))
+  (let [variant (check-spec variant ::valid-variants)
+        align (check-spec align ::valid-aligns)
+        class (check-spec class ::class)
+        elevation (check-spec elevation :tincture.core/valid-text-shadow-elevation)
+        direction (check-spec direction ::valid-directions)
+        font-style (check-spec font-style ::valid-font-styles)
+        on-click (check-spec on-click ::on-click)]
+    (let [class* (<class typography-style variant align font-style direction elevation)]
+      (into
+       [(or component (variant mapping))
+        {:on-click on-click
+         :class [class class*]}]
+       (r/children (r/current-component))))))
