@@ -83,7 +83,7 @@
                :xs 12}
          [paper {:class (<class control-paper)}
           [typography {:class (<class spacing-styles :heading)
-                       :variant :subheading}
+                       :variant :subtitle1}
            "Spacing"]
           [radio-group #(= @state %) (deref #'tincture.grid/gutters) #(reset! state (js/parseInt %))]]]
         ])))
@@ -126,21 +126,21 @@
               :xs 12}
         [paper {:class (<class control-paper)}
          [typography {:class (<class spacing-styles :heading)
-                      :variant :subheading}
+                      :variant :subtitle1}
           "direction"]
          [radio-group
           #(= (:direction @state) %)
           (deref #'tincture.grid/direction)
           #(swap! state assoc :direction (keyword %))]
          [typography {:class (<class spacing-styles :heading)
-                      :variant :subheading}
+                      :variant :subtitle1}
           "justify"]
          [radio-group
           #(= (:justify @state) %)
           (deref #'tincture.grid/justify)
           #(swap! state assoc :justify (keyword %))]
          [typography {:class (<class spacing-styles :heading)
-                      :variant :subheading}
+                      :variant :subtitle1}
           "align-items"]
          [radio-group #(= (:align-items @state) %)
           (deref #'tincture.grid/align-items)
@@ -225,25 +225,25 @@
           :spacing 32}
     [grid {:item true
            :xs 12}
-     [typography {:variant :headline
+     [typography {:variant :h4
                   :align :center}
       "Spacing"]
      [spacing]]
     [grid {:item true
            :xs 12}
-     [typography {:variant :headline
+     [typography {:variant :h4
                   :align :center}
       "Basic grid"]
      [basic-grid]]
     [grid {:item true
            :xs 12}
-     [typography {:variant :headline
+     [typography {:variant :h4
                   :align :center}
       "Grid with breakpoints"]
      [grid-with-breakpoints]]
     [grid {:item true
            :xs 12}
-     [typography {:variant :headline
+     [typography {:variant :h4
                   :align :center}
       "Interactive"]
      [interactive]]]])

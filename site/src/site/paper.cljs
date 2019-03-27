@@ -21,6 +21,6 @@
 (defn main []
   [container {:class (<class container-style)}
    [paper {:class (<class paper-style)}
-    [typography {:variant :headline}
+    [typography {:variant :h5}
      "This is a paper component"]]
    ])

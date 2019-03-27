@@ -30,7 +30,7 @@
   []
   [container
    [typography {:class (<class styles :headline)
-                :variant :display3}
+                :variant :h4}
     "CSS Gradients"]
    [typography {:class (<class styles :text)}
     "Tincture provides a gradient tool, it uses gradients defined at " [:a {:href "uigradients.com"} "uigradients.com"]]
@@ -40,6 +40,6 @@
         ^{:key kw}
         [:div {:class (<class gradient-box (gradient/css (key g)) kw)}
          [typography {:class (<class styles :palette-name)
-                      :variant :subheading}
+                      :variant :subtitle1}
           (name kw)]
          ]))]])

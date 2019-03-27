@@ -40,7 +40,7 @@
 
 (defn home-page []
   [container
-   [typography {:variant :display1}
+   [typography {:variant :h2}
     "Welcome to the Tincture demo"]
    [typography {:variant :body1}
     "Tincture is a frontend toolkit for ClojureScript that provides several
