@@ -9,7 +9,7 @@
           :output-path "doc"
           :source-paths ["src"]}
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
-                 [org.clojure/clojurescript "1.10.439" :scope "provided"]
+                 [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [cljsjs/react-transition-group "2.4.0-0"]
                  [herb "0.7.3-SNAPSHOT"]
                  ;; [prismatic/dommy "1.1.0"]
