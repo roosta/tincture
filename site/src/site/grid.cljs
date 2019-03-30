@@ -42,6 +42,10 @@
    :padding (px 16)}
   )
 
+(defgroup main-style
+  {:headline {:margin (px 32)}}
+  )
+
 (defgroup radio-group-styles
   {:label {:margin-right (px 8)}})
 
@@ -98,7 +102,8 @@
            :text-align :center}})
 
 (defgroup interactive-styles
-  {:demo {:height (px 240)}})
+  {:demo {:height (px 240)}
+   :block {:margin-bottom (px 16)}})
 
 (defn interactive []
   (let [state (r/atom {:direction :row
@@ -125,26 +130,33 @@
        [grid {:item true
               :xs 12}
         [paper {:class (<class control-paper)}
-         [typography {:class (<class spacing-styles :heading)
-                      :variant :subtitle1}
-          "direction"]
-         [radio-group
-          #(= (:direction @state) %)
-          (deref #'tincture.grid/direction)
-          #(swap! state assoc :direction (keyword %))]
-         [typography {:class (<class spacing-styles :heading)
-                      :variant :subtitle1}
-          "justify"]
-         [radio-group
-          #(= (:justify @state) %)
-          (deref #'tincture.grid/justify)
-          #(swap! state assoc :justify (keyword %))]
-         [typography {:class (<class spacing-styles :heading)
-                      :variant :subtitle1}
-          "align-items"]
-         [radio-group #(= (:align-items @state) %)
-          (deref #'tincture.grid/align-items)
-          #(swap! state assoc :align-items (keyword %))]]]])))
+         [:div {:class (<class interactive-styles :block)}
+          [typography {:class (<class spacing-styles :heading)
+                       :gutter-bottom true
+                       :variant :subtitle1}
+           "direction"]
+          [radio-group
+           #(= (:direction @state) %)
+           (deref #'tincture.grid/direction)
+           #(swap! state assoc :direction (keyword %))]]
+         [:div {:class (<class interactive-styles :block)}
+          [typography {:class (<class spacing-styles :heading)
+                       :gutter-bottom true
+                       :variant :subtitle1}
+           "justify"]
+          [radio-group
+           #(= (:justify @state) %)
+           (deref #'tincture.grid/justify)
+           #(swap! state assoc :justify (keyword %))]]
+
+         [:div {:class (<class interactive-styles :block)}
+          [typography {:class (<class spacing-styles :heading)
+                       :gutter-bottom true
+                       :variant :subtitle1}
+           "align-items"]
+          [radio-group #(= (:align-items @state) %)
+           (deref #'tincture.grid/align-items)
+           #(swap! state assoc :align-items (keyword %))]]]]])))
 
 (defn basic-grid []
    [grid {:container true
@@ -226,24 +238,32 @@
     [grid {:item true
            :xs 12}
      [typography {:variant :h4
+                  :class (<class main-style :headline)
+                  :gutter-bottom true
                   :align :center}
       "Spacing"]
      [spacing]]
     [grid {:item true
            :xs 12}
      [typography {:variant :h4
+                  :class (<class main-style :headline)
+                  :gutter-bottom true
                   :align :center}
       "Basic grid"]
      [basic-grid]]
     [grid {:item true
            :xs 12}
      [typography {:variant :h4
+                  :class (<class main-style :headline)
+                  :gutter-bottom true
                   :align :center}
       "Grid with breakpoints"]
      [grid-with-breakpoints]]
     [grid {:item true
            :xs 12}
      [typography {:variant :h4
+                  :class (<class main-style :headline)
+                  :gutter-bottom true
                   :align :center}
       "Interactive"]
      [interactive]]]])
