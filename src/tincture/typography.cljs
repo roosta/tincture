@@ -142,17 +142,24 @@
 (s/def ::on-click (s/nilable fn?))
 (s/def ::paragraph boolean?)
 (s/def ::gutter-bottom boolean?)
+(s/def ::no-wrap boolean?)
 
 (defn- typography-style
-  [variant align font-style direction elevation gutter-bottom paragraph color]
+  [variant align font-style direction
+   elevation gutter-bottom paragraph
+   color no-wrap]
   (let [k (str/join "-" [(name variant) (name align) (name font-style)
                          (name direction) elevation gutter-bottom paragraph
-                         (name color)])
+                         (name color) no-wrap])
 
         root {:margin 0}
 
         directions {:ltr {:direction "ltr"}
                     :rtl {:direction "rtl"}}
+
+        no-wrap-style {:overflow :hidden
+                       :text-overflow "ellipsis"
+                       :white-space "nowrap"}
 
         font-styles {:italic {:font-style "italic"}}
 
@@ -172,6 +179,7 @@
              (variants variant color)
              (when paragraph p-style)
              (when gutter-bottom gutter-bottom-style)
+             (when no-wrap no-wrap-style)
              (direction directions)
              (font-style font-styles)
              (align aligns)
@@ -181,7 +189,7 @@
 (defn typography
   [{:keys [variant align class elevation font-style
            on-click direction component gutter-bottom
-           paragraph color]
+           paragraph color no-wrap]
     :or {variant :body2
          font-style :normal
          align :left
@@ -189,7 +197,8 @@
          paragraph false
          gutter-bottom false
          elevation 0
-         color :light}}]
+         color :light
+         no-wrap false}}]
   (let [variant (check-spec variant ::valid-variants)
         align (check-spec align ::valid-aligns)
         class (check-spec class ::class)
@@ -199,9 +208,12 @@
         on-click (check-spec on-click ::on-click)
         gutter-bottom (check-spec gutter-bottom ::gutter-bottom)
         color (check-spec color ::valid-colors)
-        paragraph (check-spec paragraph ::paragraph)]
+        paragraph (check-spec paragraph ::paragraph)
+        no-wrap (check-spec no-wrap ::no-wrap)]
     (into
      [(if paragraph :p (or component (variant mapping) :span))
       {:on-click on-click
-       :class [class (<class typography-style variant align font-style direction elevation gutter-bottom paragraph color)]}]
+       :class [class (<class typography-style variant align font-style
+                             direction elevation gutter-bottom paragraph
+                             color no-wrap)]}]
      (r/children (r/current-component)))))
