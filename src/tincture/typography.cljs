@@ -35,7 +35,7 @@
 (defn- variants
   [variant color]
   (let [color (get colors color)
-        font @(rf/subscribe [:tincture/font])]
+        font @(rf/subscribe [:tincture.font/family])]
     (variant {:h1 {:color color
                    :font-family font
                    :font-size (rem 6)

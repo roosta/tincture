@@ -20,6 +20,18 @@
    (:tincture/font db)))
 
 (rf/reg-sub
+ :tincture.font/family
+ :<- [:tincture/font]
+ (fn [font]
+   (get font :font/family)))
+
+(rf/reg-sub
+ :tincture.font/url
+ :<- [:tincture/font]
+ (fn [font]
+   (get font :font/url)))
+
+(rf/reg-sub
  :tincture/device
  (fn []
    (cond
