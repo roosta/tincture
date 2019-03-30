@@ -126,15 +126,24 @@
 (s/def ::class (s/nilable string?))
 (s/def ::id (s/nilable string?))
 (s/def ::on-click (s/nilable fn?))
+(s/def ::paragraph boolean?)
+(s/def ::gutter-bottom boolean?)
 
 (defn- typography-style
-  [variant align font-style direction elevation]
-  (let [k (str/join "-" [(name variant) (name align) (name font-style) (name direction) elevation])
+  [variant align font-style direction elevation gutter-bottom paragraph]
+  (let [k (str/join "-" [(name variant) (name align) (name font-style)
+                         (name direction) elevation gutter-bottom paragraph])
+
+        root {:margin 0}
 
         directions {:ltr {:direction "ltr"}
                     :rtl {:direction "rtl"}}
 
         font-styles {:italic {:font-style "italic"}}
+
+        p-style {:margin-bottom (px 16)}
+
+        gutter-bottom-style {:margin-bottom (em 0.35)}
 
         aligns {:left {:text-align "left"}
                 :right {:text-align "right"}
@@ -146,17 +155,22 @@
             (merge
              {:text-shadow (t/text-shadow elevation)}
              (variants variant)
+             (when paragraph p-style)
+             (when gutter-bottom gutter-bottom-style)
              (direction directions)
              (font-style font-styles)
-             (align aligns)))
+             (align aligns)
+             root))
       {:key k})))
 
 (defn typography
-  [{:keys [variant align class elevation font-style on-click direction component]
+  [{:keys [variant align class elevation font-style on-click direction component gutter-bottom paragraph]
     :or {variant :body2
          font-style :normal
          align :left
          direction :ltr
+         paragraph false
+         gutter-bottom false
          elevation 0}}]
   (let [variant (check-spec variant ::valid-variants)
         align (check-spec align ::valid-aligns)
@@ -164,9 +178,11 @@
         elevation (check-spec elevation :tincture.core/valid-text-shadow-elevation)
         direction (check-spec direction ::valid-directions)
         font-style (check-spec font-style ::valid-font-styles)
-        on-click (check-spec on-click ::on-click)]
+        on-click (check-spec on-click ::on-click)
+        gutter-bottom (check-spec gutter-bottom ::gutter-bottom)
+        paragraph (check-spec paragraph ::paragraph)]
     (into
-     [(or component (variant mapping))
+     [(if paragraph :p (or component (variant mapping) :span))
       {:on-click on-click
-       :class [class (<class typography-style variant align font-style direction elevation)]}]
+       :class [class (<class typography-style variant align font-style direction elevation gutter-bottom paragraph)]}]
      (r/children (r/current-component)))))
