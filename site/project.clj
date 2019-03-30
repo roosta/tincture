@@ -15,7 +15,7 @@
                  [yogthos/config "1.1.1"]
                  [org.clojure/clojurescript "1.10.520"
                   :scope "provided"]
-                 [metosin/reitit "0.2.13"]
+                 [metosin/reitit "0.3.1"]
                  [pez/clerk "1.0.0"]
                  [venantius/accountant "0.2.4"
                   :exclusions [org.clojure/tools.reader]]]
@@ -74,10 +74,10 @@
                                   [orchestra "2019.02.06-1"]
                                   [ring/ring-mock "0.3.2"]
                                   [ring/ring-devel "1.7.1"]
-                                  [philoskim/debux "0.5.5"]
+                                  [philoskim/debux "0.5.6"]
                                   [prone "1.6.1"]
                                   [figwheel-sidecar "0.5.18"]
-                                  [day8.re-frame/re-frame-10x "0.3.7-react16"]
+                                  [day8.re-frame/re-frame-10x "0.4.0"]
                                   [nrepl "0.6.0"]
                                   [pjstadig/humane-test-output "0.9.0"]]
 
@@ -92,7 +92,7 @@
              :uberjar {
                        ;; :hooks [minify-assets.plugin/hooks]
                        :source-paths ["env/prod"]
-                       :dependencies [[philoskim/debux-stubs "0.5.5"]]
+                       :dependencies [[philoskim/debux-stubs "0.5.6"]]
                        :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
                        :env {:production true}
                        :aot :all
