@@ -165,9 +165,8 @@
         direction (check-spec direction ::valid-directions)
         font-style (check-spec font-style ::valid-font-styles)
         on-click (check-spec on-click ::on-click)]
-    (let [class* (<class typography-style variant align font-style direction elevation)]
-      (into
-       [(or component (variant mapping))
-        {:on-click on-click
-         :class [class class*]}]
-       (r/children (r/current-component))))))
+    (into
+     [(or component (variant mapping))
+      {:on-click on-click
+       :class [class (<class typography-style variant align font-style direction elevation)]}]
+     (r/children (r/current-component)))))
