@@ -64,13 +64,13 @@
                    :line-height 1.6}
 
               :subtitle1 {:color (rgb 0 0 0 0.87)
-                          :font-family (:body font-families)
+                          :font-family (:headline font-families)
                           :font-size (rem 1)
                           :font-weight (:regular font-weight)
                           :line-height 1.75}
 
               :subtitle2 {:color (rgb 0 0 0 0.87)
-                          :font-family (:body font-families)
+                          :font-family (:headline font-families)
                           :font-size (rem 0.875)
                           :font-weight (:medium font-weight)
                           :line-height 1.57}
