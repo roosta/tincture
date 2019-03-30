@@ -43,7 +43,7 @@
   )
 
 (defgroup main-style
-  {:headline {:margin (px 32)}}
+  {:headline {:margin "32px !important"}}
   )
 
 (defgroup radio-group-styles
