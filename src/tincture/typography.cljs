@@ -142,12 +142,13 @@
                 :justify {:text-align "justify"}}]
 
     (with-meta
-      (merge
-       {:text-shadow (t/text-shadow elevation)}
-       (variants variant)
-       (direction directions)
-       (font-style font-styles)
-       (align aligns))
+      (into {}
+            (merge
+             {:text-shadow (t/text-shadow elevation)}
+             (variants variant)
+             (direction directions)
+             (font-style font-styles)
+             (align aligns)))
       {:key k})))
 
 (defn typography
