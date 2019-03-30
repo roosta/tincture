@@ -39,12 +39,10 @@
 (defn root-style []
   {:flex-grow 1
    :background "#eee"
-   :padding (px 16)}
-  )
+   :padding (px 16)})
 
 (defgroup main-style
-  {:headline {:margin "32px !important"}}
-  )
+  {:headline {:margin "32px !important"}})
 
 (defgroup radio-group-styles
   {:label {:margin-right (px 8)}})
