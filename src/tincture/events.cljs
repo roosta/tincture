@@ -14,8 +14,7 @@
 
 (def ^:private default-db
   {:tincture/viewport-size nil
-   :tincture/font-families {:headline ["'Raleway'" "sans-serif"]
-                            :body ["'Open Sans'" "sans-serif"]}})
+   :tincture/font ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]})
 
 (defn- on-resize [e]
   (let [size (.getSize vsm)]
@@ -42,9 +41,9 @@
 
 
 (reg-event-db
- :tincture/set-font-families
- (fn [db [_ fonts]]
-   (assoc db :tincture/font-families fonts)))
+ :tincture/set-font
+ (fn [db [_ font]]
+   (assoc db :tincture/font font)))
 
 
 ;; Lato,'Helvetica Neue',Arial,Helvetica,sans-serif

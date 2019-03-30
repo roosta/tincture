@@ -15,9 +15,9 @@
    (:tincture/viewport-size db)))
 
 (rf/reg-sub
- :tincture/font-families
+ :tincture/font
  (fn [db _]
-   (:tincture/font-families db)))
+   (:tincture/font db)))
 
 (rf/reg-sub
  :tincture/device

@@ -35,82 +35,82 @@
 (defn- variants
   [variant color]
   (let [color (get colors color)
-        font-families @(rf/subscribe [:tincture/font-families])]
+        font @(rf/subscribe [:tincture/font])]
     (variant {:h1 {:color color
-                   :font-family (:headline font-families)
+                   :font-family font
                    :font-size (rem 6)
                    :font-weight (:light font-weight)
                    :line-height 1}
 
               :h2 {:color color
-                   :font-family (:headline font-families)
+                   :font-family font
                    :font-size (rem 3.75)
                    :font-weight (:light font-weight),
                    :line-height 1}
 
               :h3 {:color color
-                   :font-family (:headline font-families)
+                   :font-family font
                    :font-size (rem 3)
                    :font-weight (:regular font-weight)
                    :line-height 1.04}
 
               :h4 {:color color
-                   :font-family (:headline font-families)
+                   :font-family font
                    :font-size (rem 2.125)
                    :font-weight (:regular font-weight)
                    :line-height 1.17}
 
               :h5 {:color color
-                   :font-family (:headline font-families)
+                   :font-family font
                    :font-size (rem 1.5)
                    :font-weight (:regular font-weight)
                    :line-height 1.33}
 
               :h6 {:color color
-                   :font-family (:headline font-families)
+                   :font-family font
                    :font-size (rem 1.25)
                    :font-weight (:medium font-weight)
                    :line-height 1.6}
 
               :subtitle1 {:color color
-                          :font-family (:headline font-families)
+                          :font-family font
                           :font-size (rem 1)
                           :font-weight (:regular font-weight)
                           :line-height 1.75}
 
               :subtitle2 {:color color
-                          :font-family (:headline font-families)
+                          :font-family font
                           :font-size (rem 0.875)
                           :font-weight (:medium font-weight)
                           :line-height 1.57}
 
               :body1 {:color color
-                      :font-family (:body font-families)
+                      :font-family font
                       :font-size (rem 1)
                       :font-weight (:regular font-weight)
                       :line-height 1.5}
 
               :body2 {:color color
-                      :font-family (:body font-families)
+                      :font-family font
                       :font-size (rem 0.875)
                       :font-weight (:regular font-weight)
                       :line-height 1.5}
 
               :caption {:color color
-                        :font-family (:body font-families)
+                        :font-family font
                         :font-size (rem 0.75)
                         :font-weight (:regular font-weight)
                         :line-height 1.66}
 
               :button {:color color
-                       :font-family (:body font-families)
+                       :font-family font
                        :font-size (rem 0.875)
                        :font-weight (:medium font-weight)
                        :text-transform :uppercase
                        :line-height 1.75}
 
               :overline {:color color
-                         :font-family (:body font-families)
+                         :font-family font
                          :font-size (rem 0.75)
                          :font-weight (:regular font-weight)
                          :text-transform :uppercase
