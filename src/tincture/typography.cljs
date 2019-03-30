@@ -22,6 +22,7 @@
 
 (def ^:private colors {:light (rgb 0 0 0 0.87)
                        :dark "#fff"
+                       :inherit "inherit"
                        :secondary-light (rgb 0 0 0 0.54)
                        :secondary-dark (rgb 255 255 255 0.7)})
 
@@ -29,7 +30,7 @@
   #{:h1 :h2 :h3 :h4 :h5 :h6 :subtitle1 :subtitle2 :body1 :body2 :caption :button
    :overline :sr-only :inherit})
 
-(s/def ::valid-colors #{:light :dark :secondary-light :secondary-dark})
+(s/def ::valid-colors #{:light :dark :secondary-light :secondary-dark :inherit})
 
 (defn- variants
   [variant color]
