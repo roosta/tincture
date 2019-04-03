@@ -3,7 +3,7 @@
 Tincture is a frontend toolkit for ClojureScript that provides several utility
 functions, components, and definitions to aid/speed up developing web page visuals.
 
-- [[https://roosta.github.io/tincture/index.html][Documentation]]
+- [[https://roosta.github.io/tincture/][Documentation]]
 
 ** Requirements
 
