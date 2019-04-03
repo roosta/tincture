@@ -3,12 +3,16 @@
 Tincture is a frontend toolkit for ClojureScript that provides several utility
 functions, components, and definitions to aid/speed up developing web page visuals.
 
+- [[https://roosta.github.io/tincture/index.html][Documentation]]
+
 ** Requirements
 
    Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of
    [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various input. Tincture's components are built
    with [[%5B%5Bhttps://github.com/reagent-project/reagent%5D%5Breagent-project/reagent: A minimalistic ClojureScript interface to React.js%5D%5D][Reagent]] in mind but its just hiccup.
 
+** Usage
+** Re-frame and Tincture events
 ** Development
    Navigate to [[https://github.com/roosta/tincture/tree/master/site][site]] and start figwheel
    #+BEGIN_SRC sh
@@ -16,8 +20,8 @@ functions, components, and definitions to aid/speed up developing web page visua
    #+END_SRC
 
    Figwheel will automatically push cljs changes to the browser. Once Figwheel
-   starts up, you should be able to open the public/index.html page in the
-   browser, or go to http://localhost:3333 for the development server.
+   starts up, you should be able to open http://localhost:3449 for the
+   development server.
 
    The library was developed with the site as a testing ground and demo.
 
