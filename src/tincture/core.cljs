@@ -6,7 +6,6 @@
    [tincture.utils :as utils]
    [tincture.grid :as grid]
    [tincture.subs]
-   [tincture.db]
    [clojure.string :as str])
   (:require-macros
    [tincture.macros :as macros]))
