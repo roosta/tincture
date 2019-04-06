@@ -10,8 +10,10 @@
   (:require-macros
    [tincture.macros :as macros]))
 
-(def easing
-  "https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d"
+(def
+  ^{:doc "Map of pre-set easing functions to be used in CSS transitions
+         Source: https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d"}
+  easing
   {:ease-in-quad "cubic-bezier(.55, .085, .68, .53)"
    :ease-in-cubic "cubic-bezier(.550, .055, .675, .19)"
    :ease-in-quart "cubic-bezier(.895, .03, .685, .22)"
