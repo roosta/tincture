@@ -67,8 +67,6 @@
   [prop]
   (str "url(" prop ")"))
 
-(s/def ::valid-box-shadow-elevation (set (range 25)))
-
 (s/def ::ct-durations (s/nilable (s/coll-of pos-int? :kind vector?)))
 (s/def ::ct-properties (s/coll-of string? :kind vector? :distinct true))
 (s/def ::ct-delays (s/nilable (s/coll-of pos-int? :kind vector?)))
@@ -120,6 +118,7 @@
                          (map #(get easing %) easings))]
     (str/join ", " transitions)))
 
+(s/def ::valid-box-shadow-elevation (set (range 25)))
 (defn box-shadow
   [elevation]
   {:pre [(s/valid? ::valid-box-shadow-elevation elevation)]}
