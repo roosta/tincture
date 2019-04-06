@@ -9,7 +9,7 @@
             [reagent.debug :as d]
             [re-frame.core :refer [reg-event-db reg-event-fx reg-fx inject-cofx path trim-v
                                    after debug dispatch]]
-            [clojure.spec.alpha :as s]) )
+            [clojure.spec.alpha :as s]))
 
 (defonce ^:private vsm (ViewportSizeMonitor.))
 
