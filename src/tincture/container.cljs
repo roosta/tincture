@@ -29,7 +29,7 @@
   "Container component that scales with viewport by setting width and auto
   margins.
 
-  **Properties***
+  **Properties**
 
   * `:class`. Pred `string?`. Default `nil`. Classname string to be applied to
   the container component
@@ -42,11 +42,11 @@
   "Container component that stays the width of the viewport, width a sensible
   padding applied to both sides.
 
-  ** Properties**
+  **Properties**
 
   ContainerFluid takes a map of properties:
 
-  `:class`. Pred `string?`. Default `nil`. Classname string to be applied to
+  * `:class`. Pred `string?`. Default `nil`. Classname string to be applied to
   container component.
   "
   [{:keys [class]}]
