@@ -172,6 +172,17 @@
   breakpoints
   grid/breakpoints)
 
+(defn init!
+  "Initialize tincture. Dispatches :tincture/initialize which takes a map of options:
 
-(defn init! []
-  (rf/dispatch-sync [:tincture/initialize]))
+  **Options**
+
+  `:font-family` a vector of font-families to be used in
+  tincture.typography/Typography component. Default: `[\"'Raleway'\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
+
+  `:font-url` a string representing a font url.
+   The font url is injected as a <link> element in <head> on initialize. Default:
+  \"https://fonts.googleapis.com/css?family=Raleway:300,400,500\"
+   "
+  ([] (rf/dispatch [:tincture/initialize]))
+  ([options] (rf/dispatch-sync [:tincture/initialize options])))
