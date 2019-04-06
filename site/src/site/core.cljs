@@ -15,8 +15,7 @@
             [accountant.core :as accountant]))
 
 (defglobal global-style
-  [:body {:margin 0
-          :font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]}])
+  [:body {:margin 0}])
 
 ;; -------------------------
 ;; Routes
