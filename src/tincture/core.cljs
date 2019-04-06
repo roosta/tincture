@@ -51,14 +51,19 @@
 ;; TODO deal with function values and multiples.
 (s/def ::valid-timing-fns #{"ease" "ease-in" "ease-out" "ease-in-out" "linear" "step-start" "step-end"})
 
-(defn index-of [coll value]
+(defn index-of
+  "Takes a collection and a value and returns the value's index in the given
+  collection"
+  [coll value]
   (some (fn [[idx item]]
           (when (= value item)
             idx))
         (map-indexed vector coll)))
 
 (defn css-wrap-url
-  "DEPRECATED, use url in cssfns"
+  "Wrap a url string in the url css function. Deprecated, use tincture.cssfns/url
+  instead"
+  {:deprecated "0.2.0"}
   [prop]
   (str "url(" prop ")"))
 
