@@ -59,11 +59,7 @@
 (s/def ::unmount-on-exit boolean?)
 (s/def ::mount-on-enter boolean?)
 (s/def ::class string?)
-(s/def ::easing #{:ease-in-quad :ease-in-cubic :ease-in-quart :ease-in-quint
-                  :ease-in-expo :ease-in-circ :ease-out-quad :ease-out-cubic :ease-out-quart
-                  :ease-out-quint :ease-out-expo :ease-out-circ :ease-in-out-quad
-                  :ease-in-out-cubic :ease-in-out-quart :ease-in-out-quint :ease-in-out-expo
-                  :ease-in-out-circ })
+(s/def ::easing :tincture.core/valid-easings)
 (s/def ::appear boolean?)
 (s/def ::on-entered fn?)
 (s/def ::on-enter fn?)
