@@ -9,28 +9,27 @@
 ;; TODO Fix this, use Herb
 (defn- get-style
   [state direction easing duration]
-  (let [duration (str duration "ms")]
-    (merge
-     (case state
-       "entering" {:transform (direction {:left "translate(100%, 0)"
-                                          :right "translate(-100%, 0)"
-                                          :up "translate(0, 100%)"
-                                          :down "translate(0, -100%)"})
-                   :opacity 0.01}
-       "entered" {:transform "translate(0, 0)"
-                  :opacity 1}
-       "exiting" {:transform (direction {:left "translate(-100%, 0)"
-                                         :right "translate(100%, 0)"
-                                         :up "translate(0, -100%)"
-                                         :down "translate(0, 100%)"})
-                  :opacity 0.01}
-       "exited" {:opacity 0})
-     {:left 0
-      :top 0
-      :position "absolute"
-      :transition (create-transition {:properties ["transform" "opacity"]
-                                      :durations [duration duration]
-                                      :easings [easing easing]})})))
+  (merge
+   (case state
+     "entering" {:transform (direction {:left "translate(100%, 0)"
+                                        :right "translate(-100%, 0)"
+                                        :up "translate(0, 100%)"
+                                        :down "translate(0, -100%)"})
+                 :opacity 0.01}
+     "entered" {:transform "translate(0, 0)"
+                :opacity 1}
+     "exiting" {:transform (direction {:left "translate(-100%, 0)"
+                                       :right "translate(100%, 0)"
+                                       :up "translate(0, -100%)"
+                                       :down "translate(0, 100%)"})
+                :opacity 0.01}
+     "exited" {:opacity 0})
+   {:left 0
+    :top 0
+    :position "absolute"
+    :transition (create-transition {:properties ["transform" "opacity"]
+                                    :durations [duration duration]
+                                    :easings [easing easing]})}))
 
 (defn- slide-child
   [{:keys

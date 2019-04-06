@@ -56,15 +56,48 @@
 
 ;; TODO Allow for argument padding. If you're supplying two props but only one duration, use that duration
 (defn create-transition
-  "Helper function that generates a transition string for multiple properties"
+  "Helper function that generates a transition string for multiple properties.
+
+  *I'm not happy about this function so expect breaking changes in future
+  versions.*
+
+  **Options**
+
+  create-transition takes a map of options:
+
+  * `:properties`, `vector` of CSS properties to transition. Values must be of type
+  `string`
+
+  * `:durations`, duration applied to each property. A `vector` of positive
+  integers in milliseconds. Currently needs to be the same count as properties
+  or `nil`.
+
+  * `:delays`, delay applied to each property. A `vector` of positive integers
+  in milliseconds. Currently needs to be the same count as properties or `nil`.
+
+  * `:easing`, the easing function to be used on each property. Can be one of:
+  `#{:ease-in-quad :ease-in-cubic :ease-in-quart :ease-in-quint :ease-in-expo
+  :ease-in-circ :ease-out-quad :ease-out-cubic :ease-out-quart :ease-out-quint
+  :ease-out-expo :ease-out-circ :ease-in-out-quad :ease-in-out-cubic
+  :ease-in-out-quart :ease-in-out-quint :ease-in-out-expo :ease-in-out-circ}`
+
+  **Example usage**
+  ```clojure
+  {:transition (create-transition {:properties [\"transform\" \"opacity\"]
+                                   :durations [500 500]
+                                   :easings [:ease-in-cubic :ease-out-cubic]})}
+  ```
+  "
   [{:keys [properties durations delays easings]
-    :or {durations (take (count properties) (repeat "500ms"))
+    :or {durations (take (count properties) (repeat 500))
          easings (take (count properties) (repeat :ease-in-cubic))
-         delays (take (count properties) (repeat "0s"))}}]
+         delays (take (count properties) (repeat 0))}}]
   (let [transitions (map (fn [p d dl e]
-                           (let [f (e easing)]
-                             (str/join " " [p d dl f])))
-                         properties durations delays easings)]
+                           (str/join " " [p d dl e]))
+                         properties
+                         (map #(str % "ms") durations)
+                         (map #(str % "ms") delays)
+                         (map #(get easing %) easings))]
     (str/join ", " transitions)))
 
 (defn box-shadow
