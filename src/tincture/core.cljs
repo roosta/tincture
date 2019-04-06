@@ -43,8 +43,10 @@
                          :ease-in-out-circ})
 
 (defn clamp
-  [n a b]
-  (max (min n b) a))
+  "Clamps a value between a pair of boundary values. Takes a value and
+  boundries max-value, min-value, and returns the clamped value"
+  [value min-value max-value]
+  (max (min value max-value) min-value))
 
 ;; TODO deal with function values and multiples.
 (s/def ::valid-timing-fns #{"ease" "ease-in" "ease-out" "ease-in-out" "linear" "step-start" "step-end"})
