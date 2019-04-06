@@ -178,7 +178,7 @@
   **Options**
 
   `:font-family` a vector of font-families to be used in
-  tincture.typography/Typography component. Default: `[\"'Raleway'\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
+  `tincture.typography/Typography` component. Default: `[\"'Raleway'\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
 
   `:font-url` a string representing a font url.
    The font url is injected as a <link> element in <head> on initialize. Default:
