@@ -149,9 +149,8 @@
   number of things like 100%, 100vh or a hardcoded size like 200px. This
   component will not work unless a height it set.
 
-  It is also important that you set a `:key` meta data on the children of this
-  component since that's whats used to differentiate between children when
-  animating.
+  It is also important that you set a `:key` on the children of this component
+  since that's whats used to differentiate between children when animating.
 
   **Example usage**
   ```clojure

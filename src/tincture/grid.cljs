@@ -214,7 +214,7 @@
     value))
 
 (defn Grid
-  " Responsive 12 column grid component that adapts to screen size, using the [CSS
+  "Responsive 12 column grid component that adapts to screen size, using the [CSS
   flexible box module](https://www.w3.org/TR/css-flexbox-1/).
 
   * There are two types of layouts,  `container` and `item`
