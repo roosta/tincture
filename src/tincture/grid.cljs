@@ -213,7 +213,7 @@
       value)
     value))
 
-(defn grid
+(defn Grid
   " Responsive 12 column grid component that adapts to screen size, using the [CSS
   flexible box module](https://www.w3.org/TR/css-flexbox-1/).
 
@@ -375,3 +375,5 @@
                            (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
                            (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
        (r/children (r/current-component))))))
+
+(def ^{:deprecated "0.3.0"} grid Grid)

@@ -20,12 +20,15 @@
    :margin-right "auto"
    :margin-left "auto"})
 
-(defn container
+(defn Container
   [{:keys [class]}]
   (into [:div {:class [class (<class container-style)]}]
         (r/children (r/current-component))))
 
-(defn container-fluid
+(defn ContainerFluid
   []
   (into [:div {:class (<class container-fluid-style)}]
         (r/children (r/current-component))))
+
+(def ^{:deprecated "0.3.0"} container Container)
+(def ^{:deprecated "0.3.0"} container-fluid ContainerFluid)

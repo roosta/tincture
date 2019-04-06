@@ -56,7 +56,7 @@
 
 (s/def ::direction #{:up :down :left :right})
 
-(defn slide
+(defn Slide
   [{:keys [direction duration timeout unmount-on-exit mount-on-enter class
            easing appear enter exit on-exit on-exited on-enter on-entered classes]
     :or {direction :left duration 500 timeout 500 mount-on-enter false
@@ -97,3 +97,5 @@
                                     :appear appear
                                     :direction direction
                                     :children children}))]))
+
+(def ^{:depreacted "0.3.0"} slide Slide)

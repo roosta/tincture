@@ -186,7 +186,7 @@
              root))
       {:key k})))
 
-(defn typography
+(defn Typography
   [{:keys [variant align class elevation font-style
            on-click direction component gutter-bottom
            paragraph color no-wrap]
@@ -217,3 +217,5 @@
                              direction elevation gutter-bottom paragraph
                              color no-wrap)]}]
      (r/children (r/current-component)))))
+
+(def ^{:deprecated "0.3.0"} typography Typography)
