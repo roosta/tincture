@@ -105,6 +105,12 @@
                                    :durations [500 500]
                                    :easings [:ease-in-cubic :ease-out-cubic]})}
   ```
+
+  Result:
+
+  ```clojure
+  {:transition \"transform 500ms 0ms cubic-bezier(.550, .055, .675, .19), opacity 500ms 0ms cubic-bezier(.215, .61, .355, 1)\"}
+  ```
   "
   [{:keys [properties durations delays easings]
     :or {durations (take (count properties) (repeat 500))
@@ -173,7 +179,7 @@
   grid/breakpoints)
 
 (defn init!
-  "Initialize tincture. Dispatches :tincture/initialize which takes a map of options:
+  "Initialize tincture. Dispatches `:tincture/initialize` which takes a map of options:
 
   **Options**
 
@@ -181,7 +187,7 @@
   `tincture.typography/Typography` component. Default: `[\"'Raleway'\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
 
   `:font-url` a string representing a font url.
-   The font url is injected as a <link> element in <head> on initialize. Default:
+   The font url is injected as a &lt;link&gt; element in &lt;head&gt; on initialize. Default:
   \"https://fonts.googleapis.com/css?family=Raleway:300,400,500\"
    "
   ([] (rf/dispatch [:tincture/initialize]))
