@@ -6,8 +6,8 @@
   [dir [c1 p1] [c2 p2]])
 
 (defcssfn rgb
-  ([c1 c2 c3] [c1 c2 c3])
-  ([c1 c2 c3 a] [c1 c2 c3 a]))
+  ([r g b] [r g b])
+  ([r g b a] [r g b a]))
 
 (defcssfn url)
 
