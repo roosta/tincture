@@ -7,7 +7,7 @@
   (:require-macros
    [tincture.macros :as macros]))
 
-(def collection (macros/ui-gradients "gradients.json"))
+(def ^:private collection (macros/ui-gradients "gradients.json"))
 
 (defn css
   "Takes a name, that should correspond with gradients listed at uigradients.com
@@ -38,5 +38,3 @@
                :double-arg (s/cat :name ::palette-name
                                   :direction ::directions))
   :ret (s/coll-of string? :kind set? :min-count 3))
-
-
