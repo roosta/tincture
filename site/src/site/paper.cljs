@@ -1,10 +1,10 @@
 (ns site.paper
   (:require [reagent.core :as r]
             [garden.units :refer [px]]
-            [tincture.typography :refer [typography]]
-            [tincture.paper :refer [paper]]
+            [tincture.typography :refer [Typography]]
+            [tincture.paper :refer [Paper]]
             [herb.core :refer-macros [<class]]
-            [tincture.container :refer [container]]
+            [tincture.container :refer [Container]]
             [clojure.string :as str]
             [reagent.debug :refer [log]]
             [herb.core :refer-macros [<class]]))
@@ -19,8 +19,8 @@
    :height "100vh"})
 
 (defn main []
-  [container {:class (<class container-style)}
-   [paper {:class (<class paper-style)}
-    [typography {:variant :h5}
+  [Container {:class (<class container-style)}
+   [Paper {:class (<class paper-style)}
+    [Typography {:variant :h5}
      "This is a paper component"]]
    ])
