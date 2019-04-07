@@ -15,8 +15,12 @@
   Returns a set of CSS strings used with a :background property passed to
   Garden. The return value contains browser fallbacks.
 
-  Example
-  `(garden.core/css [:h2 {:background (gradient/css :vice-city :left)}])`"
+  **Example**
+
+  ```clojure
+  (garden.core/css [:h2 {:background (gradient/css :vice-city :left)}])
+  ```
+  "
   ([palette-name]
    (css palette-name :left))
   ([palette-name direction]
