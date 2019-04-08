@@ -22,19 +22,23 @@
           :row-gap "10px"
           :column-gap "10px"
           :grid-template-columns "repeat(4, 1fr)"}
-   :headline {:margin 0
-              :margin-top (px 10)}
+   :headline {}
+   :container {:padding (px 16)}
    :palette-name {:background (rgb 0 0 0 0.53)
                   :width "100%"}
    :text {:margin-bottom (px 20)}})
 
 (defn gradient-demo
   []
-  [container
+  [container {:class (<class styles :container)}
    [typography {:class (<class styles :headline)
+                :gutter-bottom true
+                :align :center
                 :variant :h4}
     "CSS Gradients"]
-   [typography {:class (<class styles :text)}
+   [typography {:gutter-bottom true
+                :align :center
+                :class (<class styles :text)}
     "Tincture provides a gradient tool, it uses gradients defined at " [:a {:href "uigradients.com"} "uigradients.com"]]
    [:div {:class (<class styles :grid)}
     (for [g (deref #'tincture.gradient/collection)]
