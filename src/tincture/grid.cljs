@@ -290,19 +290,19 @@
 
   Example usage:
   ```clojure
-  [grid {:container true
+  [Grid {:container true
          :class \"my-class-name\"
          :spacing 16
          :justify :center}
-   [grid {:item true
+   [Grid {:item true
           :xs 12
           :sm 6}
     [:span \"column 1\"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 12
           :sm 6}
     [span \"column 2\"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 12
           :sm 6}
     [:span \"column 3\"]]]
