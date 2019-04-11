@@ -32,4 +32,12 @@
   <p><code>:color</code>. Pred: <code>#{:light :dark :secondary-light :secondary-dark :inherit}</code>. Default: <code>:light</code>. Choose a color matching either a <code>dark</code> theme or a <code>light</code> theme. Shortcut to setting a sensible color based on light or dark. If any other color is required just add a class and don’t set this.</p></li>
   <li>
   <p><code>:no-wrap</code>. Pred: <code>boolean?</code>. Default: <code>false</code>. If <code>true</code>, the text will not wrap, but instead will truncate with an ellipsis.</p></li>
-</ul></div></div></div><div class="public anchor" id="var-typography"><h3>typography</h3><h4 class="deprecated">deprecated in 0.3.0</h4><div class="usage"></div><div class="doc"><div class="markdown"></div></div></div></div></body></html>
+</ul>
+<p>Example usage:</p>
+<pre><code class="clojure">[:div
+  [Typography {:variant :h3
+               :gutter-bottom true}
+    "my headline"]
+  [Typography
+    "My body text"]]
+</code></pre></div></div></div><div class="public anchor" id="var-typography"><h3>typography</h3><h4 class="deprecated">deprecated in 0.3.0</h4><div class="usage"></div><div class="doc"><div class="markdown"></div></div></div></div></body></html>

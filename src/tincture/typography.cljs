@@ -229,6 +229,16 @@
 
   * `:no-wrap`. Pred: `boolean?`. Default: `false`. If `true`, the text will not
   wrap, but instead will truncate with an ellipsis.
+
+  Example usage:
+  ```clojure
+  [:div
+    [Typography {:variant :h3
+                 :gutter-bottom true}
+      \"my headline\"]
+    [Typography
+      \"My body text\"]]
+  ```
   "
   [{:keys [variant align class elevation font-style
            on-click direction component gutter-bottom
