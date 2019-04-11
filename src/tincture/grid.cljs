@@ -49,7 +49,7 @@
 (s/def ::container boolean?)
 (s/def ::zero-min-width boolean?)
 (s/def ::spacing gutters)
-(s/def ::class (s/nilable string?))
+(s/def ::class (s/nilable (s/or :str string? :vector vector?)))
 (s/def ::wrap wrap)
 (s/def ::id (s/nilable string?))
 
@@ -366,14 +366,16 @@
                   zero-min-width)]
       (into
        [component {:id    id
-                   :class [class*
-                           class
-                           (when item "flexbox-item")
-                           (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
-                           (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
-                           (when md (str "grid-md-" (if (keyword? md) (name md) md)))
-                           (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
-                           (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]}]
+                   :class (vec
+                           (flatten
+                           [class*
+                            class
+                            (when item "flexbox-item")
+                            (when xs (str "grid-xs-" (if (keyword? xs) (name xs) xs)))
+                            (when sm (str "grid-sm-" (if (keyword? sm) (name sm) sm)))
+                            (when md (str "grid-md-" (if (keyword? md) (name md) md)))
+                            (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
+                            (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]))}]
        (r/children (r/current-component))))))
 
 (def ^{:deprecated "0.3.0"} grid Grid)
