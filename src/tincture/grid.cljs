@@ -260,7 +260,7 @@
   * `:wrap`, one of: `#{:nowrap :wrap :wrap-reverse}`. Default `:wrap`. Defines
   the `flex-wrap` style property. It's applied for all screen sizes.
 
-  * `:zero-min-width`, one of: #{true false}`. Default `false`, If `true`, it
+  * `:zero-min-width`, one of: `#{true false}`. Default `false`, If `true`, it
   sets `min-width: 0` on the item.
 
   * `:xs`, one of: `#{:auto true false 1 2 3 4 5 6 7 8 9 10 11 12}`. Default
