@@ -57,7 +57,7 @@
         square (check-spec square ::square)
         component (check-spec component ::component)]
     (into [component {:id id
-                      :class [(<class paper-style elevation square) class]}]
+                      :class (vec (flatten [(<class paper-style elevation square) class]))}]
           (r/children (r/current-component)))))
 
 (def ^{:deprecated "0.3.0"} paper Paper)
