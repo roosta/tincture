@@ -1,12 +1,15 @@
 (ns site.typography
   (:require [reagent.core :as r]
             [garden.units :refer [px]]
-            [tincture.typography :refer [typography]]
-            [tincture.container :refer [container]]
+            [tincture.typography :refer [Typography]]
+            [garden.units :refer [px]]
+            [tincture.paper :refer [Paper]]
+            [tincture.grid :refer [Grid]]
+            [tincture.container :refer [Container]]
             [tincture.core :refer [clamp]]
             [clojure.string :as str]
             [reagent.debug :refer [log]]
-            [herb.core :refer-macros [<class]]))
+            [herb.core :refer-macros [<class defgroup]]))
 
 (defn lorum-ipsum
   [cnt]
@@ -35,13 +38,27 @@
    :caption   "caption text"
    :overline  "overline text"})
 
+(defgroup styles
+  {:root {}
+   :container {:height "100vh"}
+   :grid {:padding (px 16)}}
+  )
+
 (defn main
   []
-  [container
-   (for [variant
-         [:h1 :h2 :h3 :h4 :h5 :h6 :subtitle1 :subtitle2 :body1 :body2 :button
-          :caption :overline]]
-     ^{:key variant}
-     [:div
-      [typography {:variant variant}
-       (variant text)]])])
+  [Container {:class (<class styles :root)}
+   [Grid {:container true
+          :class (<class styles :container)
+          :justify :center
+          :align-items :center}
+    [Grid {:item true
+           :component Paper
+           :class (<class styles :grid)
+           :xs 10}
+     (for [variant
+           [:h1 :h2 :h3 :h4 :h5 :h6 :subtitle1 :subtitle2 :body1 :body2 :button
+            :caption :overline]]
+       ^{:key variant}
+       [:div
+        [Typography {:variant variant}
+         (variant text)]])]]])
