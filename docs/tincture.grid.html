@@ -52,19 +52,19 @@
 </ul>
 <p>Additionally: * <code>:class</code> a string class name to be applied to the grid component * <code>:id</code> a string id to be applied to the grid component * <code>:component</code> the component to be used, default <code>:div</code></p>
 <p>Example usage:</p>
-<pre><code class="clojure">[grid {:container true
+<pre><code class="clojure">[Grid {:container true
        :class "my-class-name"
        :spacing 16
        :justify :center}
- [grid {:item true
+ [Grid {:item true
         :xs 12
         :sm 6}
   [:span "column 1"]]
- [grid {:item true
+ [Grid {:item true
         :xs 12
         :sm 6}
   [span "column 2"]]
- [grid {:item true
+ [Grid {:item true
         :xs 12
         :sm 6}
   [:span "column 3"]]]

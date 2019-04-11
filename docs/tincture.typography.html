@@ -4,4 +4,32 @@
 <p><strong>Inspiration</strong>:</p>
 <ul>
   <li><a href="https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Typography/Typography.js">Material-ui Typography</a></li>
-</ul></div></div><div class="public anchor" id="var-Typography"><h3>Typography</h3><div class="usage"><code>(Typography {:keys [variant align class elevation font-style on-click direction component gutter-bottom paragraph color no-wrap], :or {paragraph false, direction :ltr, font-style :normal, no-wrap false, align :left, elevation 0, color :light, variant :body2, gutter-bottom false}})</code></div><div class="doc"><div class="markdown"></div></div></div><div class="public anchor" id="var-typography"><h3>typography</h3><h4 class="deprecated">deprecated in 0.3.0</h4><div class="usage"></div><div class="doc"><div class="markdown"></div></div></div></div></body></html>
+</ul></div></div><div class="public anchor" id="var-Typography"><h3>Typography</h3><div class="usage"><code>(Typography {:keys [variant align class elevation font-style on-click direction component gutter-bottom paragraph color no-wrap], :or {paragraph false, direction :ltr, font-style :normal, no-wrap false, align :left, elevation 0, color :light, variant :body2, component :div, gutter-bottom false}})</code></div><div class="doc"><div class="markdown"><p>Typography component. It contains reusable categories of text, each with an intended application and meaning according to material design guidelines.</p>
+<p><strong>Properties</strong></p>
+<ul>
+  <li>
+  <p><code>:variant</code>. Pred: <code>#{:h1 :h2 :h3 :h4 :h5 :h6 :subtitle1 :subtitle2 :body1 :body2 :caption :button
+ :overline :sr-only :inherit}</code>. Default <code>:body1</code>. Apply chosen variant style.</p></li>
+  <li>
+  <p><code>:align</code>. Pred: <code>#{:inherit :left :right :center :justify}</code>. Default: <code>:left</code>. Set text alignment.</p></li>
+  <li>
+  <p><code>:class</code>. Pred: <code>string?</code>. Default: <code>nil</code>. Classname to be applied to the typography component.</p></li>
+  <li>
+  <p><code>:elevation</code>. Pred: <code>#{0 1 2 3}</code>. Default: <code>0</code>. Height of text shadow.</p></li>
+  <li>
+  <p><code>:font-style</code>. Pred: <code>#{:normal :italic}</code>. Default: <code>:normal</code>. Sets the CSS property <code>font-style</code>.</p></li>
+  <li>
+  <p><code>:on-click</code>. Pred: <code>fn?</code>. Default: <code>nil</code>. On click handler to be attached to the typography component.</p></li>
+  <li>
+  <p><code>:direction</code>. Pred: <code>#{:ltr :rtl}</code>. Default: <code>:ltr</code>. Sets the CSS property direction.</p></li>
+  <li>
+  <p><code>:component</code>. Pred: <code>(or string? fn? keyword?)</code>. Default <code>:div</code>. The component used for the root node. It can either be hiccup keywords or string, or another component like <code>tincture.paper/Paper</code></p></li>
+  <li>
+  <p><code>:gutter-bottom</code>. Pred <code>boolean?</code>. Default <code>false</code>. Toggles bottom margin.</p></li>
+  <li>
+  <p><code>:paragraph</code>. Pred <code>boolean?</code>. Default <code>false</code>. Toggles bottom margin and changes root node to a &lt;p&gt; element.</p></li>
+  <li>
+  <p><code>:color</code>. Pred: <code>#{:light :dark :secondary-light :secondary-dark :inherit}</code>. Default: <code>:light</code>. Choose a color matching either a <code>dark</code> theme or a <code>light</code> theme. Shortcut to setting a sensible color based on light or dark. If any other color is required just add a class and don’t set this.</p></li>
+  <li>
+  <p><code>:no-wrap</code>. Pred: <code>boolean?</code>. Default: <code>false</code>. If <code>true</code>, the text will not wrap, but instead will truncate with an ellipsis.</p></li>
+</ul></div></div></div><div class="public anchor" id="var-typography"><h3>typography</h3><h4 class="deprecated">deprecated in 0.3.0</h4><div class="usage"></div><div class="doc"><div class="markdown"></div></div></div></div></body></html>

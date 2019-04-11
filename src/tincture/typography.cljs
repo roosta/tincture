@@ -188,6 +188,48 @@
       {:key k})))
 
 (defn Typography
+  "Typography component. It contains reusable categories of text, each with an
+  intended application and meaning according to material design guidelines.
+
+  **Properties**
+
+  * `:variant`. Pred: `#{:h1 :h2 :h3 :h4 :h5 :h6 :subtitle1 :subtitle2 :body1 :body2 :caption :button
+   :overline :sr-only :inherit}`. Default `:body1`. Apply chosen variant style.
+
+  * `:align`. Pred: `#{:inherit :left :right :center :justify}`. Default:
+  `:left`. Set text alignment.
+
+  * `:class`. Pred: `string?`. Default: `nil`. Classname to be applied to the
+  typography component.
+
+  * `:elevation`. Pred: `#{0 1 2 3}`. Default: `0`. Height of text shadow.
+
+  * `:font-style`. Pred: `#{:normal :italic}`. Default: `:normal`. Sets the CSS
+  property `font-style`.
+
+  * `:on-click`. Pred: `fn?`. Default: `nil`. On click handler to be attached to
+  the typography component.
+
+  * `:direction`. Pred: `#{:ltr :rtl}`. Default: `:ltr`. Sets the CSS property
+  direction.
+
+  * `:component`. Pred: `(or string? fn? keyword?)`. Default `:div`. The
+  component used for the root node. It can either be hiccup keywords or string,
+  or another component like `tincture.paper/Paper`
+
+  * `:gutter-bottom`. Pred `boolean?`. Default `false`. Toggles bottom margin.
+
+  * `:paragraph`. Pred `boolean?`. Default `false`. Toggles bottom margin and
+  changes root node to a &lt;p&gt; element.
+
+  * `:color`. Pred: `#{:light :dark :secondary-light :secondary-dark :inherit}`.
+  Default: `:light`. Choose a color matching either a `dark` theme or a `light`
+  theme. Shortcut to setting a sensible color based on light or dark. If any
+  other color is required just add a class and don't set this.
+
+  * `:no-wrap`. Pred: `boolean?`. Default: `false`. If `true`, the text will not
+  wrap, but instead will truncate with an ellipsis.
+  "
   [{:keys [variant align class elevation font-style
            on-click direction component gutter-bottom
            paragraph color no-wrap]
