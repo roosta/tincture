@@ -143,6 +143,7 @@
 (s/def ::paragraph boolean?)
 (s/def ::gutter-bottom boolean?)
 (s/def ::no-wrap boolean?)
+(s/def ::component (s/or :str string? :fn fn? :kw keyword?))
 
 (defn- typography-style
   [variant align font-style direction
@@ -195,6 +196,7 @@
          align :left
          direction :ltr
          paragraph false
+         component :div
          gutter-bottom false
          elevation 0
          color :light
@@ -202,6 +204,7 @@
   (let [variant (check-spec variant ::valid-variants)
         align (check-spec align ::valid-aligns)
         class (check-spec class ::class)
+        component (check-spec component ::component)
         elevation (check-spec elevation :tincture.core/valid-text-shadow-elevation)
         direction (check-spec direction ::valid-directions)
         font-style (check-spec font-style ::valid-font-styles)
