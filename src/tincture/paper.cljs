@@ -17,7 +17,7 @@
   {:box-sizing "border-box"
    :border-radius (if square 0 (px 4))})
 
-(s/def ::class (s/nilable string?))
+(s/def ::class (s/nilable (s/or :str string? :vector vector?)))
 (s/def ::id (s/nilable string?))
 (s/def ::elevation :tincture.core/valid-box-shadow-elevation)
 (s/def ::square boolean?)
