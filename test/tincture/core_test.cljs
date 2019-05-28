@@ -12,5 +12,4 @@
   (testing "Get index from random collections using 'index-of'"
     (is (= (t/index-of [1 2 3 4] 3) 2))
     (is (= (t/index-of #{:a :b :c} :b) 1))
-    (is (= (t/index-of {:a 1 :b 2 :c 3} :a) 0))
     ))

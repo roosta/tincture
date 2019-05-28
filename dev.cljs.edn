@@ -1,0 +1,5 @@
+^{:auto-testing true
+  :open-url false
+  :watch-dirs ["test" "src"]
+  :open-file-command "emacs-file-opener"}
+{:main tincture.core}

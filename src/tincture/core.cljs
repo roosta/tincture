@@ -192,3 +192,6 @@
    "
   ([] (rf/dispatch [:tincture/initialize]))
   ([options] (rf/dispatch-sync [:tincture/initialize options])))
+
+(defn -main [& args]
+  (.log js/console "started!"))

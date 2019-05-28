@@ -8,16 +8,18 @@
           :metadata {:doc/format :markdown}
           :output-path "docs"
           :source-paths ["src"]}
-  :profiles {:dev {:dependencies [[clj-chrome-devtools "20190502"]]}}
-  :cljsbuild {:builds [{:id "test"
-                        :source-paths ["src" "test"]
-                        :compiler {:optimizations :whitespace
-                                   :output-to "target/cljs/test/test.js"
-                                   :pretty-print true}}]}
+  :resource-paths ["target" "resources"]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1-SNAPSHOT"]]
+                   :aliases {"fig" ["trampoline" "run" "-m" "figwheel.main"]
+                             "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" tincture.test-runner]
+                             "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
+                             "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}}}
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [cljsjs/react-transition-group "2.4.0-0"]
                  [herb "0.8.1"]
                  [prismatic/dommy "1.1.0"]
                  [re-frame "0.10.6"]]
-  :source-paths ["src"])
+  :source-paths ["src"]
+  :clean-targets ^{:protect false} ["target"]
+  )
