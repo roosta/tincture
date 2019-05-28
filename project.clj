@@ -3,7 +3,7 @@
   :url "https://github.com/roosta/tincture"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :plugins [[lein-codox "0.10.6"]]
+  :plugins [[lein-codox "0.10.7"]]
   :codox {:language :clojurescript
           :metadata {:doc/format :markdown}
           :output-path "docs"
