@@ -36,11 +36,12 @@
    :ease-in-out-circ "cubic-bezier(.785, .135, .15, .86)"}
   )
 
-(s/def ::valid-easings #{:ease-in-quad :ease-in-cubic :ease-in-quart :ease-in-quint
-                         :ease-in-expo :ease-in-circ :ease-out-quad :ease-out-cubic :ease-out-quart
-                         :ease-out-quint :ease-out-expo :ease-out-circ :ease-in-out-quad
-                         :ease-in-out-cubic :ease-in-out-quart :ease-in-out-quint :ease-in-out-expo
-                         :ease-in-out-circ})
+(s/def ::valid-easings
+  #{:ease-in-quad :ease-in-cubic :ease-in-quart :ease-in-quint
+    :ease-in-expo :ease-in-circ :ease-out-quad :ease-out-cubic :ease-out-quart
+    :ease-out-quint :ease-out-expo :ease-out-circ :ease-in-out-quad
+    :ease-in-out-cubic :ease-in-out-quart :ease-in-out-quint :ease-in-out-expo
+    :ease-in-out-circ})
 
 (defn clamp
   "Clamps a value between a pair of boundary values. Takes a value and
