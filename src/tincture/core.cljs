@@ -130,7 +130,8 @@
          duration 300
          easing :ease-in-cubic
          delay 0}}]
-  (let [n (count property) 
+  ;; transition: <property> || <duration> || <timing-function> || <delay> [, ...];
+  (let [n (if (sequential? property) (count property) 1) 
         properties (map name (flatten [property]))  
         durations (pad n duration)
         easings (pad n easing)
@@ -139,8 +140,8 @@
                           (str/join " " [p d dl e]))
                         properties
                         (map #(str % "ms") durations)
-                        (map #(str % "ms") delays)
-                        (map #(get easing-presets %) easings))]
+                        (map #(get easing-presets %) easings)
+                        (map #(str % "ms") delays))]
     (str/join ", " transition)))
 
 (s/def ::valid-box-shadow-elevation (set (range 25)))
