@@ -1,7 +1,7 @@
 (ns tincture.slide
   (:require [tincture.transitions :refer [Transition TransitionGroup CSSTransition]]
             [clojure.spec.alpha :as s]
-            [tincture.core :refer [easing create-transition]]
+            [tincture.core :refer [easing-presets create-transition]]
             [reagent.debug :refer [log]]
             [clojure.string :as str]
             [reagent.core :as r]))
@@ -27,9 +27,9 @@
    {:left 0
     :top 0
     :position "absolute"
-    :transition (create-transition {:properties ["transform" "opacity"]
-                                    :durations [duration duration]
-                                    :easings [easing easing]})}))
+    :transition (create-transition {:property [:transform :opacity]
+                                    :duration duration
+                                    :easing easing})}))
 
 (defn- slide-child
   [{:keys

@@ -11,9 +11,9 @@
    [tincture.macros :as macros]))
 
 (def
-  ^{:doc "Map of pre-set easing functions to be used in CSS transitions
+  ^{:doc "Map of easing preset functions to be used in CSS transitions
          Source: https://gist.github.com/bendc/ac03faac0bf2aee25b49e5fd260a727d"}
-  easing
+  easing-presets
   {:ease-in-quad "cubic-bezier(.55, .085, .68, .53)"
    :ease-in-cubic "cubic-bezier(.550, .055, .675, .19)"
    :ease-in-quart "cubic-bezier(.895, .03, .685, .22)"
@@ -73,6 +73,12 @@
 (s/def ::ct-delays (s/nilable (s/coll-of pos-int? :kind vector?)))
 (s/def ::ct-easings (s/nilable ::valid-easings))
 
+(defn- pad
+  [n val]
+  (if (sequential? val)
+    (take n (concat val (repeat (last val))))
+    (take n (concat [val] (repeat val)))))
+
 ;; TODO Allow for argument padding. If you're supplying two props but only one duration, use that duration
 (defn create-transition
   "Helper function that generates a transition string for multiple properties.
@@ -113,17 +119,23 @@
   {:transition \"transform 500ms 0ms cubic-bezier(.550, .055, .675, .19), opacity 500ms 0ms cubic-bezier(.215, .61, .355, 1)\"}
   ```
   "
-  [{:keys [properties durations delays easings]
-    :or {durations (take (count properties) (repeat 500))
-         easings (take (count properties) (repeat :ease-in-cubic))
-         delays (take (count properties) (repeat 0))}}]
-  (let [transitions (map (fn [p d dl e]
-                           (str/join " " [p d dl e]))
-                         properties
-                         (map #(str % "ms") durations)
-                         (map #(str % "ms") delays)
-                         (map #(get easing %) easings))]
-    (str/join ", " transitions)))
+  [{:keys [property duration delay easing]
+    :or {property :all 
+         duration 300
+         easing :ease-in-cubic
+         delay 0}}]
+  (let [n (count property) 
+        properties (map name (flatten [property]))  
+        durations (pad n duration)
+        easings (pad n easing)
+        delays (pad n delay)
+        transition (map (fn [p d dl e]
+                          (str/join " " [p d dl e]))
+                        properties
+                        (map #(str % "ms") durations)
+                        (map #(str % "ms") delays)
+                        (map #(get easing-presets %) easings))]
+    (str/join ", " transition)))
 
 (s/def ::valid-box-shadow-elevation (set (range 25)))
 
