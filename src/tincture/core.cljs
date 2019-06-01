@@ -88,40 +88,41 @@
 (defn create-transition
   "Helper function that generates a transition string for multiple properties.
 
-  *I'm not happy about this function so expect breaking changes in future
-  versions.*
-
   **Options**
 
   create-transition takes a map of options:
 
-  * `:properties`, `vector` of CSS properties to transition. Values must be of type
-  `string`
+  * `:property` CSS property/ies to transition. Can be single prop
+  either string or keyword, a sequental collection of string or keyword.
 
-  * `:durations`, duration applied to each property. A `vector` of positive
-  integers in milliseconds. Currently needs to be the same count as properties
-  or `nil`.
+  * `:duration` Duration applied to each property. A single positive
+  int in milliseconds, or sequential collection of positive integers
+  in milliseconds. Does not have to match the property count, it will
+  get padded out to match the property count.
 
-  * `:delays`, delay applied to each property. A `vector` of positive integers
-  in milliseconds. Currently needs to be the same count as properties or `nil`.
+  * `:delay`, delay applied to each property. A single positive int in
+  milliseconds, or a sequential collection of positive integers in
+  milliseconds. Does not have to match property count, will get padded
+  out based on the last value in collection, or if single value it is
+  used for each property.
 
   * `:easing`, the easing function to be used on each property. Can be one of:
   `#{:ease-in-quad :ease-in-cubic :ease-in-quart :ease-in-quint :ease-in-expo
   :ease-in-circ :ease-out-quad :ease-out-cubic :ease-out-quart :ease-out-quint
   :ease-out-expo :ease-out-circ :ease-in-out-quad :ease-in-out-cubic
   :ease-in-out-quart :ease-in-out-quint :ease-in-out-expo :ease-in-out-circ}`
+  or a sequential collection the same. Does not have to match property
+  count, will get padded out based on either last value in collection.
 
   **Example usage**
   ```clojure
-  {:transition (create-transition {:properties [\"transform\" \"opacity\"]
-                                   :durations [500 500]
+  {:transition (create-transition {:property [:transform :opacity]
+                                   :durations [300 500]
                                    :easings [:ease-in-cubic :ease-out-cubic]})}
   ```
-
   Result:
-
   ```clojure
-  {:transition \"transform 500ms 0ms cubic-bezier(.550, .055, .675, .19), opacity 500ms 0ms cubic-bezier(.215, .61, .355, 1)\"}
+  {:transition \"transform 300ms cubic-bezier(.550, .055, .675, .19) 0ms, opacity 300ms cubic-bezier(.550, .055, .675, .19) 0ms\"}
   ```
   "
   [{:keys [property duration delay easing]
