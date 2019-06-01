@@ -45,7 +45,12 @@
 
 (defn clamp
   "Clamps a value between a pair of boundary values. Takes a value and
-  boundries max-value, min-value, and returns the clamped value"
+  boundries max-value, min-value, and returns the a value within those bounds.
+  Example:
+  ```clojure
+  (clamp 200 100 150)
+  ;=> 150
+  ```"
   [value min-value max-value]
   (max (min value max-value) min-value))
 
