@@ -80,12 +80,15 @@
 (s/def ::ct-easings (s/nilable ::valid-easings))
 
 (defn- pad
+  "Pad out a collection with `n` size and input `value` that can either
+  be a sequential collection (set/list/vector) or single value. The
+  padding is the last value in collection or whatever single value was
+  passed in"
   [n val]
   (if (sequential? val)
     (take n (concat val (repeat (last val))))
     (take n (concat [val] (repeat val)))))
 
-;; TODO Allow for argument padding. If you're supplying two props but only one duration, use that duration
 (defn create-transition
   "Helper function that generates a transition string for multiple properties.
 
