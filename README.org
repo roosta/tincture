@@ -4,6 +4,7 @@ Tincture is a frontend toolkit for ClojureScript that provides several utility
 functions, components, and definitions to aid/speed up developing web page visuals.
 
 - [[https://roosta.github.io/tincture/][Documentation]]
+- [[http://tincture.roosta.sh][Demo site]]
 
 ** Requirements
 
@@ -14,16 +15,28 @@ functions, components, and definitions to aid/speed up developing web page visua
 ** Usage
 ** Re-frame and Tincture events
 ** Development
-   Navigate to [[https://github.com/roosta/tincture/tree/master/site][site]] and start figwheel
+   Start figwheel main with the development build
    #+BEGIN_SRC sh
-     lein figwheel
+     lein fig:build
    #+END_SRC
 
-   Figwheel will automatically push cljs changes to the browser. Once Figwheel
-   starts up, you should be able to open http://localhost:3449 for the
+   Figwheel-main will automatically push cljs changes to the browser. Once Figwheel
+   starts up, you should be able to open http://localhost:9500 for the
    development server.
 
-   The library was developed with the site as a testing ground and demo.
+** Testing
+   Either run:
+   #+BEGIN_SRC sh
+   lein fig:test
+   #+END_SRC
+   
+   For a headless test environment using chrome, make sure its
+   installed on your system.
+   
+   You can also start the dev build and navigate to
+   http://localhost:9500/figwheel-extra-main/auto-testing to get a
+   nice interface while coding that runs the tests on each save.
+
 
 ** Sources
    - [[https://github.com/roosta/tincture/blob/master/resources/gradients.json][gradients.json]] sourced from: https://github.com/Ghosh/uiGradients/
