@@ -42,7 +42,7 @@ functions, components, and definitions to aid/speed up developing web page visua
 **** :tincture.font/url
      Returns the currently used font url
 **** :tincture/device
-     Uses ~goog.lkabs.userAgent.device~ to return whatever device your
+     Uses ~goog.labs.userAgent.device~ to return whatever device your
      site is run on.
 **** :tincture/breakpoint-down
      Takes a breakpoint, one of ~#{:xs :sm :md :lg :xl}~ Returns a
