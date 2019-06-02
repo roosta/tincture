@@ -8,12 +8,54 @@ functions, components, and definitions to aid/speed up developing web page visua
 
 ** Requirements
 
-   Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of
-   [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various input. Tincture's components are built
-   with [[https://github.com/reagent-project/reagent][Reagent]] in mind but its just hiccup.
+   Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542
+   due to use of [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various
+   input. Tincture's components are built with [[https://github.com/reagent-project/reagent][Reagent]] in mind but
+   it's not a dependency, so you could in theory use this with another
+   framework, but I haven't tested that.
 
 ** Usage
 ** Re-frame and Tincture events
+*** Initialize
+   Tincture uses re-frame as an event handler, and if you want to use
+   Tincture's events you have to initialize it first.
+
+   You can do this by calling ~tincture.core/init!~. Init! take a map of
+   options, namely a font family and a font url. These are used in the
+   typography component. If no options is provided Tincture uses
+   ~["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]~
+   as a default. The url also needs to be provided if you are going to
+   use a custom font face, an example of this would be:
+   "https://fonts.googleapis.com/css?family=Raleway:300,400,500"
+   This URL is attached to the head of the HTML dynamically.
+*** Subscriptions
+**** :tincture/viewport-size
+     Returns a vector of the current viewport size: [width height]
+**** :tincture/viewport-width
+     Returns the current viewport width
+**** :tincture/viewport-height
+     Returns the current viewport height
+**** :tincture/font
+     Returns the currently used font family and url
+**** :tincture.font/family
+     Returns the currently used font family
+**** :tincture.font/url
+     Returns the currently used font url
+**** :tincture/device
+     Uses ~goog.lkabs.userAgent.device~ to return whatever device your
+     site is run on.
+**** :tincture/breakpoint-down
+     Takes a breakpoint, one of ~#{:xs :sm :md :lg :xl}~ Returns a
+     ~boolean~ that indicates if current viewport width is below the
+     given breakpoint. Breakpoints are defined in
+     ~tincture.core/breakpoints~ and looks like this: ~{:xs 0 :sm 600 :md
+     960 :lg 1280 :xl 1920}~
+**** :tincture/breakpoint-up
+     Takes a breakpoint, one of ~#{:xs :sm :md :lg :xl}~ Returns a
+     ~boolean~ that indicates if current viewport width is above the
+     given breakpoint. Breakpoints are defined in
+     ~tincture.core/breakpoints~ and looks like this: ~{:xs 0 :sm 600 :md
+     960 :lg 1280 :xl 1920}~
 ** Development
    Start figwheel main with the development build
    #+BEGIN_SRC sh
