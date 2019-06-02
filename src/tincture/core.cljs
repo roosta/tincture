@@ -1,6 +1,7 @@
 (ns tincture.core
   (:require
    [cljs.spec.alpha :as s :include-macros true]
+   [tincture.spec :refer [check-spec]]
    [re-frame.core :as rf]
    [tincture.events]
    [debux.cs.core :refer-macros [clog dbg]]
@@ -74,10 +75,22 @@
   [prop]
   (str "url(" prop ")"))
 
-(s/def ::ct-durations (s/nilable (s/coll-of pos-int? :kind vector?)))
-(s/def ::ct-properties (s/coll-of string? :kind vector? :distinct true))
-(s/def ::ct-delays (s/nilable (s/coll-of pos-int? :kind vector?)))
-(s/def ::ct-easings (s/nilable ::valid-easings))
+(s/def ::ct-duration
+  (s/nilable
+   (s/or :coll (s/coll-of pos-int? :kind sequential?)
+         :single pos-int?)))
+
+(s/def ::ct-property
+  (s/or :single (s/or :str string? :key keyword?)
+        :coll (s/coll-of (s/or :str string? :key keyword) :kind sequential? :distinct true)))
+
+(s/def ::ct-delay
+  (s/nilable
+   (s/or :coll (s/coll-of pos-int? :kind sequential?)
+         :single pos-int?)))
+
+(s/def ::ct-easing (s/nilable (s/or :single ::valid-easings
+                                    :coll (s/coll-of ::valid-easings :kind sequential?))))
 
 (defn- pad
   "Pad out a collection with `n` size and input `value` that can either
@@ -122,7 +135,7 @@
   ```clojure
   {:transition (create-transition {:property [:transform :opacity]
                                    :duration [300 500]
-                                   :easing [:ease-in-cubic :ease-out-cubic]})}
+                                   :easing   [:ease-in-cubic :ease-out-cubic]})}
   ```
   Result:
   ```clojure
@@ -130,13 +143,17 @@
   ```
   "
   [{:keys [property duration delay easing]
-    :or {property :all 
+    :or {property :all
          duration 300
          easing :ease-in-cubic
          delay 0}}]
   ;; transition: <property> || <duration> || <timing-function> || <delay> [, ...];
-  (let [n (if (sequential? property) (count property) 1) 
-        properties (map name (flatten [property]))  
+  (let [duration (check-spec duration ::ct-duration)
+        property (check-spec property ::ct-property)
+        delay (check-spec delay ::ct-delay)
+        easing (check-spec easing ::ct-easing)
+        n (if (sequential? property) (count property) 1)
+        properties (map name (flatten [property]))
         durations (pad n duration)
         easings (pad n easing)
         delays (pad n delay)
