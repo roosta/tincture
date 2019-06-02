@@ -76,9 +76,8 @@ functions, components, and definitions to aid/speed up developing web page visua
    installed on your system.
    
    You can also start the dev build and navigate to
-   http://localhost:9500/figwheel-extra-main/auto-testing to get a
+   [[http://localhost:9500/figwheel-extra-main/auto-testing][http://localhost:9500/figwheel-extra-main/auto-testing]] to get a
    nice interface while coding that runs the tests on each save.
-
 
 ** Sources
    - [[https://github.com/roosta/tincture/blob/master/resources/gradients.json][gradients.json]] sourced from: https://github.com/Ghosh/uiGradients/
