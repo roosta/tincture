@@ -14,6 +14,20 @@
  (fn [db _]
    (:tincture/viewport-size db)))
 
+;; get viewport size
+(rf/reg-sub
+ :tincture/viewport-width
+ :<- [:tincture/viewport-size]
+ (fn [[width _]]
+   width))
+
+;; get viewport size
+(rf/reg-sub
+ :tincture/viewport-height
+ :<- [:tincture/viewport-size]
+ (fn [[_ height]]
+   height))
+
 (rf/reg-sub
  :tincture/font
  (fn [db _]
@@ -38,20 +52,6 @@
      (device/isDesktop) :desktop
      (device/isTablet)  :tablet
      (device/isMobile)  :mobile)))
-
-;; get viewport size
-(rf/reg-sub
- :tincture/viewport-width
- :<- [:tincture/viewport-size]
- (fn [[width _]]
-   width))
-
-;; get viewport size
-(rf/reg-sub
- :tincture/viewport-height
- :<- [:tincture/viewport-size]
- (fn [[_ height]]
-   height))
 
 (rf/reg-sub
  :tincture/breakpoint-down
