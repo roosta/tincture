@@ -89,8 +89,9 @@
    (s/or :coll (s/coll-of int? :kind sequential?)
          :single int?)))
 
-(s/def ::ct-easing (s/nilable (s/or :single ::valid-easings
-                                    :coll (s/coll-of ::valid-easings :kind sequential?))))
+(s/def ::ct-easing
+  (s/nilable (s/or :single ::valid-easings
+                   :coll (s/coll-of ::valid-easings :kind sequential?))))
 
 (defn- pad
   "Pad out a collection with `n` size and input `value` that can either
