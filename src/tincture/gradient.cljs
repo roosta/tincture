@@ -10,10 +10,11 @@
 (def ^:private collection (macros/ui-gradients "gradients.json"))
 
 (defn css
-  "Takes a name, that should correspond with gradients listed at uigradients.com
-  and can be either string or keyword, and a direction: #{:left :right :up :down}
-  Returns a set of CSS strings used with a :background property passed to
-  Garden. The return value contains browser fallbacks.
+  "Takes a name, that should correspond with gradients listed
+  at [uigradients.com](uigradients.com) and can be either string or
+  keyword, and a direction: #{:left :right :up :down} Returns a set of
+  CSS strings used with a :background property passed to Garden. The
+  return value contains browser fallbacks.
 
   **Example**
 
