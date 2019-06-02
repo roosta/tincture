@@ -118,8 +118,8 @@
   **Example usage**
   ```clojure
   {:transition (create-transition {:property [:transform :opacity]
-                                   :durations [300 500]
-                                   :easings [:ease-in-cubic :ease-out-cubic]})}
+                                   :duration [300 500]
+                                   :easing [:ease-in-cubic :ease-out-cubic]})}
   ```
   Result:
   ```clojure
