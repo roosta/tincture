@@ -66,3 +66,10 @@
            "0px 3px 5px -1px rgba(0, 0, 0, 0.2),0px 5px 8px 0px rgba(0, 0, 0, 0.14),0px 1px 14px 0px rgba(0, 0, 0, 0.12)"))
     (is (= (t/box-shadow 24)
            "0px 11px 15px -7px rgba(0, 0, 0, 0.2),0px 24px 38px 3px rgba(0, 0, 0, 0.14),0px 9px 46px 8px rgba(0, 0, 0, 0.12)"))))
+
+(deftest text-shadow
+  (testing "Creating a text-shadow CSS string"
+    (is (= (t/text-shadow 0)
+           "none"))
+    (is (= (t/text-shadow 2)
+           "2px 2px 4px rgba(0, 0, 0, 0.3)"))))
