@@ -352,18 +352,18 @@
         md             (-> md (check-spec ::md) (require-prop props :item :md))
         sm             (-> sm (check-spec ::sm) (require-prop props :item :sm))
         xl             (-> xl (check-spec ::xl) (require-prop props :item :xl))
-        xs             (-> xs (check-spec ::xs) (require-prop props :item :xs))]
-    (let [class* (<class
-                  grid-style
-                  align-content
-                  align-items
-                  container
-                  direction
-                  spacing
-                  item
-                  justify
-                  wrap
-                  zero-min-width)]
+        xs             (-> xs (check-spec ::xs) (require-prop props :item :xs))
+        class* (<class
+                grid-style
+                align-content
+                align-items
+                container
+                direction
+                spacing
+                item
+                justify
+                wrap
+                zero-min-width)]
       (into
        [component {:id    id
                    :class (vec
@@ -376,6 +376,6 @@
                             (when md (str "grid-md-" (if (keyword? md) (name md) md)))
                             (when lg (str "grid-lg-" (if (keyword? lg) (name lg) lg)))
                             (when xl (str "grid-xl-" (if (keyword? xl) (name xl) xl)))]))}]
-       (r/children (r/current-component))))))
+       (r/children (r/current-component)))))
 
 (def ^{:deprecated "0.3.0"} grid Grid)
