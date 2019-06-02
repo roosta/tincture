@@ -3,6 +3,7 @@
    [cljs.spec.alpha :as s :include-macros true]
    [re-frame.core :as rf]
    [tincture.events]
+   [debux.cs.core :refer-macros [clog dbg]]
    [tincture.utils :as utils]
    [tincture.grid :as grid]
    [tincture.subs]
