@@ -169,8 +169,9 @@
 (s/def ::valid-box-shadow-elevation (set (range 25)))
 
 (defn box-shadow
-  "Takes a elevation and retuns a CSS box-shadow string Elevation can be one of
-  `#{0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24}`"
+  "Takes a elevation and retuns a CSS box-shadow string. Elevation can
+  be one of `#{0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21
+  22 23 24}`"
   [elevation]
   {:pre [(s/valid? ::valid-box-shadow-elevation elevation)]}
   (get ["none"
