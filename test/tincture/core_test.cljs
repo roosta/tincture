@@ -14,6 +14,15 @@
     (is (= (t/index-of #{:a :b :c} :b) 1))
     (is (= (t/index-of '(:a :b :c) :c) 2))))
 
+(deftest pad
+  (testing "Padding out a collection"
+    (is (= (#'tincture.core/pad 5 :test)
+           '(:test :test :test :test :test)))
+    (is (= (#'tincture.core/pad 5 [:test :test])
+           '(:test :test :test :test :test)))
+    (is (= (#'tincture.core/pad 5 '(:test :test))
+           '(:test :test :test :test :test)))))
+
 (deftest create-transition
   (testing "Creating a CSS ready transition"
     (is (= (t/create-transition {:property [:opacity :transform]
