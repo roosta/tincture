@@ -10,9 +10,8 @@ functions, components, and definitions to aid/speed up developing web page visua
 
    Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542
    due to use of [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various
-   input. Tincture's components are built with [[https://github.com/reagent-project/reagent][Reagent]] in mind but
-   it's not a dependency, so you could in theory use this with another
-   framework, but I haven't tested that.
+   input. Tincture's components are built using [[https://github.com/reagent-project/reagent][Reagent]] APIs, so
+   Reagent is required as well.
 
 ** Usage
 ** Re-frame and Tincture events
