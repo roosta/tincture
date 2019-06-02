@@ -1,6 +1,6 @@
 (defproject site "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Demo site for tincture library"
+  :url "http://tincture.roosta.sh"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
@@ -21,10 +21,7 @@
                   :exclusions [org.clojure/tools.reader]]]
 
   :plugins [[lein-environ "1.1.0"]
-            [lein-cljsbuild "1.1.7"]
-            ;; [lein-asset-minifier "0.2.7"
-            ;;  :exclusions [org.clojure/clojure]]
-            ]
+            [lein-cljsbuild "1.1.7"]]
 
   :ring {:handler site.handler/app
          :uberwar-name "site.war"}
@@ -40,8 +37,6 @@
   :source-paths ["src"]
   :resource-paths ["resources" "target/cljsbuild"]
 
-  ;; :minify-assets {:assets {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
-
   :cljsbuild
   {:builds {:min {:source-paths ["src" "env/prod"]
                   :compiler {:output-to        "target/cljsbuild/public/js/app.js"
@@ -49,7 +44,7 @@
                              :source-map       "target/cljsbuild/public/js/app.js.map"
                              :optimizations :advanced
                              :pretty-print  false}}
-            :app {:source-paths ["src" "env/dev" "../src"]
+            :app {:source-paths ["src" "env/dev"]
                   :figwheel {:on-jsload "site.core/mount-root"}
                   :compiler {:main "site.dev"
                              :asset-path "/js/out"
@@ -89,9 +84,7 @@
 
                    :env {:dev true}}
 
-             :uberjar {
-                       ;; :hooks [minify-assets.plugin/hooks]
-                       :source-paths ["env/prod"]
+             :uberjar {:source-paths ["env/prod"]
                        :dependencies [[philoskim/debux-stubs "0.5.6"]]
                        :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
                        :env {:production true}
