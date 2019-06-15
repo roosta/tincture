@@ -1,6 +1,7 @@
 (ns tincture.test-runner
   (:require [figwheel.main.testing :refer-macros [run-tests-async]]
-            [tincture.core-test]))
+            [tincture.core-test]
+            [tincture.cssfns-test]))
 
 (defn -main [& args]
   ;; this needs to be the last statement in the main function so that it can
