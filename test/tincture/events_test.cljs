@@ -33,5 +33,14 @@
        (rf/dispatch [:tincture/set-viewport-size [1 2]])
        (is (=  @viewport [1 2]))
        (is (=  @width 1))
-       (is (=  @height 2))
-       ))))
+       (is (=  @height 2))))))
+
+(deftest set-font-event
+  (testing "Setting viewport size"
+    (rf-test/run-test-sync
+     (let [family (rf/subscribe [:tincture.font/family])
+           url (rf/subscribe [:tincture.font/url])]
+       (rf/dispatch [:tincture/set-font "test" "anothertest"])
+       (is (=  @family "test"))
+       (is (=  @url "anothertest"))))))
+
