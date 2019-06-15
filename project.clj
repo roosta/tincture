@@ -10,7 +10,8 @@
           :source-paths ["src"]}
   :resource-paths ["target" "resources"]
   :jar-exclusions [#"(?:^|\/)public\/"]
-  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1-SNAPSHOT"]]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1-SNAPSHOT"]
+                                  [day8.re-frame/test "0.1.5"]]
                    :aliases {"fig" ["trampoline" "run" "-m" "figwheel.main"]
                              "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" tincture.test-runner]
                              "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
