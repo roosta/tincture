@@ -2,8 +2,8 @@
   (:require-macros [garden.def :refer [defcssfn]]))
 
 (defcssfn linear-gradient
-  [dir c1 p1 c2 p2]
-  [dir [c1 p1] [c2 p2]])
+  [dir color1 position1 color2 position2]
+  [dir [color1 position1] [color2 position2]])
 
 (defcssfn rgb
   ([r g b] [r g b])
