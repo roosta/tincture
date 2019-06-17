@@ -56,4 +56,10 @@
        (is @lg-up)
        (is @xl-down)
        (rf/dispatch [:tincture/set-viewport-size [2000 0]])
-       (is @xl-up)))))
+       (is @xl-up)
+       (try @(rf/subscribe [:tincture/breakpoint-down :ad])
+            (catch js/Error e
+              (is (.-message e) "Invalid breakpoint")))
+       (try @(rf/subscribe [:tincture/breakpoint-up :xc])
+            (catch js/Error e
+              (is (.-message e) "Invalid breakpoint")))))))
