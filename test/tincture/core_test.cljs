@@ -56,7 +56,24 @@
     (is (= (t/create-transition {:property [:opacity :transform :width]
                                  :duration [500 300]
                                  :easing [:ease-in-cubic :ease-out-cubic]})
-           "opacity 500ms cubic-bezier(.550, .055, .675, .19) 0ms, transform 300ms cubic-bezier(.215, .61, .355, 1) 0ms, width 300ms cubic-bezier(.215, .61, .355, 1) 0ms"))))
+           "opacity 500ms cubic-bezier(.550, .055, .675, .19) 0ms, transform 300ms cubic-bezier(.215, .61, .355, 1) 0ms, width 300ms cubic-bezier(.215, .61, .355, 1) 0ms"))
+    (try (t/create-transition {:property 1
+                               :duration [500 300]
+                               :easing [:ease-in-cubic :ease-out-cubic]})
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))))
+    (try (t/create-transition {:property :asd
+                               :duration -500
+                               :easing [:ease-in-cubic :ease-out-cubic]})
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))
+           (.log js/console e))
+         )
+    (try (t/create-transition {:property :asd
+                               :duration [500 300]
+                               :easing [:ease-in :ease-out]})
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))))))
 
 (deftest box-shadow
   (testing "Creating box-shadow"
