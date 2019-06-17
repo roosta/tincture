@@ -207,13 +207,13 @@
   "Takes an elevation and returns a CSS string to be used in text-shadow property
   Elevation can be one of `#{0 1 2 3}`"
   [elevation]
-  {:pre [(s/valid? ::valid-text-shadow-elevation elevation)]}
-  (case elevation
-    0 "none"
-    ;; offset-x | offset-y | blur-radius | color
-    1 "1px 1px 2px rgba(0, 0, 0, 0.3)"
-    2 "2px 2px 4px rgba(0, 0, 0, 0.3)"
-    3 "4px 4px 8px rgba(0, 0, 0, 0.3)"))
+  (let [elevation (check-spec elevation ::valid-text-shadow-elevation)]
+    (case elevation
+      0 "none"
+      ;; offset-x | offset-y | blur-radius | color
+      1 "1px 1px 2px rgba(0, 0, 0, 0.3)"
+      2 "2px 2px 4px rgba(0, 0, 0, 0.3)"
+      3 "4px 4px 8px rgba(0, 0, 0, 0.3)")))
 
 (def
   ^{:doc "Map of breakpoints to be used in media queries, this is just an alias to
