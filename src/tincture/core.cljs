@@ -77,8 +77,8 @@
 
 (s/def ::ct-duration
   (s/nilable
-   (s/or :coll (s/coll-of int? :kind sequential?)
-         :single int?)))
+   (s/or :coll (s/coll-of (s/or :pos pos-int? :zero zero?) :kind sequential?)
+         :single (s/or :pos pos-int? :zero zero?))))
 
 (s/def ::ct-property
   (s/or :single (s/or :str string? :key keyword?)
@@ -86,8 +86,8 @@
 
 (s/def ::ct-delay
   (s/nilable
-   (s/or :coll (s/coll-of int? :kind sequential?)
-         :single int?)))
+   (s/or :coll (s/coll-of (s/or :pos pos-int? :zero zero?) :kind sequential?)
+         :single (s/or :pos pos-int? :zero zero?))))
 
 (s/def ::ct-easing
   (s/nilable (s/or :single ::valid-easings
