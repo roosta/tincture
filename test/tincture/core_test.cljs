@@ -93,4 +93,10 @@
     (is (= (t/text-shadow 0)
            "none"))
     (is (= (t/text-shadow 2)
-           "2px 2px 4px rgba(0, 0, 0, 0.3)"))))
+           "2px 2px 4px rgba(0, 0, 0, 0.3)"))
+    (try (t/text-shadow -10)
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))))
+    (try (t/text-shadow 40)
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))))))
