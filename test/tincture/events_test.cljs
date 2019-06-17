@@ -1,6 +1,5 @@
 (ns tincture.events-test
   (:require [cljs.test :refer-macros [deftest testing is async]]
-            [clojure.pprint :refer [pprint]]
             [re-frame.core :as rf]
             [dommy.core :as dommy :refer-macros [sel1 sel]]
             [day8.re-frame.test :as rf-test]
