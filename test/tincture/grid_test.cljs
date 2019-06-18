@@ -34,7 +34,7 @@
     (is (= (g/down :xl) (g/up :xs)))))
 
 (deftest xs-grid
-  (testing "xs grid values"
+  (testing "xs sized grid"
     (let [grid (#'tincture.grid/generate-grid :xs)
           [_ xs-1] (first (filter (fn [[kw _]] (= kw :.grid-xs-1)) grid))
           [_ xs-2] (first (filter (fn [[kw _]] (= kw :.grid-xs-2)) grid))
@@ -216,7 +216,7 @@
       (is (= (:max-width sm-true) "100%")))))
 
 (deftest md-grid
-  (testing "sm sized grid"
+  (testing "md sized grid"
     (let [query (-> (#'tincture.grid/generate-grid :md) :value :media-queries)
           grid (-> (#'tincture.grid/generate-grid :md) :value :rules first)
           [_ md-1] (first (filter (fn [[kw _]] (= kw :.grid-md-1)) grid))
@@ -307,3 +307,189 @@
       (is (= (:flex-basis md-true) 0))
       (is (= (:flex-grow md-true) 1))
       (is (= (:max-width md-true) "100%")))))
+
+(deftest lg-grid
+  (testing "lg sized grid"
+    (let [query (-> (#'tincture.grid/generate-grid :lg) :value :media-queries)
+          grid (-> (#'tincture.grid/generate-grid :lg) :value :rules first)
+          [_ lg-1] (first (filter (fn [[kw _]] (= kw :.grid-lg-1)) grid))
+          [_ lg-2] (first (filter (fn [[kw _]] (= kw :.grid-lg-2)) grid))
+          [_ lg-3] (first (filter (fn [[kw _]] (= kw :.grid-lg-3)) grid))
+          [_ lg-4] (first (filter (fn [[kw _]] (= kw :.grid-lg-4)) grid))
+          [_ lg-5] (first (filter (fn [[kw _]] (= kw :.grid-lg-5)) grid))
+          [_ lg-6] (first (filter (fn [[kw _]] (= kw :.grid-lg-6)) grid))
+          [_ lg-7] (first (filter (fn [[kw _]] (= kw :.grid-lg-7)) grid))
+          [_ lg-8] (first (filter (fn [[kw _]] (= kw :.grid-lg-8)) grid))
+          [_ lg-9] (first (filter (fn [[kw _]] (= kw :.grid-lg-9)) grid))
+          [_ lg-10] (first (filter (fn [[kw _]] (= kw :.grid-lg-10)) grid))
+          [_ lg-11] (first (filter (fn [[kw _]] (= kw :.grid-lg-11)) grid))
+          [_ lg-12] (first (filter (fn [[kw _]] (= kw :.grid-lg-12)) grid))
+          [_ lg-auto] (first (filter (fn [[kw _]] (= kw :.grid-lg-auto)) grid))
+          [_ lg-true] (first (filter (fn [[kw _]] (= kw :.grid-lg-true)) grid))]
+
+      ;; media query
+      (is (= (-> query :min-width :magnitude) 1280))
+      (is (= (-> query :min-width :unit) :px))
+
+      ;; lg-1
+      (is (= (:flex-basis lg-1) "8.333333%"))
+      (is (= (:flex-grow lg-1) 0))
+      (is (= (:max-width lg-1) "8.333333%"))
+
+      ;; lg-2
+      (is (= (:flex-basis lg-2) "16.666667%"))
+      (is (= (:flex-grow lg-2) 0))
+      (is (= (:max-width lg-2) "16.666667%"))
+
+      ;; lg-3
+      (is (= (:flex-basis lg-3) "25%"))
+      (is (= (:flex-grow lg-3) 0))
+      (is (= (:max-width lg-3) "25%"))
+
+      ;; lg-4
+      (is (= (:flex-basis lg-4) "33.333333%"))
+      (is (= (:flex-grow lg-4) 0))
+      (is (= (:max-width lg-4) "33.333333%"))
+
+      ;; lg-5
+      (is (= (:flex-basis lg-5) "41.666667%"))
+      (is (= (:flex-grow lg-5) 0))
+      (is (= (:max-width lg-5) "41.666667%"))
+
+      ;; lg-6
+      (is (= (:flex-basis lg-6) "50%"))
+      (is (= (:flex-grow lg-6) 0))
+      (is (= (:max-width lg-6) "50%"))
+
+      ;; lg-7
+      (is (= (:flex-basis lg-7) "58.333333%"))
+      (is (= (:flex-grow lg-7) 0))
+      (is (= (:max-width lg-7) "58.333333%"))
+
+      ;; lg-8
+      (is (= (:flex-basis lg-8) "66.666667%"))
+      (is (= (:flex-grow lg-8) 0))
+      (is (= (:max-width lg-8) "66.666667%"))
+
+      ;; lg-9
+      (is (= (:flex-basis lg-9) "75%"))
+      (is (= (:flex-grow lg-9) 0))
+      (is (= (:max-width lg-9) "75%"))
+
+      ;; lg-10
+      (is (= (:flex-basis lg-10) "83.333333%"))
+      (is (= (:flex-grow lg-10) 0))
+      (is (= (:max-width lg-10) "83.333333%"))
+
+      ;; lg-11
+      (is (= (:flex-basis lg-11) "91.666667%"))
+      (is (= (:flex-grow lg-11) 0))
+      (is (= (:max-width lg-11) "91.666667%"))
+
+      ;; lg-12
+      (is (= (:flex-basis lg-12) "100%"))
+      (is (= (:flex-grow lg-12) 0))
+      (is (= (:max-width lg-12) "100%"))
+
+      ;; lg-auto
+      (is (= (:flex-basis lg-auto) "auto"))
+      (is (= (:flex-grow lg-auto) 0))
+      (is (= (:max-width lg-auto) "none"))
+
+      ;; lg-true
+      (is (= (:flex-basis lg-true) 0))
+      (is (= (:flex-grow lg-true) 1))
+      (is (= (:max-width lg-true) "100%")))))
+
+(deftest xl-grid
+  (testing "xl sized grid"
+    (let [query (-> (#'tincture.grid/generate-grid :xl) :value :media-queries)
+          grid (-> (#'tincture.grid/generate-grid :xl) :value :rules first)
+          [_ xl-1] (first (filter (fn [[kw _]] (= kw :.grid-xl-1)) grid))
+          [_ xl-2] (first (filter (fn [[kw _]] (= kw :.grid-xl-2)) grid))
+          [_ xl-3] (first (filter (fn [[kw _]] (= kw :.grid-xl-3)) grid))
+          [_ xl-4] (first (filter (fn [[kw _]] (= kw :.grid-xl-4)) grid))
+          [_ xl-5] (first (filter (fn [[kw _]] (= kw :.grid-xl-5)) grid))
+          [_ xl-6] (first (filter (fn [[kw _]] (= kw :.grid-xl-6)) grid))
+          [_ xl-7] (first (filter (fn [[kw _]] (= kw :.grid-xl-7)) grid))
+          [_ xl-8] (first (filter (fn [[kw _]] (= kw :.grid-xl-8)) grid))
+          [_ xl-9] (first (filter (fn [[kw _]] (= kw :.grid-xl-9)) grid))
+          [_ xl-10] (first (filter (fn [[kw _]] (= kw :.grid-xl-10)) grid))
+          [_ xl-11] (first (filter (fn [[kw _]] (= kw :.grid-xl-11)) grid))
+          [_ xl-12] (first (filter (fn [[kw _]] (= kw :.grid-xl-12)) grid))
+          [_ xl-auto] (first (filter (fn [[kw _]] (= kw :.grid-xl-auto)) grid))
+          [_ xl-true] (first (filter (fn [[kw _]] (= kw :.grid-xl-true)) grid))]
+
+      ;; media query
+      (is (= (-> query :min-width :magnitude) 1920))
+      (is (= (-> query :min-width :unit) :px))
+
+      ;; xl-1
+      (is (= (:flex-basis xl-1) "8.333333%"))
+      (is (= (:flex-grow xl-1) 0))
+      (is (= (:max-width xl-1) "8.333333%"))
+
+      ;; xl-2
+      (is (= (:flex-basis xl-2) "16.666667%"))
+      (is (= (:flex-grow xl-2) 0))
+      (is (= (:max-width xl-2) "16.666667%"))
+
+      ;; xl-3
+      (is (= (:flex-basis xl-3) "25%"))
+      (is (= (:flex-grow xl-3) 0))
+      (is (= (:max-width xl-3) "25%"))
+
+      ;; xl-4
+      (is (= (:flex-basis xl-4) "33.333333%"))
+      (is (= (:flex-grow xl-4) 0))
+      (is (= (:max-width xl-4) "33.333333%"))
+
+      ;; xl-5
+      (is (= (:flex-basis xl-5) "41.666667%"))
+      (is (= (:flex-grow xl-5) 0))
+      (is (= (:max-width xl-5) "41.666667%"))
+
+      ;; xl-6
+      (is (= (:flex-basis xl-6) "50%"))
+      (is (= (:flex-grow xl-6) 0))
+      (is (= (:max-width xl-6) "50%"))
+
+      ;; xl-7
+      (is (= (:flex-basis xl-7) "58.333333%"))
+      (is (= (:flex-grow xl-7) 0))
+      (is (= (:max-width xl-7) "58.333333%"))
+
+      ;; xl-8
+      (is (= (:flex-basis xl-8) "66.666667%"))
+      (is (= (:flex-grow xl-8) 0))
+      (is (= (:max-width xl-8) "66.666667%"))
+
+      ;; xl-9
+      (is (= (:flex-basis xl-9) "75%"))
+      (is (= (:flex-grow xl-9) 0))
+      (is (= (:max-width xl-9) "75%"))
+
+      ;; xl-10
+      (is (= (:flex-basis xl-10) "83.333333%"))
+      (is (= (:flex-grow xl-10) 0))
+      (is (= (:max-width xl-10) "83.333333%"))
+
+      ;; xl-11
+      (is (= (:flex-basis xl-11) "91.666667%"))
+      (is (= (:flex-grow xl-11) 0))
+      (is (= (:max-width xl-11) "91.666667%"))
+
+      ;; xl-12
+      (is (= (:flex-basis xl-12) "100%"))
+      (is (= (:flex-grow xl-12) 0))
+      (is (= (:max-width xl-12) "100%"))
+
+      ;; xl-auto
+      (is (= (:flex-basis xl-auto) "auto"))
+      (is (= (:flex-grow xl-auto) 0))
+      (is (= (:max-width xl-auto) "none"))
+
+      ;; xl-true
+      (is (= (:flex-basis xl-true) 0))
+      (is (= (:flex-grow xl-true) 1))
+      (is (= (:max-width xl-true) "100%")))))
