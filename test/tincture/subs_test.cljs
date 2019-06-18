@@ -59,7 +59,7 @@
        (is @xl-up)
        (try @(rf/subscribe [:tincture/breakpoint-down :ad])
             (catch js/Error e
-              (is (.-message e) "Invalid breakpoint")))
+              (is (= (.-message e) "Invalid breakpoint"))))
        (try @(rf/subscribe [:tincture/breakpoint-up :xc])
             (catch js/Error e
-              (is (.-message e) "Invalid breakpoint")))))))
+              (is (= (.-message e) "Invalid breakpoint"))))))))
