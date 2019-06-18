@@ -1,8 +1,6 @@
 (ns tincture.gradient-test
   (:require [cljs.test :refer-macros [deftest testing is async]]
-            [clojure.pprint :refer [pprint]]
-            [tincture.gradient :as g])
-  )
+            [tincture.gradient :as g]))
 
 (deftest css
   (testing "Output from gradient CSS function"
@@ -17,4 +15,10 @@
     (is (= (g/css :ed-s-sunset-gradient)
            #{"#ff7e5f" "linear-gradient(to left, #ff7e5f, #feb47b)" "-webkit-linear-gradient(to left, #ff7e5f, #feb47b)"}))
     (is (= (g/css :pure-lust)
-           #{"#333333" "linear-gradient(to left, #333333, #dd1818)" "-webkit-linear-gradient(to left, #333333, #dd1818)"}))))
+           #{"#333333" "linear-gradient(to left, #333333, #dd1818)" "-webkit-linear-gradient(to left, #333333, #dd1818)"}))
+    (try (g/css :test)
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))))
+    (try (g/css :vice-city :test)
+         (catch js/Error e
+           (is (= (.-message e) "Invalid value"))))))
