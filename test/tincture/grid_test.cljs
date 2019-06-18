@@ -1,6 +1,7 @@
 (ns tincture.grid-test
   (:require [cljs.test :refer-macros [deftest testing is]]
             [garden.core :refer [css]]
+            [garden.units :refer [px]]
             [tincture.grid :as g]))
 
 (deftest up
@@ -33,7 +34,7 @@
     (is (= (g/down :xl) (g/up :xs)))))
 
 (deftest xs-grid
-  (testing "Generating grid by passing sample breakpoints"
+  (testing "xs grid values"
     (let [grid (#'tincture.grid/generate-grid :xs)
           [_ xs-1] (first (filter (fn [[kw _]] (= kw :.grid-xs-1)) grid))
           [_ xs-2] (first (filter (fn [[kw _]] (= kw :.grid-xs-2)) grid))
@@ -116,6 +117,100 @@
       (is (= (:max-width xs-auto) "none"))
 
       ;; xs-true
-      (is (= (:flex-basis xs-true) "0"))
-      (is (= (:flex-grow xs-true) 0))
-      (is (= (:max-width xs-true) "100%")))))
+      (is (= (:flex-basis xs-true) 0))
+      (is (= (:flex-grow xs-true) 1))
+      (is (= (:max-width xs-true) "100%"))
+      )))
+
+(deftest sm-grid
+  (testing "sm sized grid"
+    (let [query (-> (#'tincture.grid/generate-grid :sm) :value :media-queries)
+          grid (-> (#'tincture.grid/generate-grid :sm) :value :rules first)
+          [_ sm-1] (first (filter (fn [[kw _]] (= kw :.grid-sm-1)) grid))
+          [_ sm-2] (first (filter (fn [[kw _]] (= kw :.grid-sm-2)) grid))
+          [_ sm-3] (first (filter (fn [[kw _]] (= kw :.grid-sm-3)) grid))
+          [_ sm-4] (first (filter (fn [[kw _]] (= kw :.grid-sm-4)) grid))
+          [_ sm-5] (first (filter (fn [[kw _]] (= kw :.grid-sm-5)) grid))
+          [_ sm-6] (first (filter (fn [[kw _]] (= kw :.grid-sm-6)) grid))
+          [_ sm-7] (first (filter (fn [[kw _]] (= kw :.grid-sm-7)) grid))
+          [_ sm-8] (first (filter (fn [[kw _]] (= kw :.grid-sm-8)) grid))
+          [_ sm-9] (first (filter (fn [[kw _]] (= kw :.grid-sm-9)) grid))
+          [_ sm-10] (first (filter (fn [[kw _]] (= kw :.grid-sm-10)) grid))
+          [_ sm-11] (first (filter (fn [[kw _]] (= kw :.grid-sm-11)) grid))
+          [_ sm-12] (first (filter (fn [[kw _]] (= kw :.grid-sm-12)) grid))
+          [_ sm-auto] (first (filter (fn [[kw _]] (= kw :.grid-sm-auto)) grid))
+          [_ sm-true] (first (filter (fn [[kw _]] (= kw :.grid-sm-true)) grid))]
+
+      ;; media query
+      (is (= (-> query :min-width :magnitude) 600))
+      (is (= (-> query :min-width :unit) :px))
+
+      ;; sm-1
+      (is (= (:flex-basis sm-1) "8.333333%"))
+      (is (= (:flex-grow sm-1) 0))
+      (is (= (:max-width sm-1) "8.333333%"))
+
+      ;; sm-2
+      (is (= (:flex-basis sm-2) "16.666667%"))
+      (is (= (:flex-grow sm-2) 0))
+      (is (= (:max-width sm-2) "16.666667%"))
+
+      ;; sm-3
+      (is (= (:flex-basis sm-3) "25%"))
+      (is (= (:flex-grow sm-3) 0))
+      (is (= (:max-width sm-3) "25%"))
+
+      ;; sm-4
+      (is (= (:flex-basis sm-4) "33.333333%"))
+      (is (= (:flex-grow sm-4) 0))
+      (is (= (:max-width sm-4) "33.333333%"))
+
+      ;; sm-5
+      (is (= (:flex-basis sm-5) "41.666667%"))
+      (is (= (:flex-grow sm-5) 0))
+      (is (= (:max-width sm-5) "41.666667%"))
+
+      ;; sm-6
+      (is (= (:flex-basis sm-6) "50%"))
+      (is (= (:flex-grow sm-6) 0))
+      (is (= (:max-width sm-6) "50%"))
+
+      ;; sm-7
+      (is (= (:flex-basis sm-7) "58.333333%"))
+      (is (= (:flex-grow sm-7) 0))
+      (is (= (:max-width sm-7) "58.333333%"))
+
+      ;; sm-8
+      (is (= (:flex-basis sm-8) "66.666667%"))
+      (is (= (:flex-grow sm-8) 0))
+      (is (= (:max-width sm-8) "66.666667%"))
+
+      ;; sm-9
+      (is (= (:flex-basis sm-9) "75%"))
+      (is (= (:flex-grow sm-9) 0))
+      (is (= (:max-width sm-9) "75%"))
+
+      ;; sm-10
+      (is (= (:flex-basis sm-10) "83.333333%"))
+      (is (= (:flex-grow sm-10) 0))
+      (is (= (:max-width sm-10) "83.333333%"))
+
+      ;; sm-11
+      (is (= (:flex-basis sm-11) "91.666667%"))
+      (is (= (:flex-grow sm-11) 0))
+      (is (= (:max-width sm-11) "91.666667%"))
+
+      ;; sm-12
+      (is (= (:flex-basis sm-12) "100%"))
+      (is (= (:flex-grow sm-12) 0))
+      (is (= (:max-width sm-12) "100%"))
+
+      ;; sm-auto
+      (is (= (:flex-basis sm-auto) "auto"))
+      (is (= (:flex-grow sm-auto) 0))
+      (is (= (:max-width sm-auto) "none"))
+
+      ;; sm-true
+      (is (= (:flex-basis sm-true) 0))
+      (is (= (:flex-grow sm-true) 1))
+      (is (= (:max-width sm-true) "100%")))))
