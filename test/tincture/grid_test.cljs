@@ -1,7 +1,8 @@
 (ns tincture.grid-test
   (:require [cljs.test :refer-macros [deftest testing is]]
+            [herb.core :refer-macros [<class]]
             [garden.core :refer [css]]
-            [garden.units :refer [px]]
+            [garden.units :refer [px percent]]
             [tincture.grid :as g]))
 
 (deftest up
@@ -551,7 +552,27 @@
       (is (= (-> spacing-40 :width :args first first :magnitude) 100))
       (is (= (-> spacing-40 :width :args first second) '+))
       (is (= (-> spacing-40 :width :args first last :unit) :px))
-      (is (= (-> spacing-40 :width :args first last :magnitude) 40))
+      (is (= (-> spacing-40 :width :args first last :magnitude) 40)))))
 
-      ))
-  )
+(deftest grid-style
+  (testing "Sample grid styles"
+    (let [container-default (#'tincture.grid/grid-style :stretch :stretch true :row 0 false :flex-start :wrap false)
+          item-default (#'tincture.grid/grid-style :stretch :stretch false :row 0 true :flex-start :wrap false)
+          center (#'tincture.grid/grid-style :stretch :center true :row 0 false :center :wrap false)
+          column-spacing (#'tincture.grid/grid-style :stretch :stretch true :row 16 false :flex-start :wrap false)
+          nowrap-zero-min-width (#'tincture.grid/grid-style :stretch :stretch true :row 0 false :flex-start :nowrap true)]
+      (is (= container-default {:box-sizing :border-box, :display :flex, :flex-wrap :wrap, :width (percent 100)}))
+      (is (= item-default {:box-sizing :border-box, :margin 0}))
+      (is (= center {:box-sizing :border-box, :display :flex, :flex-wrap :wrap, :width (percent 100), :align-items :center, :justify-content :center}))
+      (is (= column-spacing {:box-sizing :border-box,
+                             :display :flex,
+                             :flex-wrap :wrap,
+                             :width #garden.types.CSSFunction{:f "calc",
+                                                              :args [(#garden.types.CSSUnit{:unit :%,:magnitude 100}
+                                                                      +
+                                                                      #garden.types.CSSUnit{:unit :px,:magnitude 16})]},
+                             :margin #garden.types.CSSUnit{:unit :px,:magnitude -8}}))
+      (is (= nowrap-zero-min-width {:box-sizing :border-box,
+                                    :display :flex,
+                                    :flex-wrap :nowrap,
+                                    :width #garden.types.CSSUnit{:unit :%, :magnitude 100}, :min-width 0})))))
