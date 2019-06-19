@@ -22,8 +22,6 @@
           :class [class (<class svg-icon-style)]}]
    (r/children (r/current-component))))
 
-(def svg-icon SvgIcon)
-
 (defn Mail
   [{:keys [class]}]
   [SvgIcon {:class class
