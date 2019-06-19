@@ -576,3 +576,31 @@
                                     :display :flex,
                                     :flex-wrap :nowrap,
                                     :width #garden.types.CSSUnit{:unit :%, :magnitude 100}, :min-width 0})))))
+
+
+(deftest require-prop
+  (testing "That require-prop throws exceptions when it should"
+    (let [f #'tincture.grid/require-prop]
+      (is (= (f :center {:container true :align-items :center} :container :align-items) :center))
+      (try (f :center {:container false :align-items :center} :container :align-items)
+           (catch js/Error e
+             (is (= (.-message e)
+                    "The property :align-items of tincture.grid must be used on :container"))))
+      (is (= (f :column {:container true :direction :column} :container :direction) :column))
+      (try (f :column {:container false :direction :column} :container :direction)
+           (catch js/Error e
+             (is (= (.-message e)
+                    "The property :direction of tincture.grid must be used on :container"))))
+      (is (= (f 2 {:item true :xs 2} :item :xs) 2))
+      (try (f 2 {:item false :xs 2} :item :xs)
+           (catch js/Error e
+             (is (= (.-message e)
+                    "The property :xs of tincture.grid must be used on :item"))))
+      (is (= (f 6 {:item true :md 6} :item :md) 6))
+      (try (f 2 {:item false :md 6} :item :md)
+           (catch js/Error e
+             (is (= (.-message e)
+                    "The property :md of tincture.grid must be used on :item")))))))
+
+(deftest grid-component
+  (testing "Grid component error handling"))
