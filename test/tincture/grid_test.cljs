@@ -36,19 +36,19 @@
 
 (deftest xs-grid
   (testing "xs sized grid"
-    (let [grid (#'tincture.grid/generate-grid :xs)
-          [_ xs-1] (first (filter (fn [[kw _]] (= kw :.grid-xs-1)) grid))
-          [_ xs-2] (first (filter (fn [[kw _]] (= kw :.grid-xs-2)) grid))
-          [_ xs-3] (first (filter (fn [[kw _]] (= kw :.grid-xs-3)) grid))
-          [_ xs-4] (first (filter (fn [[kw _]] (= kw :.grid-xs-4)) grid))
-          [_ xs-5] (first (filter (fn [[kw _]] (= kw :.grid-xs-5)) grid))
-          [_ xs-6] (first (filter (fn [[kw _]] (= kw :.grid-xs-6)) grid))
-          [_ xs-7] (first (filter (fn [[kw _]] (= kw :.grid-xs-7)) grid))
-          [_ xs-8] (first (filter (fn [[kw _]] (= kw :.grid-xs-8)) grid))
-          [_ xs-9] (first (filter (fn [[kw _]] (= kw :.grid-xs-9)) grid))
-          [_ xs-10] (first (filter (fn [[kw _]] (= kw :.grid-xs-10)) grid))
-          [_ xs-11] (first (filter (fn [[kw _]] (= kw :.grid-xs-11)) grid))
-          [_ xs-12] (first (filter (fn [[kw _]] (= kw :.grid-xs-12)) grid))
+    (let [grid        (#'tincture.grid/generate-grid :xs)
+          [_ xs-1]    (first (filter (fn [[kw _]] (= kw :.grid-xs-1)) grid))
+          [_ xs-2]    (first (filter (fn [[kw _]] (= kw :.grid-xs-2)) grid))
+          [_ xs-3]    (first (filter (fn [[kw _]] (= kw :.grid-xs-3)) grid))
+          [_ xs-4]    (first (filter (fn [[kw _]] (= kw :.grid-xs-4)) grid))
+          [_ xs-5]    (first (filter (fn [[kw _]] (= kw :.grid-xs-5)) grid))
+          [_ xs-6]    (first (filter (fn [[kw _]] (= kw :.grid-xs-6)) grid))
+          [_ xs-7]    (first (filter (fn [[kw _]] (= kw :.grid-xs-7)) grid))
+          [_ xs-8]    (first (filter (fn [[kw _]] (= kw :.grid-xs-8)) grid))
+          [_ xs-9]    (first (filter (fn [[kw _]] (= kw :.grid-xs-9)) grid))
+          [_ xs-10]   (first (filter (fn [[kw _]] (= kw :.grid-xs-10)) grid))
+          [_ xs-11]   (first (filter (fn [[kw _]] (= kw :.grid-xs-11)) grid))
+          [_ xs-12]   (first (filter (fn [[kw _]] (= kw :.grid-xs-12)) grid))
           [_ xs-auto] (first (filter (fn [[kw _]] (= kw :.grid-xs-auto)) grid))
           [_ xs-true] (first (filter (fn [[kw _]] (= kw :.grid-xs-true)) grid))]
 
@@ -218,20 +218,20 @@
 
 (deftest md-grid
   (testing "md sized grid"
-    (let [query (-> (#'tincture.grid/generate-grid :md) :value :media-queries)
-          grid (-> (#'tincture.grid/generate-grid :md) :value :rules first)
-          [_ md-1] (first (filter (fn [[kw _]] (= kw :.grid-md-1)) grid))
-          [_ md-2] (first (filter (fn [[kw _]] (= kw :.grid-md-2)) grid))
-          [_ md-3] (first (filter (fn [[kw _]] (= kw :.grid-md-3)) grid))
-          [_ md-4] (first (filter (fn [[kw _]] (= kw :.grid-md-4)) grid))
-          [_ md-5] (first (filter (fn [[kw _]] (= kw :.grid-md-5)) grid))
-          [_ md-6] (first (filter (fn [[kw _]] (= kw :.grid-md-6)) grid))
-          [_ md-7] (first (filter (fn [[kw _]] (= kw :.grid-md-7)) grid))
-          [_ md-8] (first (filter (fn [[kw _]] (= kw :.grid-md-8)) grid))
-          [_ md-9] (first (filter (fn [[kw _]] (= kw :.grid-md-9)) grid))
-          [_ md-10] (first (filter (fn [[kw _]] (= kw :.grid-md-10)) grid))
-          [_ md-11] (first (filter (fn [[kw _]] (= kw :.grid-md-11)) grid))
-          [_ md-12] (first (filter (fn [[kw _]] (= kw :.grid-md-12)) grid))
+    (let [query       (-> (#'tincture.grid/generate-grid :md) :value :media-queries)
+          grid        (-> (#'tincture.grid/generate-grid :md) :value :rules first)
+          [_ md-1]    (first (filter (fn [[kw _]] (= kw :.grid-md-1)) grid))
+          [_ md-2]    (first (filter (fn [[kw _]] (= kw :.grid-md-2)) grid))
+          [_ md-3]    (first (filter (fn [[kw _]] (= kw :.grid-md-3)) grid))
+          [_ md-4]    (first (filter (fn [[kw _]] (= kw :.grid-md-4)) grid))
+          [_ md-5]    (first (filter (fn [[kw _]] (= kw :.grid-md-5)) grid))
+          [_ md-6]    (first (filter (fn [[kw _]] (= kw :.grid-md-6)) grid))
+          [_ md-7]    (first (filter (fn [[kw _]] (= kw :.grid-md-7)) grid))
+          [_ md-8]    (first (filter (fn [[kw _]] (= kw :.grid-md-8)) grid))
+          [_ md-9]    (first (filter (fn [[kw _]] (= kw :.grid-md-9)) grid))
+          [_ md-10]   (first (filter (fn [[kw _]] (= kw :.grid-md-10)) grid))
+          [_ md-11]   (first (filter (fn [[kw _]] (= kw :.grid-md-11)) grid))
+          [_ md-12]   (first (filter (fn [[kw _]] (= kw :.grid-md-12)) grid))
           [_ md-auto] (first (filter (fn [[kw _]] (= kw :.grid-md-auto)) grid))
           [_ md-true] (first (filter (fn [[kw _]] (= kw :.grid-md-true)) grid))]
 
@@ -311,20 +311,20 @@
 
 (deftest lg-grid
   (testing "lg sized grid"
-    (let [query (-> (#'tincture.grid/generate-grid :lg) :value :media-queries)
-          grid (-> (#'tincture.grid/generate-grid :lg) :value :rules first)
-          [_ lg-1] (first (filter (fn [[kw _]] (= kw :.grid-lg-1)) grid))
-          [_ lg-2] (first (filter (fn [[kw _]] (= kw :.grid-lg-2)) grid))
-          [_ lg-3] (first (filter (fn [[kw _]] (= kw :.grid-lg-3)) grid))
-          [_ lg-4] (first (filter (fn [[kw _]] (= kw :.grid-lg-4)) grid))
-          [_ lg-5] (first (filter (fn [[kw _]] (= kw :.grid-lg-5)) grid))
-          [_ lg-6] (first (filter (fn [[kw _]] (= kw :.grid-lg-6)) grid))
-          [_ lg-7] (first (filter (fn [[kw _]] (= kw :.grid-lg-7)) grid))
-          [_ lg-8] (first (filter (fn [[kw _]] (= kw :.grid-lg-8)) grid))
-          [_ lg-9] (first (filter (fn [[kw _]] (= kw :.grid-lg-9)) grid))
-          [_ lg-10] (first (filter (fn [[kw _]] (= kw :.grid-lg-10)) grid))
-          [_ lg-11] (first (filter (fn [[kw _]] (= kw :.grid-lg-11)) grid))
-          [_ lg-12] (first (filter (fn [[kw _]] (= kw :.grid-lg-12)) grid))
+    (let [query       (-> (#'tincture.grid/generate-grid :lg) :value :media-queries)
+          grid        (-> (#'tincture.grid/generate-grid :lg) :value :rules first)
+          [_ lg-1]    (first (filter (fn [[kw _]] (= kw :.grid-lg-1)) grid))
+          [_ lg-2]    (first (filter (fn [[kw _]] (= kw :.grid-lg-2)) grid))
+          [_ lg-3]    (first (filter (fn [[kw _]] (= kw :.grid-lg-3)) grid))
+          [_ lg-4]    (first (filter (fn [[kw _]] (= kw :.grid-lg-4)) grid))
+          [_ lg-5]    (first (filter (fn [[kw _]] (= kw :.grid-lg-5)) grid))
+          [_ lg-6]    (first (filter (fn [[kw _]] (= kw :.grid-lg-6)) grid))
+          [_ lg-7]    (first (filter (fn [[kw _]] (= kw :.grid-lg-7)) grid))
+          [_ lg-8]    (first (filter (fn [[kw _]] (= kw :.grid-lg-8)) grid))
+          [_ lg-9]    (first (filter (fn [[kw _]] (= kw :.grid-lg-9)) grid))
+          [_ lg-10]   (first (filter (fn [[kw _]] (= kw :.grid-lg-10)) grid))
+          [_ lg-11]   (first (filter (fn [[kw _]] (= kw :.grid-lg-11)) grid))
+          [_ lg-12]   (first (filter (fn [[kw _]] (= kw :.grid-lg-12)) grid))
           [_ lg-auto] (first (filter (fn [[kw _]] (= kw :.grid-lg-auto)) grid))
           [_ lg-true] (first (filter (fn [[kw _]] (= kw :.grid-lg-true)) grid))]
 
@@ -404,20 +404,20 @@
 
 (deftest xl-grid
   (testing "xl sized grid"
-    (let [query (-> (#'tincture.grid/generate-grid :xl) :value :media-queries)
-          grid (-> (#'tincture.grid/generate-grid :xl) :value :rules first)
-          [_ xl-1] (first (filter (fn [[kw _]] (= kw :.grid-xl-1)) grid))
-          [_ xl-2] (first (filter (fn [[kw _]] (= kw :.grid-xl-2)) grid))
-          [_ xl-3] (first (filter (fn [[kw _]] (= kw :.grid-xl-3)) grid))
-          [_ xl-4] (first (filter (fn [[kw _]] (= kw :.grid-xl-4)) grid))
-          [_ xl-5] (first (filter (fn [[kw _]] (= kw :.grid-xl-5)) grid))
-          [_ xl-6] (first (filter (fn [[kw _]] (= kw :.grid-xl-6)) grid))
-          [_ xl-7] (first (filter (fn [[kw _]] (= kw :.grid-xl-7)) grid))
-          [_ xl-8] (first (filter (fn [[kw _]] (= kw :.grid-xl-8)) grid))
-          [_ xl-9] (first (filter (fn [[kw _]] (= kw :.grid-xl-9)) grid))
-          [_ xl-10] (first (filter (fn [[kw _]] (= kw :.grid-xl-10)) grid))
-          [_ xl-11] (first (filter (fn [[kw _]] (= kw :.grid-xl-11)) grid))
-          [_ xl-12] (first (filter (fn [[kw _]] (= kw :.grid-xl-12)) grid))
+    (let [query       (-> (#'tincture.grid/generate-grid :xl) :value :media-queries)
+          grid        (-> (#'tincture.grid/generate-grid :xl) :value :rules first)
+          [_ xl-1]    (first (filter (fn [[kw _]] (= kw :.grid-xl-1)) grid))
+          [_ xl-2]    (first (filter (fn [[kw _]] (= kw :.grid-xl-2)) grid))
+          [_ xl-3]    (first (filter (fn [[kw _]] (= kw :.grid-xl-3)) grid))
+          [_ xl-4]    (first (filter (fn [[kw _]] (= kw :.grid-xl-4)) grid))
+          [_ xl-5]    (first (filter (fn [[kw _]] (= kw :.grid-xl-5)) grid))
+          [_ xl-6]    (first (filter (fn [[kw _]] (= kw :.grid-xl-6)) grid))
+          [_ xl-7]    (first (filter (fn [[kw _]] (= kw :.grid-xl-7)) grid))
+          [_ xl-8]    (first (filter (fn [[kw _]] (= kw :.grid-xl-8)) grid))
+          [_ xl-9]    (first (filter (fn [[kw _]] (= kw :.grid-xl-9)) grid))
+          [_ xl-10]   (first (filter (fn [[kw _]] (= kw :.grid-xl-10)) grid))
+          [_ xl-11]   (first (filter (fn [[kw _]] (= kw :.grid-xl-11)) grid))
+          [_ xl-12]   (first (filter (fn [[kw _]] (= kw :.grid-xl-12)) grid))
           [_ xl-auto] (first (filter (fn [[kw _]] (= kw :.grid-xl-auto)) grid))
           [_ xl-true] (first (filter (fn [[kw _]] (= kw :.grid-xl-true)) grid))]
 
@@ -497,8 +497,8 @@
 
 (deftest generate-gutter
   (testing "Generating gutter for grid component"
-    (let [gutter (#'tincture.grid/generate-gutter)
-          spacing-8 (:spacing-8 gutter)
+    (let [gutter     (#'tincture.grid/generate-gutter)
+          spacing-8  (:spacing-8 gutter)
           spacing-16 (:spacing-16 gutter)
           spacing-24 (:spacing-24 gutter)
           spacing-32 (:spacing-32 gutter)
@@ -556,26 +556,26 @@
 
 (deftest grid-style
   (testing "Sample grid styles"
-    (let [container-default (#'tincture.grid/grid-style :stretch :stretch true :row 0 false :flex-start :wrap false)
-          item-default (#'tincture.grid/grid-style :stretch :stretch false :row 0 true :flex-start :wrap false)
-          center (#'tincture.grid/grid-style :stretch :center true :row 0 false :center :wrap false)
-          column-spacing (#'tincture.grid/grid-style :stretch :stretch true :row 16 false :flex-start :wrap false)
+    (let [container-default     (#'tincture.grid/grid-style :stretch :stretch true :row 0 false :flex-start :wrap false)
+          item-default          (#'tincture.grid/grid-style :stretch :stretch false :row 0 true :flex-start :wrap false)
+          center                (#'tincture.grid/grid-style :stretch :center true :row 0 false :center :wrap false)
+          column-spacing        (#'tincture.grid/grid-style :stretch :stretch true :row 16 false :flex-start :wrap false)
           nowrap-zero-min-width (#'tincture.grid/grid-style :stretch :stretch true :row 0 false :flex-start :nowrap true)]
       (is (= container-default {:box-sizing :border-box, :display :flex, :flex-wrap :wrap, :width (percent 100)}))
       (is (= item-default {:box-sizing :border-box, :margin 0}))
       (is (= center {:box-sizing :border-box, :display :flex, :flex-wrap :wrap, :width (percent 100), :align-items :center, :justify-content :center}))
       (is (= column-spacing {:box-sizing :border-box,
-                             :display :flex,
-                             :flex-wrap :wrap,
-                             :width #garden.types.CSSFunction{:f "calc",
-                                                              :args [(#garden.types.CSSUnit{:unit :%,:magnitude 100}
-                                                                      +
-                                                                      #garden.types.CSSUnit{:unit :px,:magnitude 16})]},
-                             :margin #garden.types.CSSUnit{:unit :px,:magnitude -8}}))
+                             :display    :flex,
+                             :flex-wrap  :wrap,
+                             :width      #garden.types.CSSFunction{:f    "calc",
+                                                                   :args [(#garden.types.CSSUnit{:unit :%,:magnitude 100}
+                                                                           +
+                                                                           #garden.types.CSSUnit{:unit :px,:magnitude 16})]},
+                             :margin     #garden.types.CSSUnit{:unit :px,:magnitude -8}}))
       (is (= nowrap-zero-min-width {:box-sizing :border-box,
-                                    :display :flex,
-                                    :flex-wrap :nowrap,
-                                    :width #garden.types.CSSUnit{:unit :%, :magnitude 100}, :min-width 0})))))
+                                    :display    :flex,
+                                    :flex-wrap  :nowrap,
+                                    :width      #garden.types.CSSUnit{:unit :%, :magnitude 100}, :min-width 0})))))
 
 
 (deftest require-prop
