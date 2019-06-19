@@ -2,6 +2,7 @@
   (:require [tincture.transitions :refer [Transition TransitionGroup CSSTransition]]
             [clojure.spec.alpha :as s]
             [tincture.core :refer [easing-presets create-transition]]
+            [tincture.spec :refer [check-spec]]
             [reagent.debug :refer [log]]
             [clojure.string :as str]
             [reagent.core :as r]))
@@ -162,18 +163,29 @@
   "
   [{:keys [direction duration timeout unmount-on-exit mount-on-enter class
            easing appear enter exit on-exit on-exited on-enter on-entered classes]
-    :or {direction :left duration 500 timeout 500 mount-on-enter false
-         unmount-on-exit false easing :ease-in-out-cubic appear false
-         enter true exit true on-enter #() on-exit #() on-exited #() on-entered #()}}]
-  {:pre [(s/valid? ::direction direction)]}
-  (let [{transition-class :transition
-         child-container-class :child-container} classes
-        children (r/children (r/current-component))
-        k (or (-> children first meta :key)
-              (-> children first second :key))]
+    :or   {direction       :left duration 500                timeout  500 mount-on-enter false
+           unmount-on-exit false easing   :ease-in-out-cubic appear   false
+           enter           true  exit     true               on-enter #() on-exit        #() on-exited #() on-entered #()}}]
+  (let [direction      (check-spec direction ::direction) 
+        duration       (check-spec duration ::duration)
+        timeout        (check-spec timeout ::timeout)
+        mount-on-enter (check-spec mount-on-enter ::mount-on-enter)
+        class          (check-spec class ::class)
+        easing         (check-spec easing ::easing)
+        appear         (check-spec appear ::appear)
+        enter          (check-spec enter ::enter)
+        exit           (check-spec exit ::exit)
+        on-exit        (check-spec on-exit ::on-exit)
+        on-exited      (check-spec on-exited ::on-exited)
+        on-enter       (check-spec on-enter ::on-enter)
+        on-entered     (check-spec on-entered ::on-entered)
+        {transition-class :transition child-container-class :child-container} (check-spec classes ::classes)
+        children       (r/children (r/current-component))
+        k              (or (-> children first meta :key)
+                           (-> children first second :key))]
     [TransitionGroup {:class class
                       :enter enter
-                      :exit exit
+                      :exit  exit
                       :style {:position "relative"
                               :overflow "hidden"}
 
@@ -185,20 +197,20 @@
      ;; to access the passed props of transition group we need to create a react
      ;; component from the carousel-child transition.
      (let [child (r/reactify-component slide-child)]
-       (r/create-element child #js {:key k
-                                    :duration duration
+       (r/create-element child #js {:key                   k
+                                    :duration              duration
                                     :child-container-class child-container-class
-                                    :transition-class transition-class
-                                    :timeout timeout
-                                    :on-exit on-exit
-                                    :on-exited on-exited
-                                    :on-enter on-enter
-                                    :on-entered on-entered
-                                    :unmount-on-exit unmount-on-exit
-                                    :mount-on-enter mount-on-enter
-                                    :easing easing
-                                    :appear appear
-                                    :direction direction
-                                    :children children}))]))
+                                    :transition-class      transition-class
+                                    :timeout               timeout
+                                    :on-exit               on-exit
+                                    :on-exited             on-exited
+                                    :on-enter              on-enter
+                                    :on-entered            on-entered
+                                    :unmount-on-exit       unmount-on-exit
+                                    :mount-on-enter        mount-on-enter
+                                    :easing                easing
+                                    :appear                appear
+                                    :direction             direction
+                                    :children              children}))]))
 
 (def ^{:deprecated "0.3.0"} slide Slide)
