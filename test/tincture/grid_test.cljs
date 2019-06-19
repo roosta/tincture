@@ -493,3 +493,65 @@
       (is (= (:flex-basis xl-true) 0))
       (is (= (:flex-grow xl-true) 1))
       (is (= (:max-width xl-true) "100%")))))
+
+(deftest generate-gutter
+  (testing "Generating gutter for grid component"
+    (let [gutter (#'tincture.grid/generate-gutter)
+          spacing-8 (:spacing-8 gutter)
+          spacing-16 (:spacing-16 gutter)
+          spacing-24 (:spacing-24 gutter)
+          spacing-32 (:spacing-32 gutter)
+          spacing-40 (:spacing-40 gutter)]
+
+      ;; Spacing 8
+      (is (= (-> spacing-8 :margin :unit) :px))
+      (is (= (-> spacing-8 :margin :magnitude) -4))
+      (is (= (-> spacing-8 :width :f) "calc"))
+      (is (= (-> spacing-8 :width :args first first :unit) :%))
+      (is (= (-> spacing-8 :width :args first first :magnitude) 100))
+      (is (= (-> spacing-8 :width :args first second) '+))
+      (is (= (-> spacing-8 :width :args first last :unit) :px))
+      (is (= (-> spacing-8 :width :args first last :magnitude) 8))
+      
+      ;; Spacing 16
+      (is (= (-> spacing-16 :margin :unit) :px))
+      (is (= (-> spacing-16 :margin :magnitude) -8))
+      (is (= (-> spacing-16 :width :f) "calc"))
+      (is (= (-> spacing-16 :width :args first first :unit) :%))
+      (is (= (-> spacing-16 :width :args first first :magnitude) 100))
+      (is (= (-> spacing-16 :width :args first second) '+))
+      (is (= (-> spacing-16 :width :args first last :unit) :px))
+      (is (= (-> spacing-16 :width :args first last :magnitude) 16))
+
+      ;; Spacing-24
+      (is (= (-> spacing-24 :margin :unit) :px))
+      (is (= (-> spacing-24 :margin :magnitude) -12))
+      (is (= (-> spacing-24 :width :f) "calc"))
+      (is (= (-> spacing-24 :width :args first first :unit) :%))
+      (is (= (-> spacing-24 :width :args first first :magnitude) 100))
+      (is (= (-> spacing-24 :width :args first second) '+))
+      (is (= (-> spacing-24 :width :args first last :unit) :px))
+      (is (= (-> spacing-24 :width :args first last :magnitude) 24))
+
+      ;; Spacing-32
+      (is (= (-> spacing-32 :margin :unit) :px))
+      (is (= (-> spacing-32 :margin :magnitude) -16))
+      (is (= (-> spacing-32 :width :f) "calc"))
+      (is (= (-> spacing-32 :width :args first first :unit) :%))
+      (is (= (-> spacing-32 :width :args first first :magnitude) 100))
+      (is (= (-> spacing-32 :width :args first second) '+))
+      (is (= (-> spacing-32 :width :args first last :unit) :px))
+      (is (= (-> spacing-32 :width :args first last :magnitude) 32))
+
+      ;; Spacing-40
+      (is (= (-> spacing-40 :margin :unit) :px))
+      (is (= (-> spacing-40 :margin :magnitude) -20))
+      (is (= (-> spacing-40 :width :f) "calc"))
+      (is (= (-> spacing-40 :width :args first first :unit) :%))
+      (is (= (-> spacing-40 :width :args first first :magnitude) 100))
+      (is (= (-> spacing-40 :width :args first second) '+))
+      (is (= (-> spacing-40 :width :args first last :unit) :px))
+      (is (= (-> spacing-40 :width :args first last :magnitude) 40))
+
+      ))
+  )
