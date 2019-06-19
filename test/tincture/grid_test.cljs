@@ -1,7 +1,10 @@
 (ns tincture.grid-test
   (:require [cljs.test :refer-macros [deftest testing is]]
             [herb.core :refer-macros [<class]]
+            [tincture.test-utils :as utils]
+            [dommy.core :as dommy :refer-macros [sel1 sel]]
             [garden.core :refer [css]]
+            [reagent.core :as r]
             [garden.units :refer [px percent]]
             [tincture.grid :as g]))
 
@@ -602,5 +605,17 @@
              (is (= (.-message e)
                     "The property :md of tincture.grid must be used on :item")))))))
 
+(def ^:dynamic c)
+
 (deftest grid-component
-  (testing "Grid component error handling"))
+  (testing "Grid component error handling"
+    (binding [c (utils/new-container!)]
+      (r/render [g/Grid {:id "test-grid" :container true :align-items :center :justify :center}] c)
+      (is (= (.-className (sel1 c :#test-grid))
+             "tincture_grid_grid-style_stretch-center-true-row-0-false-center-wrap"))
+      (r/render [g/Grid {:id "test-grid" :item true :xs 12 :md 6}] c)
+      (is (= (.-className (sel1 c :#test-grid))
+             "tincture_grid_grid-style_stretch-stretch-false-row-0-true-flex-start-wrap flexbox-item grid-xs-12 grid-md-6"))
+      (r/render [g/Grid {:id "test-grid" :container true :direction :column :spacing 40}] c)
+      (is (= (.-className (sel1 c :#test-grid))
+             "tincture_grid_grid-style_stretch-stretch-true-column-40-false-flex-start-wrap")))))
