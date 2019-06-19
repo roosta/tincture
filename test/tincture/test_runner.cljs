@@ -5,7 +5,8 @@
             [tincture.events-test]
             [tincture.subs-test]
             [tincture.gradient-test]
-            [tincture.grid-test]))
+            [tincture.grid-test]
+            [tincture.paper-test]))
 
 (defn -main [& args]
   ;; this needs to be the last statement in the main function so that it can
