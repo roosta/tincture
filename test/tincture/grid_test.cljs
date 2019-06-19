@@ -1,6 +1,5 @@
 (ns tincture.grid-test
   (:require [cljs.test :refer-macros [deftest testing is]]
-            [herb.core :refer-macros [<class]]
             [tincture.test-utils :as utils]
             [dommy.core :as dommy :refer-macros [sel1 sel]]
             [garden.core :refer [css]]
