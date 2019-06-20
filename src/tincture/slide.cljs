@@ -163,9 +163,19 @@
   "
   [{:keys [direction duration timeout unmount-on-exit mount-on-enter class
            easing appear enter exit on-exit on-exited on-enter on-entered classes]
-    :or   {direction       :left duration 500                timeout  500 mount-on-enter false
-           unmount-on-exit false easing   :ease-in-out-cubic appear   false
-           enter           true  exit     true               on-enter #() on-exit        #() on-exited #() on-entered #()}}]
+    :or   {direction       :left
+           duration        500
+           timeout         500
+           mount-on-enter  false
+           unmount-on-exit false
+           easing          :ease-in-out-cubic
+           appear          false
+           enter           true
+           exit            true
+           on-enter        #()
+           on-exit         #()
+           on-exited       #()
+           on-entered      #()}}]
   (let [direction      (check-spec direction ::direction) 
         duration       (check-spec duration ::duration)
         timeout        (check-spec timeout ::timeout)
