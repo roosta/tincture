@@ -7,8 +7,8 @@
             [site.paper :as paper-demo]
             [site.grid :as grid-demo]
             [reitit.frontend :as reitit]
-            [tincture.container :refer [container]]
-            [tincture.typography :refer [typography]]
+            [tincture.container :refer [Container]]
+            [tincture.typography :refer [Typography]]
             [tincture.core :as t]
             [herb.core :refer-macros [defglobal]]
             [clerk.core :as clerk]
@@ -38,27 +38,27 @@
 ;; Page components
 
 (defn home-page []
-  [container
-   [typography {:variant :h2}
+  [Container
+   [Typography {:variant :h2}
     "Welcome to the Tincture demo"]
-   [typography {:variant :body1}
+   [Typography {:variant :body1}
     "Tincture is a frontend toolkit for ClojureScript that provides several
     utility functions, and definitions to aid/speed up developing web page visuals."]
    [:ul
     [:li [:a {:href "/typography"}
-          [typography {:variant :body1}
+          [Typography {:variant :body1}
            "Typography demo"]]]
     [:li [:a {:href "/slide"}
-          [typography {:variant :body1}
+          [Typography {:variant :body1}
            "Slide demo"]]]
     [:li [:a {:href "/gradient"}
-          [typography {:variant :body1}
+          [Typography {:variant :body1}
            "Gradient demo"]]]
     [:li [:a {:href "/paper"}
-          [typography {:variant :body1}
+          [Typography {:variant :body1}
            "Paper demo"]]]
     [:li [:a {:href "/grid"}
-          [typography {:variant :body1}
+          [Typography {:variant :body1}
            "Grid demo"]]]
     ]])
 
