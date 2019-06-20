@@ -39,7 +39,7 @@
    [typography {:gutter-bottom true
                 :align :center
                 :class (<class styles :text)}
-    "Tincture provides a gradient tool, it uses gradients defined at " [:a {:href "uigradients.com"} "uigradients.com"]]
+    "Tincture provides a gradient tool, it uses gradients defined at " [:a {:href "https://uigradients.com"} "uigradients.com"]]
    [:div {:class (<class styles :grid)}
     (for [g (deref #'tincture.gradient/collection)]
       (let [kw (key g)]
