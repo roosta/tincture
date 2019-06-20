@@ -3,6 +3,9 @@
             [site.slide :refer [slide-demo]]
             [site.gradient :refer [gradient-demo]]
             [reagent.session :as session]
+            [garden.units :refer [px]]
+            [herb.core :refer-macros [<class defgroup]]
+            [tincture.grid :refer [Grid]]
             [site.typography :as typo-demo]
             [site.paper :as paper-demo]
             [site.grid :as grid-demo]
@@ -37,30 +40,42 @@
 ;; -------------------------
 ;; Page components
 
+(defgroup styles
+  {:container {:height "100vh"}
+   :row {:padding (px 32)}
+   :ul {:display :inline-block}})
+
 (defn home-page []
   [Container
-   [Typography {:variant :h2}
-    "Welcome to the Tincture demo"]
-   [Typography {:variant :body1}
-    "Tincture is a frontend toolkit for ClojureScript that provides several
+   [Grid {:container true
+          :class (<class styles :container)
+          :justify :center
+          :align-content :center}
+    [Grid {:item true
+           :class (<class styles :row)
+           :md 6
+           :xs 12}
+     [Typography {:variant :h2}
+      "Welcome to the Tincture demo"]
+     [Typography {:variant :body1}
+      "Tincture is a frontend toolkit for ClojureScript that provides several
     utility functions, and definitions to aid/speed up developing web page visuals."]
-   [:ul
-    [:li [:a {:href "/typography"}
-          [Typography {:variant :body1}
-           "Typography demo"]]]
-    [:li [:a {:href "/slide"}
-          [Typography {:variant :body1}
-           "Slide demo"]]]
-    [:li [:a {:href "/gradient"}
-          [Typography {:variant :body1}
-           "Gradient demo"]]]
-    [:li [:a {:href "/paper"}
-          [Typography {:variant :body1}
-           "Paper demo"]]]
-    [:li [:a {:href "/grid"}
-          [Typography {:variant :body1}
-           "Grid demo"]]]
-    ]])
+      [:ul {:class (<class styles :ul)}
+       [:li [:a {:href "/typography"}
+             [Typography {:variant :body1}
+              "Typography demo"]]]
+       [:li [:a {:href "/slide"}
+             [Typography {:variant :body1}
+              "Slide demo"]]]
+       [:li [:a {:href "/gradient"}
+             [Typography {:variant :body1}
+              "Gradient demo"]]]
+       [:li [:a {:href "/paper"}
+             [Typography {:variant :body1}
+              "Paper demo"]]]
+       [:li [:a {:href "/grid"}
+             [Typography {:variant :body1}
+              "Grid demo"]]]]]]])
 
 ;; -------------------------
 ;; Translate routes -> page components
