@@ -4,9 +4,9 @@
    [clojure.string :as str]
    [tincture.spec :refer [check-spec]]
    [reagent.debug :refer [log]]
-   [tincture.utils :as utils])
+   [inkspot.util :as util])
   (:require-macros
-   [tincture.macros :as macros]))
+   [inkspot.macros :as macros]))
 
 (def ^:private collection (macros/ui-gradients "gradients.json"))
 
@@ -14,7 +14,7 @@
 (s/def ::direction #{:left :right :up :down})
 (s/def ::hex-color (s/and string? #(re-matches #"^#(?:[0-9a-fA-F]{3}){1,2}$" %)))
 (s/def ::palette-name (s/or :keyword ::ui-gradient-keyword
-                            :palette-name (s/and string? #(s/valid? ::ui-gradient-keyword (utils/name->kword %)))))
+                            :palette-name (s/and string? #(s/valid? ::ui-gradient-keyword (util/name->kword %)))))
 
 (defn css
   "Takes a name, that should correspond with gradients listed
@@ -34,7 +34,7 @@
   ([palette-name direction]
    (let [palette-name (check-spec palette-name ::palette-name) 
          direction (check-spec direction ::direction)
-         kw (utils/name->kword palette-name)
+         kw (util/name->kword palette-name)
          colors (kw collection)
          gradient-str (str "linear-gradient(to " (name direction) ", " (str/join ", " colors) ")")]
      #{(first colors)

@@ -21,6 +21,7 @@
                  [cljsjs/react-transition-group "2.4.0-0"]
                  [reagent "0.8.1" :scope "provided"]
                  [philoskim/debux "0.5.6"]
+                 [rm-hull/inkspot "0.2.1"]
                  [herb "0.8.1"]
                  [prismatic/dommy "1.1.0"]
                  [re-frame "0.10.6"]]

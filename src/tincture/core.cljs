@@ -5,12 +5,9 @@
    [re-frame.core :as rf]
    [tincture.events]
    [debux.cs.core :refer-macros [clog dbg]]
-   [tincture.utils :as utils]
    [tincture.grid :as grid]
    [tincture.subs]
-   [clojure.string :as str])
-  (:require-macros
-   [tincture.macros :as macros]))
+   [clojure.string :as str]))
 
 (def
   ^{:doc "Map of easing preset functions to be used in CSS transitions
