@@ -25,7 +25,8 @@
               :left 0,
               :top 0,
               :position "absolute",
-              :transition "transform 1000ms cubic-bezier(.95, .05, .795, .035) 0ms, opacity 1000ms cubic-bezier(.95, .05, .795, .035) 0ms"}))
+              :transition "transform 1000ms cubic-bezier(.95, .05, .795, .035) 0ms, opacity 1000ms cubic-bezier(.95, .05, .795, .035) 0ms"}
+             ))
       (is (= (f "exited" :down :ease-out-circ 120)
              {:opacity 0,
               :left 0,
