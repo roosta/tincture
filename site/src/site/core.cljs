@@ -75,7 +75,11 @@
               "Paper demo"]]]
        [:li [:a {:href "/grid"}
              [Typography {:variant :body1}
-              "Grid demo"]]]]]]])
+              "Grid demo"]]]
+       [:li [:a {:href "https://github.com/roosta/tincture"}
+             [Typography {:variant :body1}
+              "Github"]]]
+       ]]]])
 
 ;; -------------------------
 ;; Translate routes -> page components
