@@ -1,4 +1,5 @@
 (ns tincture.gradient
+  "Generate CSS ready gradients from [uigradients.com](https://uigradients.com/)"
   (:require
    [cljs.spec.alpha :as s :include-macros true]
    [clojure.string :as str]
