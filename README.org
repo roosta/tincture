@@ -55,6 +55,13 @@ functions, components, and definitions to aid/speed up developing web page visua
      given breakpoint. Breakpoints are defined in
      ~tincture.core/breakpoints~ and looks like this: ~{:xs 0 :sm 600 :md
      960 :lg 1280 :xl 1920}~
+** Disclaimer
+   Tincture is not a UI framework, it's simply various functions and
+   components I use on a regular basis being a frontend developer
+   using ClojureScript. Many components in Tincture is based on
+   [[https://material-ui.com/][Material UI]], and is simply an adaptation of those componets in
+   ClojureScript. If you want a framework I wholeheartedly recommend
+   [[https://material-ui.com/][Material UI]].
 ** Development
    Start figwheel main with the development build
    #+BEGIN_SRC sh
