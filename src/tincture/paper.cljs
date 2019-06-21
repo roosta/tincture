@@ -21,6 +21,7 @@
 (s/def ::id (s/nilable string?))
 (s/def ::elevation :tincture.core/valid-box-shadow-elevation)
 (s/def ::square boolean?)
+(s/def ::on-click fn?)
 (s/def ::component (s/or :str string? :fn fn? :kw keyword?))
 
 (defn Paper
@@ -47,16 +48,19 @@
   * `:component`. Pred `(or string? fn? keyword?)`. Default `:div`. The
   component used for the root node.
   "
-  [{:keys [class id elevation square component]
+  [{:keys [class id elevation square component on-click]
     :or {square false
          component :div
-         elevation 2}}]
+         elevation 2
+         on-click #()}}]
   (let [class (check-spec class ::class)
         id (check-spec id ::id)
         elevation (check-spec elevation ::elevation)
         square (check-spec square ::square)
-        component (check-spec component ::component)]
+        component (check-spec component ::component)
+        on-click (check-spec on-click ::on-click)]
     (into [component {:id id
+                      :on-click on-click
                       :class (vec (flatten [(<class paper-style elevation square) class]))}]
           (r/children (r/current-component)))))
 
