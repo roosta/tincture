@@ -17,6 +17,15 @@
     (try (sp/check-spec -1 ::test-pos-int "test message")
          (catch js/Error e
            (is (= (.-message e)
-                  "test message"))))
-    
-    ))
+                  "test message"))))))
+
+(deftest email-spec
+  (testing "Passing emails through the :tincture.spec/email spec"
+    (is (s/valid? :tincture.spec/email "test@example.com"))
+    (is (s/valid? :tincture.spec/email "test.user@example.com"))
+    (is (not (s/valid? :tincture.spec/email "test")))
+    (is (not (s/valid? :tincture.spec/email "test@example")))
+    (is (not (s/valid? :tincture.spec/email "example.com")))
+    (is (not (s/valid? :tincture.spec/email "test.example.com")))
+    )
+  )
