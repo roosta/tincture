@@ -19,11 +19,11 @@
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [cljsjs/react-transition-group "2.4.0-0"]
-                 [reagent "0.8.1" :scope "provided"]
+                 [reagent "0.8.1"]
                  [rm-hull/inkspot "0.2.1"]
                  [herb "0.8.1"]
                  [prismatic/dommy "1.1.0"]
-                 [re-frame "0.10.6" :scope "provided"]]
+                 [re-frame "0.10.6"]]
   :source-paths ["src"]
   :clean-targets ^{:protect false} ["target"]
   )
