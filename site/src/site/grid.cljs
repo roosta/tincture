@@ -42,7 +42,8 @@
    :padding (px 16)})
 
 (defgroup main-style
-  {:headline {:margin "32px !important"}})
+  {:headline {:margin "32px !important"}
+   :container {:overflow-x "hidden"}})
 
 (defgroup radio-group-styles
   {:label {:margin-right (px 8)}})
@@ -230,7 +231,7 @@
      "xs=6 sm=3"]]])
 
 (defn main []
-  [container
+  [container {:class (<class main-style :container)}
    [Grid {:container true
           :spacing 32}
     [Grid {:item true
