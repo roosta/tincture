@@ -1,7 +1,8 @@
 #+TITLE: Tincture
 
-Tincture is a frontend toolkit for ClojureScript that provides several utility
-functions, components, and definitions to aid/speed up developing web page visuals.
+Tincture is a frontend toolkit for ClojureScript that provides several
+utility functions, components, and definitions to aid/speed up
+developing common web page visuals and functionality.
 
 - [[https://roosta.github.io/tincture/][Documentation]]
 - [[http://tincture.roosta.sh][Demo site]]
@@ -10,8 +11,12 @@ functions, components, and definitions to aid/speed up developing web page visua
 
    Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542
    due to use of [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various
-   input. Tincture's components are built using [[https://github.com/reagent-project/reagent][Reagent]] APIs, so
-   Reagent is required as well.
+   input.
+
+   Furthermore, [[https://github.com/reagent-project/reagent][Reagent]] API is used in the components, and is required
+   as well, it is currently set as ~:scope "provided"~ so you can pick
+   which version to use. The same goes for [[https://github.com/Day8/re-frame][re-frame]], more on that
+   below.
 
 ** Usage
 ** Re-frame and Tincture events
@@ -56,12 +61,13 @@ functions, components, and definitions to aid/speed up developing web page visua
      ~tincture.core/breakpoints~ and looks like this: ~{:xs 0 :sm 600 :md
      960 :lg 1280 :xl 1920}~
 ** Disclaimer
-   Tincture is not a UI framework, it's simply various functions and
-   components I use on a regular basis being a frontend developer
-   using ClojureScript. Many components in Tincture is based on
-   [[https://material-ui.com/][Material UI]], and is simply an adaptation of those componets in
-   ClojureScript. If you want a framework I wholeheartedly recommend
-   [[https://material-ui.com/][Material UI]].
+   Tincture is not a UI framework as such, it's simply various
+   functions and components I use on a regular basis being a frontend
+   developer using ClojureScript. Many components in Tincture is based
+   on [[https://material-ui.com/][Material UI]], and is a re-implementation of those components in
+   ClojureScript. If you want a full framework I wholeheartedly
+   recommend [[https://material-ui.com/][Material UI]].
+
 ** Development
    Start figwheel main with the development build
    #+BEGIN_SRC sh
@@ -77,16 +83,16 @@ functions, components, and definitions to aid/speed up developing web page visua
    #+BEGIN_SRC sh
    lein fig:test
    #+END_SRC
-   
+
    For a headless test environment using chrome, make sure its
    installed on your system.
-   
+
    You can also start the dev build and navigate to
    [[http://localhost:9500/figwheel-extra-main/auto-testing][http://localhost:9500/figwheel-extra-main/auto-testing]] to get a
    nice interface while coding that runs the tests on each save.
 
 ** Sources
    - [[https://github.com/roosta/tincture/blob/master/resources/gradients.json][gradients.json]] sourced from: https://github.com/Ghosh/uiGradients/
-   - [[https://github.com/roosta/tincture/blob/0b90def186907c7f4879b1d5930603fa9bc3d6ef/src/tincture/macros.clj#L13][Gradient macro]] sourced from https://github.com/rm-hull/inkspot
-   - [[https://github.com/roosta/tincture/blob/master/src/tincture/grid.cljs][Tincture Grid]] is heavily inspired by [[https://material-ui.com/layout/grid/][Material-ui Grid]]
-   - [[https://github.com/roosta/tincture/blob/master/src/tincture/typography.cljs][Tincture Typography]] is heavily inspired by [[https://material-ui.com/style/typography/][Material-ui Typography]]
+   - [[https://github.com/roosta/tincture/blob/master/src/tincture/grid.cljs][Tincture Grid]] is inspired by [[https://material-ui.com/layout/grid/][Material-ui Grid]]
+   - [[https://github.com/roosta/tincture/blob/master/src/tincture/typography.cljs][Tincture Typography]] is inspired by [[https://material-ui.com/style/typography/][Material-ui Typography]]
+   - [[https://github.com/roosta/tincture/blob/master/src/tincture/paper.cljs][Tincture Paper]] is inspired by [[https://material-ui.com/components/paper/][Material-ui Paper]]
