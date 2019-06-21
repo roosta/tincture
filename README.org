@@ -9,7 +9,7 @@ utility functions, components, and definitions to aid/speed up
 developing common web page visuals and functionality.
 
 - [[https://roosta.github.io/tincture/][Documentation]]
-- [[http://tincture.roosta.sh][Demo site]]
+- Demo site
 
 ** Requirements
 
