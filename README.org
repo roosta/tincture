@@ -1,6 +1,7 @@
 #+TITLE: Tincture
 
 [[https://circleci.com/gh/roosta/tincture][file:https://circleci.com/gh/roosta/tincture.svg?style=svg]]
+[[https://clojars.org/tincture][file:https://img.shields.io/clojars/v/tincture.svg]]
 
 
 Tincture is a frontend toolkit for ClojureScript that provides several
