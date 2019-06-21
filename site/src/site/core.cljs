@@ -43,7 +43,8 @@
 (defgroup styles
   {:container {:height "100vh"}
    :row {:padding (px 32)}
-   :ul {:display :inline-block}})
+   :ul {:display :inline-block}
+   :a {:text-decoration-color "black"}})
 
 (defn home-page []
   [Container
@@ -61,23 +62,35 @@
       "Tincture is a frontend toolkit for ClojureScript that provides several
     utility functions, and definitions to aid/speed up developing web page visuals."]
       [:ul {:class (<class styles :ul)}
-       [:li [:a {:href "/typography"}
-             [Typography {:variant :body1}
+       [:li [:a {:href "/typography"
+                 :class (<class styles :a)}
+             [Typography {:variant :body1
+                          :component :span}
               "Typography demo"]]]
-       [:li [:a {:href "/slide"}
-             [Typography {:variant :body1}
+       [:li [:a {:href "/slide"
+                 :class (<class styles :a)}
+             [Typography {:variant :body1
+                          :component :span}
               "Slide demo"]]]
-       [:li [:a {:href "/gradient"}
-             [Typography {:variant :body1}
+       [:li [:a {:href "/gradient"
+                 :class (<class styles :a)}
+             [Typography {:variant :body1
+                          :component :span}
               "Gradient demo"]]]
-       [:li [:a {:href "/paper"}
-             [Typography {:variant :body1}
+       [:li [:a {:href "/paper"
+                 :class (<class styles :a)}
+             [Typography {:variant :body1
+                          :component :span}
               "Paper demo"]]]
-       [:li [:a {:href "/grid"}
-             [Typography {:variant :body1}
+       [:li [:a {:href "/grid"
+                 :class (<class styles :a)}
+             [Typography {:variant :body1
+                          :component :span}
               "Grid demo"]]]
-       [:li [:a {:href "https://github.com/roosta/tincture"}
-             [Typography {:variant :body1}
+       [:li [:a {:href "https://github.com/roosta/tincture"
+                 :class (<class styles :a)}
+             [Typography {:variant :body1
+                          :component :span}
               "Github"]]]
        ]]]])
 
