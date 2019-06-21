@@ -52,6 +52,7 @@
 (s/def ::class (s/nilable (s/or :str string? :vector vector?)))
 (s/def ::wrap wrap)
 (s/def ::id (s/nilable string?))
+(s/def ::style (s/nilable map?))
 (s/def ::on-click fn?)
 
 (defn up
@@ -322,6 +323,7 @@
            zero-min-width
            component
            on-click
+           style
            lg md sm xl xs]
     :or   {align-content  :stretch
            align-items    :stretch
@@ -352,6 +354,7 @@
         wrap           (-> wrap (check-spec ::wrap) (require-prop props :container :justify))
         zero-min-width (check-spec zero-min-width ::zero-min-width)
         on-click       (check-spec on-click ::on-click)
+        style          (check-spec style ::style)
         lg             (-> lg (check-spec ::lg) (require-prop props :item :lg))
         md             (-> md (check-spec ::md) (require-prop props :item :md))
         sm             (-> sm (check-spec ::sm) (require-prop props :item :sm))
@@ -371,6 +374,7 @@
       (into
        [component {:id    id
                    :on-click on-click
+                   :style style
                    :class (vec
                            (flatten
                            [class*

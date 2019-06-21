@@ -23,7 +23,8 @@
    :margin-right "auto"
    :margin-left "auto"})
 
-(s/def ::class string?)
+(s/def ::class (s/nilable string?))
+(s/def ::style (s/nilable map?))
 
 (defn Container
   "Container component that scales with viewport by setting width and auto
@@ -49,9 +50,11 @@
   * `:class`. Pred `string?`. Default `nil`. Classname string to be applied to
   container component.
   "
-  [{:keys [class]}]
-  (let [class (check-spec class ::class)]
-    (into [:div {:class [class (<class container-fluid-style)]}]
+  [{:keys [class style]}]
+  (let [class (check-spec class ::class)
+        style (check-spec style ::style)]
+    (into [:div {:style style
+                 :class [class (<class container-fluid-style)]}]
           (r/children (r/current-component)))))
 
 (def ^{:deprecated "0.3.0"} container Container)

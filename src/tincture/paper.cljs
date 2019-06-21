@@ -23,6 +23,7 @@
 (s/def ::square boolean?)
 (s/def ::on-click fn?)
 (s/def ::component (s/or :str string? :fn fn? :kw keyword?))
+(s/def ::style (s/nilable map?))
 
 (defn Paper
   "Paper component, made to resemble a flat sheet of paper that acts as a
@@ -48,7 +49,7 @@
   * `:component`. Pred `(or string? fn? keyword?)`. Default `:div`. The
   component used for the root node.
   "
-  [{:keys [class id elevation square component on-click]
+  [{:keys [class id elevation square component on-click style]
     :or {square false
          component :div
          elevation 2
@@ -58,8 +59,10 @@
         elevation (check-spec elevation ::elevation)
         square (check-spec square ::square)
         component (check-spec component ::component)
-        on-click (check-spec on-click ::on-click)]
+        on-click (check-spec on-click ::on-click)
+        style (check-spec style ::style)]
     (into [component {:id id
+                      :style style
                       :on-click on-click
                       :class (vec (flatten [(<class paper-style elevation square) class]))}]
           (r/children (r/current-component)))))
