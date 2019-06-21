@@ -10,37 +10,51 @@
 
 (deftest variants
   (testing "Sample some variants and ensure output"
-    (let [f #'tincture.typography/variants]
-      (rf-test/run-test-sync
-       (core/init!)
-       (is (= (f :h2 :light)
-              {:color #garden.types.CSSFunction{:f "rgb", :args [0 0 0 0.87]},
-               :font-family ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"],
-               :font-size #garden.types.CSSUnit{:unit :rem, :magnitude 3.75}, :font-weight 300, :line-height 1}))
-       (is (= (f :subtitle1 :dark)
-              {:color "#fff",
-               :font-family ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"],
-               :font-size #garden.types.CSSUnit{:unit :rem, :magnitude 1},
-               :font-weight 400,
-               :line-height 1.75}))
-       (is (= (f :body1 :secondary-light)
-              {:color #garden.types.CSSFunction{:f "rgb", :args [0 0 0 0.54]},
-               :font-family ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"],
-               :font-size #garden.types.CSSUnit{:unit :rem, :magnitude 1},
-               :font-weight 400,
-               :line-height 1.5}))
-       (is (= (f :button :light)
-              {:color #garden.types.CSSFunction{:f "rgb", :args [0 0 0 0.87]},
-               :font-family ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"],
-               :font-size #garden.types.CSSUnit{:unit :rem, :magnitude 0.875},
-               :font-weight 500,
-               :text-transform :uppercase,
-               :line-height 1.75}))
-       (is (= (f :sr-only :light)
-              {:position "absolute",
-               :height #garden.types.CSSUnit{:unit :px, :magnitude 1},
-               :width #garden.types.CSSUnit{:unit :px, :magnitude 1},
-               :overflow "hidden"}))))))
+    (rf-test/run-test-sync
+     (core/init!)
+     (let [variant (#'tincture.typography/variants :h2 :light)]
+       (.log js/console variant)
+       (is (= (-> variant :color :f) "rgb"))
+       (is (= (-> variant :color :args) [0 0 0 0.87]))
+       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-size :unit) :rem))
+       (is (= (-> variant :font-size :magnitude) 3.75))
+       (is (= (-> variant :font-weight) 300))
+       (is (= (-> variant :line-height) 1)))
+
+     (let [variant (#'tincture.typography/variants :subtitle1 :dark)]
+       (is (= (-> variant :color) "#fff"))
+       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-size :unit) :rem))
+       (is (= (-> variant :font-size :magnitude) 1))
+       (is (= (-> variant :font-weight) 400))
+       (is (= (-> variant :line-height) 1.75)))
+
+     (let [variant (#'tincture.typography/variants :body1 :secondary-light)]
+       (is (= (-> variant :color :f) "rgb"))
+       (is (= (-> variant :color :args) [0 0 0 0.54]))
+       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-size :unit) :rem))
+       (is (= (-> variant :font-size :magnitude) 1))
+       (is (= (-> variant :font-weight) 400))
+       (is (= (-> variant :line-height) 1.5)))
+
+     (let [variant (#'tincture.typography/variants :button :light)]
+       (is (= (-> variant :color :f) "rgb"))
+       (is (= (-> variant :color :args) [0 0 0 0.87]))
+       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-size :unit) :rem))
+       (is (= (-> variant :font-size :magnitude) 0.875))
+       (is (= (-> variant :font-weight) 500))
+       (is (= (-> variant :line-height) 1.75)))
+
+     (let [variant (#'tincture.typography/variants :sr-only :light)]
+       (is (= (-> variant :position) "absolute"))
+       (is (= (-> variant :height :unit) :px))
+       (is (= (-> variant :height :magnitude) 1))
+       (is (= (-> variant :width :unit) :px))
+       (is (= (-> variant :width :magnitude) 1))
+       (is (= (-> variant :overflow) "hidden"))))))
 
 (deftest typography-style
   (testing "typography style function"
