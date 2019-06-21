@@ -14,7 +14,7 @@ developing common web page visuals and functionality.
    input.
 
    Furthermore, [[https://github.com/reagent-project/reagent][Reagent]] API is used in the components, and is required
-   as well, it is currently set as ~:scope "provided"~ so you can pick
+   as well, it is currently set as :scope "provided" so you can pick
    which version to use. The same goes for [[https://github.com/Day8/re-frame][re-frame]], more on that
    below.
 
