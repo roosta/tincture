@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [0.3.2-SNAPSHOT]
+### Added
+- Enable passing raw style-map to components
 
 ## [0.3.1]
 
@@ -30,6 +33,7 @@ All notable changes to this project will be documented in this file. This change
 - Breakpoint event/sub handlers using re-frame
 - CSS functions
 
+[0.3.2-SNAPSHOT]: https://github.com/roosta/tincture/compare/0.3.1...HEAD
 [0.3.1]: https://github.com/roosta/tincture/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/roosta/tincture/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/roosta/tincture/compare/0.1.8...0.2.0
