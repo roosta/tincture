@@ -6,6 +6,8 @@
             [tincture.subs-test]
             [tincture.gradient-test]
             [tincture.grid-test]
+            [tincture.typography-test]
+            [tincture.spec-test]
             [tincture.paper-test]))
 
 (defn -main [& args]
