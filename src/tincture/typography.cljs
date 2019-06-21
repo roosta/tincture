@@ -31,6 +31,7 @@
    :overline :sr-only :inherit})
 
 (s/def ::valid-colors #{:light :dark :secondary-light :secondary-dark :inherit})
+(s/def ::id (s/nilable string?))
 
 (defn- variants
   [variant color]
@@ -242,7 +243,7 @@
   "
   [{:keys [variant align class elevation font-style
            on-click direction component gutter-bottom
-           paragraph color no-wrap]
+           paragraph color no-wrap id]
     :or {variant :body2
          font-style :normal
          align :left
@@ -264,10 +265,12 @@
         gutter-bottom (check-spec gutter-bottom ::gutter-bottom)
         color (check-spec color ::valid-colors)
         paragraph (check-spec paragraph ::paragraph)
-        no-wrap (check-spec no-wrap ::no-wrap)]
+        no-wrap (check-spec no-wrap ::no-wrap)
+        id (check-spec id ::id)]
     (into
      [(if paragraph :p (or component (variant mapping) :span))
-      {:on-click on-click
+      {:id id
+       :on-click on-click
        :class [class (<class typography-style variant align font-style
                              direction elevation gutter-bottom paragraph
                              color no-wrap)]}]
