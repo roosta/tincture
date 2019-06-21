@@ -17,12 +17,61 @@ developing common web page visuals and functionality.
    due to use of [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various
    input.
 
-   Furthermore, [[https://github.com/reagent-project/reagent][Reagent]] API is used in the components, and is required
-   as well, it is currently set as :scope "provided" so you can pick
-   which version to use. The same goes for [[https://github.com/Day8/re-frame][re-frame]], more on that
-   below.
-
 ** Usage
+To use Tincture add this to your dependencies
+
+[[http://clojars.org/tincture][file:http://clojars.org/tincture/latest-version.svg]]
+
+Normally Tincture includes [[https://github.com/reagent-project/reagent][Reagent]] and [[https://github.com/Day8/re-frame][re-frame]], but if you want to
+use a different version of these libs exclude them from Tincture:
+
+#+BEGIN_SRC clojure
+[tincture "0.x.x" :exclusions [reagent re-frame]]
+#+END_SRC
+
+You might also optionally initialize the event system.
+
+#+BEGIN_SRC clojure
+  (ns my-project
+    (:require [tincture.core :as t]))
+
+  (defn my-init-function []
+    (t/init!))
+#+END_SRC
+
+** Examples
+
+   See [[https://roosta.github.io/tincture/][documentation]] for full overview
+
+*** Grid component
+    #+BEGIN_SRC clojure
+      [Grid {:container true
+             :class "my-class-name"
+             :spacing 16
+             :justify :center}
+       [Grid {:item true
+              :xs 12
+              :sm 6}
+        [:span "column 1"]]
+       [Grid {:item true
+              :xs 12
+              :sm 6}
+        [span "column 2"]]
+       [Grid {:item true
+              :xs 12
+              :sm 6}
+        [:span "column 3"]]]
+    #+END_SRC
+*** Typography component
+    #+BEGIN_SRC clojure
+      [:div
+       [Typography {:variant :h3
+                    :gutter-bottom true}
+        "my headline"]
+       [Typography
+        "My body text"]]
+    #+END_SRC
+
 ** Re-frame and Tincture events
 *** Initialize
    Tincture uses re-frame as an event handler, and if you want to use
