@@ -4,7 +4,6 @@
    [tincture.spec :refer [check-spec]]
    [re-frame.core :as rf]
    [tincture.events]
-   [debux.cs.core :refer-macros [clog dbg]]
    [tincture.grid :as grid]
    [tincture.subs]
    [clojure.string :as str]))
