@@ -24,7 +24,7 @@
                  [rm-hull/inkspot "0.2.1"]
                  [herb "0.8.1"]
                  [prismatic/dommy "1.1.0"]
-                 [re-frame "0.10.6"]]
+                 [re-frame "0.10.6" :scope "provided"]]
   :source-paths ["src"]
   :clean-targets ^{:protect false} ["target"]
   )
