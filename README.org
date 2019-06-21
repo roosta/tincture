@@ -45,6 +45,9 @@ You might also optionally initialize the event system.
 
 *** Grid component
     #+BEGIN_SRC clojure
+      (ns my-project.my-ns
+        (:require [tincture.grid :refer [Grid]]))
+
       [Grid {:container true
              :class "my-class-name"
              :spacing 16
@@ -64,6 +67,9 @@ You might also optionally initialize the event system.
     #+END_SRC
 *** Typography component
     #+BEGIN_SRC clojure
+      (ns my-project.my-ns
+        (:require [tincture.typography :refer [Typography]]))
+
       [:div
        [Typography {:variant :h3
                     :gutter-bottom true}
