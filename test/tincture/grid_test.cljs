@@ -515,7 +515,7 @@
       (is (= (-> spacing-8 :width :args first second) '+))
       (is (= (-> spacing-8 :width :args first last :unit) :px))
       (is (= (-> spacing-8 :width :args first last :magnitude) 8))
-      
+
       ;; Spacing 16
       (is (= (-> spacing-16 :margin :unit) :px))
       (is (= (-> spacing-16 :margin :magnitude) -8))
@@ -607,7 +607,7 @@
 (def ^:dynamic c)
 
 (deftest grid-component
-  (testing "Grid component error handling"
+  (testing "Mounting grid component and checking classname"
     (binding [c (utils/new-container!)]
       (r/render [g/Grid {:id "test-grid" :container true :align-items :center :justify :center}] c)
       (is (= (.-className (sel1 c :#test-grid))
