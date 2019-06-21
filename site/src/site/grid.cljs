@@ -3,8 +3,8 @@
    [tincture.container :refer [container]]
    [tincture.typography :refer [typography]]
    [debux.cs.core :refer [clog]]
-   [tincture.grid :refer [grid gutters justify direction align-items]]
-   [tincture.paper :refer [paper]]
+   [tincture.grid :refer [Grid gutters justify direction align-items]]
+   [tincture.paper :refer [Paper]]
    [tincture.cssfns :refer [rgb]]
    [herb.core :refer [<class defgroup]]
    [reagent.debug :refer [log]]
@@ -66,24 +66,24 @@
 (defn spacing []
   (let [state (r/atom 8)]
     (fn []
-       [grid {:container true
+       [Grid {:container true
               :spacing 16
               :class (<class root-style)}
-        [grid {:item true
+        [Grid {:item true
                :xs 12}
-         [grid {:container true
+         [Grid {:container true
                 :class (<class spacing-styles :grid-container)
                 :spacing @state
                 :justify :center}
-          [grid {:item true}
-           [paper {:class (<class paper-style)}]]
-          [grid {:item true}
-           [paper {:class (<class paper-style)}]]
-          [grid {:item true}
-           [paper {:class (<class paper-style)}]]]]
-        [grid {:item true
+          [Grid {:item true}
+           [Paper {:class (<class paper-style)}]]
+          [Grid {:item true}
+           [Paper {:class (<class paper-style)}]]
+          [Grid {:item true}
+           [Paper {:class (<class paper-style)}]]]]
+        [Grid {:item true
                :xs 12}
-         [paper {:class (<class control-paper)}
+         [Paper {:class (<class control-paper)}
           [typography {:class (<class spacing-styles :heading)
                        :variant :subtitle1}
            "Spacing"]
@@ -108,12 +108,12 @@
                        :justify :center
                        :align-items :center})]
     (fn []
-      [grid {:container true
+      [Grid {:container true
              :spacing 16
              :class (<class root-style)}
-       [grid {:item true
+       [Grid {:item true
               :xs 12}
-        [grid {:container true
+        [Grid {:container true
                :class (<class interactive-styles :demo)
                :direction (:direction @state)
                :justify (:justify @state)
@@ -121,13 +121,13 @@
                :spacing 16}
          (for [n (range 3)]
            ^{:key n}
-           [grid {:item true}
-            [paper {:class (<class paper-interactive-style n)}
+           [Grid {:item true}
+            [Paper {:class (<class paper-interactive-style n)}
              (str "Cell " (inc n))
              ]])]]
-       [grid {:item true
+       [Grid {:item true
               :xs 12}
-        [paper {:class (<class control-paper)}
+        [Paper {:class (<class control-paper)}
          [:div {:class (<class interactive-styles :block)}
           [typography {:class (<class spacing-styles :heading)
                        :gutter-bottom true
@@ -157,83 +157,83 @@
            #(swap! state assoc :align-items (keyword %))]]]]])))
 
 (defn basic-grid []
-   [grid {:container true
+   [Grid {:container true
           :class (<class grid-style :root)
           :spacing 24}
-    [grid {:item true
+    [Grid {:item true
            :xs 12}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=12"]]
-    [grid {:item true
+    [Grid {:item true
            :xs 6}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=6"]]
-    [grid {:item true
+    [Grid {:item true
            :xs 6}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=6"]]
-    [grid {:item true
+    [Grid {:item true
            :xs 3}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=3"]]
-    [grid {:item true
+    [Grid {:item true
            :xs 3}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=3"]]
-    [grid {:item true
+    [Grid {:item true
            :xs 3}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=3"]]
-    [grid {:item true
+    [Grid {:item true
            :xs 3}
-     [paper {:class (<class grid-style :paper)}
+     [Paper {:class (<class grid-style :paper)}
       "xs=3"]]])
 
 
 (defn grid-with-breakpoints []
-  [grid {:container true
+  [Grid {:container true
          :class (<class grid-style :root)
          :spacing 24}
-   [grid {:item true
+   [Grid {:item true
           :xs 12}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=12"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 12
           :sm 6}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=12 sm=6"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 12
           :sm 6}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=12 sm=6"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 6
           :sm 3}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=6 sm=3"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 6
           :sm 3}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=6 sm=3"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 6
           :sm 3}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=6 sm=3"]]
-   [grid {:item true
+   [Grid {:item true
           :xs 6
           :sm 3}
-    [paper {:class (<class grid-style :paper)}
+    [Paper {:class (<class grid-style :paper)}
      "xs=6 sm=3"]]])
 
 (defn main []
   [container
-   [grid {:container true
+   [Grid {:container true
           :spacing 32}
-    [grid {:item true
+    [Grid {:item true
            :xs 12}
      [typography {:variant :h4
                   :class (<class main-style :headline)
@@ -241,7 +241,7 @@
                   :align :center}
       "Spacing"]
      [spacing]]
-    [grid {:item true
+    [Grid {:item true
            :xs 12}
      [typography {:variant :h4
                   :class (<class main-style :headline)
@@ -249,7 +249,7 @@
                   :align :center}
       "Basic grid"]
      [basic-grid]]
-    [grid {:item true
+    [Grid {:item true
            :xs 12}
      [typography {:variant :h4
                   :class (<class main-style :headline)
@@ -257,7 +257,7 @@
                   :align :center}
       "Grid with breakpoints"]
      [grid-with-breakpoints]]
-    [grid {:item true
+    [Grid {:item true
            :xs 12}
      [typography {:variant :h4
                   :class (<class main-style :headline)
