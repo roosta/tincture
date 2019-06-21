@@ -6,14 +6,13 @@
             [day8.re-frame.test :as rf-test]
             [tincture.core :as core]
             [tincture.events]
-            [tincture.typography]))
+            [tincture.typography :as t]))
 
 (deftest variants
   (testing "Sample some variants and ensure output"
     (rf-test/run-test-sync
      (core/init!)
      (let [variant (#'tincture.typography/variants :h2 :light)]
-       (.log js/console variant)
        (is (= (-> variant :color :f) "rgb"))
        (is (= (-> variant :color :args) [0 0 0 0.87]))
        (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
@@ -84,6 +83,34 @@
          (is (= (:text-shadow style) "4px 4px 8px rgba(0, 0, 0, 0.3)"))
          (is (= (-> style :margin-bottom :unit) :em))
          (is (= (-> style :margin-bottom :magnitude) 0.35))
+         (is (= (:font-family style) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
          (is (= (:direction style) "rtl"))
          (is (= (:margin style) 0))
          (is (= (-> style meta :key) "h3-right-italic-rtl-3-true-true-dark-true"))))))
+
+(def ^:dynamic c)
+
+(deftest typography-component
+  (testing "Mounting typography component and checking classname"
+    (binding [c (utils/new-container!)]
+      (r/render [t/Typography {:id "test"}] c)
+      (is (= (.-className (sel1 c :#test))
+             "tincture_typography_typography-style_body2-left-normal-ltr-0-false-false-light-false"))
+      (r/render [t/Typography {:id "test"
+                               :variant :h2
+                               :align :right
+                               :direction :rtl
+                               :paragraph false
+                               :component :span
+                               :gutter-bottom true
+                               :elevation 2
+                               :color :dark
+                               :no-wrap true}] c)
+      (is (= (.-className (sel1 c :#test))
+             "tincture_typography_typography-style_h2-right-normal-rtl-2-true-false-dark-true"))
+      (is (= (.-tagName (sel1 c :#test)) "SPAN"))
+
+      (r/render [t/Typography {:id "test" :paragraph true :component :span}] c)
+      (is (= (.-className (sel1 c :#test))
+             "tincture_typography_typography-style_body2-left-normal-ltr-0-false-true-light-false"))
+      (is (= (.-tagName (sel1 c :#test)) "P")))))
