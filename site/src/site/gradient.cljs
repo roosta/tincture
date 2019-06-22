@@ -13,8 +13,7 @@
   [gradient kw]
   ^{:key kw}
   {:background gradient
-   :height (px 200)
-   })
+   :height (px 200)})
 
 (defgroup styles
   {:headline {}
@@ -41,6 +40,8 @@
       (let [kw (key g)]
         ^{:key kw}
         [Grid {:item true
+               :xs 12
+               :sm 6
                :md 3}
          [Grid {:container true
                 :align-items :center
@@ -49,5 +50,4 @@
                         :align :center
                         :color :dark
                         :variant :subtitle1}
-            (name kw)]]
-         ]))]])
+            (name kw)]]]))]])
