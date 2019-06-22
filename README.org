@@ -17,6 +17,10 @@ developing common web page visuals and functionality.
    due to use of [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various
    input.
 
+   The components in this library is build using [[https://github.com/reagent-project/reagent][Reagent]] API, and the
+   event system used is [[https://github.com/Day8/re-frame][re-frame]]. If you'd prefer some other react
+   framework, or no react at all this library is probably not for you.
+
 ** Usage
 To use Tincture add this to your dependencies
 
