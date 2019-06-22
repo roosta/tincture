@@ -1,15 +1,16 @@
 (ns site.slide
   (:require
-   [tincture.icons :refer [chevron-left
-                       chevron-right
-                       chevron-up
-                       chevron-down]]
+   [tincture.icons :refer [ChevronLeft
+                           ChevronRight
+                           ChevronUp
+                           ChevronDown]]
    [reagent.debug :refer [log]]
    [herb.core :refer-macros [<class defgroup]]
    [tincture.core :as core]
+   [tincture.grid :refer [Grid]]
    [garden.units :refer [px]]
-   [tincture.container :refer [container]]
-   [tincture.slide :refer [slide]]
+   [tincture.container :refer [Container]]
+   [tincture.slide :refer [Slide]]
    [reagent.core :as r])
   )
 
@@ -51,26 +52,26 @@
   (let [state (r/atom {:n 0
                        :dir :left})]
     (fn []
-      [container {:class (<class style :container)}
+      [Container {:class (<class style :container)}
        [:div
         [:div {:class (<class style :row)
                :on-click #(swap! state (on-click :up))}
-         [chevron-up {:class (<class style :chevron)}]]
+         [ChevronUp {:class (<class style :chevron)}]]
         [:div {:class (<class style :row)}
          [:div {:on-click #(swap! state (on-click :left))}
-          [chevron-left {:class (<class style :chevron)}]]
+          [ChevronLeft {:class (<class style :chevron)}]]
          (let [color (->> (count colors)
                           (mod (:n @state))
                           (nth colors))]
            [:div
-            [slide {:class (<class style :slide)
+            [Slide {:class (<class style :slide)
                     :classes {:child-container (<class style :child-container)}
                     :direction (:dir @state)}
              ^{:key color}
              [:div {:style {:background-color color}
                     :class (<class style :child)}]]])
          [:div {:on-click #(swap! state (on-click :right))}
-          [chevron-right {:class (<class style :chevron)}]]]
+          [ChevronRight {:class (<class style :chevron)}]]]
         [:div {:class (<class style :row)
                :on-click #(swap! state (on-click :down))}
-         [chevron-down {:class (<class style :chevron)}]]]])))
+         [ChevronDown {:class (<class style :chevron)}]]]])))
