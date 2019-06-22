@@ -43,7 +43,7 @@
 
 (defgroup main-style
   {:headline {:margin "32px !important"}
-   :container {:overflow-x "hidden"}})
+   :container {:overflow "hidden"}})
 
 (defgroup radio-group-styles
   {:label {:margin-right (px 8)}})
