@@ -20,10 +20,7 @@
   {:slide {:width (px 600)
            :height (px 600)
            :box-shadow "inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1)"}
-   :container {:height "100vh"
-               :display "flex"
-               :justify-content "center"
-               :align-items "center"}
+   :container {:height "100vh"}
    :chevron {:width "100px"
              :cursor "pointer"
              :fill "#333"
@@ -32,11 +29,13 @@
            :width "100%"}
    :child-container {:height "100%"
                      :width "100%"}
-   :row {:display "flex"
+   :row {
+         ;; :display "flex"
          :width "100%"
-         :flex "0 1 auto"
-         :justify-content "center"
-         :align-items "center"}})
+         ;; :flex "0 1 auto"
+         ;; :justify-content "center"
+         ;; :align-items "center"
+         }})
 
 (defn on-click
   [direction]
@@ -52,12 +51,17 @@
   (let [state (r/atom {:n 0
                        :dir :left})]
     (fn []
-      [Container {:class (<class style :container)}
-       [:div
-        [:div {:class (<class style :row)
+      [Grid {:container true
+             :justify :center
+             :align-items :center
+             :class (<class style :container)}
+       [Grid {:item true}
+        [Grid {:container true
+               :justify :center
                :on-click #(swap! state (on-click :up))}
          [ChevronUp {:class (<class style :chevron)}]]
-        [:div {:class (<class style :row)}
+        [Grid {:container true
+               :align-items :center}
          [:div {:on-click #(swap! state (on-click :left))}
           [ChevronLeft {:class (<class style :chevron)}]]
          (let [color (->> (count colors)
@@ -72,6 +76,7 @@
                     :class (<class style :child)}]]])
          [:div {:on-click #(swap! state (on-click :right))}
           [ChevronRight {:class (<class style :chevron)}]]]
-        [:div {:class (<class style :row)
+        [Grid {:container true
+               :justify :center
                :on-click #(swap! state (on-click :down))}
          [ChevronDown {:class (<class style :chevron)}]]]])))
