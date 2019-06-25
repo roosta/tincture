@@ -16,14 +16,14 @@
                              "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" tincture.test-runner]
                              "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
                              "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}}}
-  :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
+  :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [cljsjs/react-transition-group "2.4.0-0" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [reagent "0.8.1"]
                  [rm-hull/inkspot "0.2.1"]
                  [herb "0.8.1"]
                  [prismatic/dommy "1.1.0"]
-                 [re-frame "0.10.6"]]
+                 [re-frame "0.10.7"]]
   :source-paths ["src"]
   :clean-targets ^{:protect false} ["target"]
   )
