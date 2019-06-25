@@ -18,7 +18,7 @@
                              "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}}}
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
-                 [cljsjs/react-transition-group "2.4.0-0"]
+                 [cljsjs/react-transition-group "2.4.0-0" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [reagent "0.8.1"]
                  [rm-hull/inkspot "0.2.1"]
                  [herb "0.8.1"]
