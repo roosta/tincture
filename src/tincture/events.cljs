@@ -31,7 +31,7 @@
 (reg-event-fx
  :tincture/initialize
  (fn [{:keys [db]} [_ {:keys [font-family font-url]
-                       :or {font-family ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]
+                       :or {font-family ["Raleway" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]
                             font-url "https://fonts.googleapis.com/css?family=Raleway:300,400,500"}}]]
    (let [size (.getSize vsm)]
      {:db (-> db
