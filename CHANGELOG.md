@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file. This change
 ## [0.3.2-SNAPSHOT]
 ### Added
 - Enable passing raw style-map to components
+- `<sub` and `>evt` shorthand functions to core
 
 ## [0.3.1]
 

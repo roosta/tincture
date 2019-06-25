@@ -223,7 +223,7 @@
   **Options**
 
   `:font-family` a vector of font-families to be used in
-  `tincture.typography/Typography` component. Default: `[\"'Raleway'\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
+  `tincture.typography/Typography` component. Default: `[\"Raleway\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
 
   `:font-url` a string representing a font url.
    The font url is injected as a &lt;link&gt; element in &lt;head&gt; on initialize. Default:
@@ -231,6 +231,35 @@
    "
   ([] (rf/dispatch [:tincture/initialize]))
   ([options] (rf/dispatch-sync [:tincture/initialize options])))
+
+(def ^{:doc "Shorthand for subscribing to re-frame subscriptions and
+dereference in one go.
+
+Source: https://lambdaisland.com/blog/2017-02-11-re-frame-form-1-subscriptions
+
+Example:
+
+```clojure
+(<sub [:tincture/viewport-width])
+```
+"}
+  <sub
+  (comp deref rf/subscribe))
+
+(def
+  ^{:doc "Shorthand for dispatching re-frame events
+
+source: https://lambdaisland.com/blog/2017-02-11-re-frame-form-1-subscriptions
+
+Example:
+```clojure
+(>evt [:tincture/set-font
+  {:font-family [\"Raleway\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]
+   :font-url \"https://fonts.googleapis.com/css?family=Raleway:300,400,500\"}])
+```
+"}
+
+  >evt rf/dispatch)
 
 (defn -main [& args]
   (.log js/console "started!"))
