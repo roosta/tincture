@@ -59,7 +59,7 @@
 (s/def ::timeout pos-int?)
 (s/def ::unmount-on-exit boolean?)
 (s/def ::mount-on-enter boolean?)
-(s/def ::class string?)
+(s/def ::class (s/nilable (s/or :str string? :vector vector?)))
 (s/def ::easing :tincture.core/valid-easings)
 (s/def ::appear boolean?)
 (s/def ::on-entered fn?)
@@ -71,6 +71,7 @@
 (s/def ::transition string?)
 (s/def ::child-container string?)
 (s/def ::classes (s/keys :opt [::transition ::child-container]))
+(s/def ::id (s/nilable string?))
 
 (defn Slide
   "Slide components in and out based on mount status
@@ -161,8 +162,9 @@
         [:img {:src @image}]]]))
   ```
   "
-  [{:keys [direction duration timeout unmount-on-exit mount-on-enter class
-           easing appear enter exit on-exit on-exited on-enter on-entered classes]
+  [{:keys [direction duration timeout unmount-on-exit mount-on-enter
+           class easing appear enter exit on-exit on-exited on-enter
+           on-entered classes id]
     :or   {direction       :left
            duration        500
            timeout         500
@@ -176,11 +178,12 @@
            on-exit         #()
            on-exited       #()
            on-entered      #()}}]
-  (let [direction      (check-spec direction ::direction) 
+  (let [direction      (check-spec direction ::direction)
         duration       (check-spec duration ::duration)
         timeout        (check-spec timeout ::timeout)
         mount-on-enter (check-spec mount-on-enter ::mount-on-enter)
         class          (check-spec class ::class)
+        id             (check-spec id ::id)
         easing         (check-spec easing ::easing)
         appear         (check-spec appear ::appear)
         enter          (check-spec enter ::enter)
@@ -194,6 +197,7 @@
         k              (or (-> children first meta :key)
                            (-> children first second :key))]
     [TransitionGroup {:class class
+                      :id id
                       :enter enter
                       :exit  exit
                       :style {:position "relative"
