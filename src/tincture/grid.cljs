@@ -185,6 +185,7 @@
         k (str/join "-" [(name align-content) (name align-items) (str container) (name direction)
                          (str spacing) (str item) (name justify) (name wrap)])
         styles (merge
+                {}
                 (when container (:container styles))
                 (when item (:item styles))
                 (when zero-min-width (:zero-min-width styles))
