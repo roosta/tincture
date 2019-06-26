@@ -8,6 +8,7 @@
    [herb.core :refer-macros [<class defgroup]]
    [tincture.core :as core]
    [goog.object :as gobj]
+   [clojure.string :as str]
    [dommy.core :refer-macros [sel1 sel]]
    [tincture.typography :refer [Typography]]
    [cljsjs.hammer]
@@ -31,21 +32,21 @@
   {:type-container {:width "100%"
                     :height "100%"}
    :container {:height "100vh"}
-   :chevron {:width "100px"
-             :cursor "pointer"
-             :fill "#333"
-             :height "100px"}
    :child {:height "100%"
            :width "100%"}
    :child-container {:height "100%"
-                     :width "100%"}
-   :row {
-         ;; :display "flex"
-         :width "100%"
-         ;; :flex "0 1 auto"
-         ;; :justify-content "center"
-         ;; :align-items "center"
-         }})
+                     :width "100%"}})
+
+(defgroup chevron-style
+  {:root {:text-align "center"}
+   :chevron {:width "100px"
+             :cursor "pointer"
+             :fill "#333"
+             :height "100px"}})
+
+(def state
+  (r/atom {:n 0
+           :dir :left}))
 
 (defn on-click
   [direction]
@@ -57,73 +58,70 @@
           :right (inc n))
      :dir direction}))
 
-(defn on-up [state]
+(defn on-up []
   (swap! state (on-click :up)))
 
-(defn on-left [state]
+(defn on-left []
   (swap! state (on-click :left)))
 
-(defn on-right [state]
+(defn on-right []
   (swap! state (on-click :right)))
 
-(defn on-down [state]
+(defn on-down []
   (swap! state (on-click :down)))
 
+(defn setup-hammer []
+  (let [hammer (js/Hammer. (sel1 :#slide-root))]
+    (.set (.get hammer "swipe") #js {:direction 30})
+    (.on hammer "swiperight" on-right)
+    (.on hammer "swipeleft"  on-left)
+    (.on hammer "swipeup"    on-up)
+    (.on hammer "swipedown"  on-down)))
+
+(defn Chevron [dir]
+  (let [md-up? @(rf/subscribe [:tincture/breakpoint-up :md])
+        [fn component] (case dir
+                         :up [on-up ChevronUp]
+                         :down [on-down ChevronDown]
+                         :left [on-left ChevronLeft]
+                         :right [on-right ChevronRight])]
+    (when md-up?
+      [:div {:on-click fn
+             :class (<class chevron-style :root)}
+       [component {:class (<class chevron-style :chevron)}]])))
+
 (defn slide-demo []
-  (let [state (r/atom {:n 0
-                       :dir :left})]
-    (r/create-class
-     {:component-did-mount
-      (fn []
-        (let [hammer (js/Hammer. (sel1 :#slide-root))]
-          (.set (.get hammer "swipe") #js {:direction 30})
-          (.on hammer "swiperight" #(on-right state))
-          (.on hammer "swipeleft"  #(on-left state))
-          (.on hammer "swipeup"    #(on-up state))
-          (.on hammer "swipedown"  #(on-down state))))
-      :reagent-render
-      (fn []
-        (let [md-up? @(rf/subscribe [:tincture/breakpoint-up :md])
-              md-down? @(rf/subscribe [:tincture/breakpoint-down :md])]
+  (r/create-class
+   {:component-did-mount setup-hammer
+    :reagent-render
+    (fn []
+      (let [md-down? @(rf/subscribe [:tincture/breakpoint-down :md])]
+        [Grid {:container true
+               :justify :center
+               :align-items :center
+               :class (<class style :container)}
+         [Grid {:item true}
+          [Chevron :up]
           [Grid {:container true
-                 :justify :center
-                 :align-items :center
-                 :class (<class style :container)}
-           [Grid {:item true}
-            (when md-up?
-              [Grid {:container true
-                     :justify :center
-                     :on-click #(on-up state)}
-               [ChevronUp {:class (<class style :chevron)}]])
-            [Grid {:container true
-                   :align-items :center}
-             (when md-up?
-               [:div {:on-click #(on-left state)}
-                [ChevronLeft {:class (<class style :chevron)}]])
-             (let [color (->> (count colors)
-                              (mod (:n @state))
-                              (nth colors))]
-               [:div
-                [Slide {:id "slide-root"
-                        :class (<class slide-style)
-                        :classes {:child-container (<class style :child-container)}
-                        :direction (:dir @state)}
-                 ^{:key color}
-                 [:div {:style {:background-color color}
-                        :class (<class style :child)}
-                  (when md-down?
-                    [Grid {:container true
-                           :justify :center
-                           :class (<class style :type-container)
-                           :align-items :center}
-                     [Typography {:variant :h6
-                                  :color :dark}
-                      "Swipe left, right, up, or down"]])]]])
-             (when md-up?
-               [:div {:on-click #(on-right state)}
-                [ChevronRight {:class (<class style :chevron)}]])]
-            (when md-up?
-              [Grid {:container true
-                     :justify :center
-                     :on-click #(on-down state)}
-               [ChevronDown {:class (<class style :chevron)}]])]]))})))
+                 :align-items :center}
+           [Chevron :left]
+           (let [color (->> (count colors)
+                            (mod (:n @state))
+                            (nth colors))]
+             [Slide {:id "slide-root"
+                     :class (<class slide-style)
+                     :classes {:child-container (<class style :child-container)}
+                     :direction (:dir @state)}
+              ^{:key color}
+              [:div {:style {:background-color color}
+                     :class (<class style :child)}
+               (when md-down?
+                 [Grid {:container true
+                        :justify :center
+                        :class (<class style :type-container)
+                        :align-items :center}
+                  [Typography {:variant :h6
+                               :color :dark}
+                   "Swipe left, right, up, or down"]])]])
+           [Chevron :right]]
+          [Chevron :down]]]))}))
