@@ -303,7 +303,7 @@
    [Grid {:item true
           :xs 12
           :sm 6}
-    [span \"column 2\"]]
+    [:span \"column 2\"]]
    [Grid {:item true
           :xs 12
           :sm 6}
