@@ -31,8 +31,8 @@
 (reg-event-fx
  :tincture/initialize
  (fn [{:keys [db]} [_ {:keys [font-family font-url]
-                       :or {font-family ["Raleway" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]
-                            font-url "https://fonts.googleapis.com/css?family=Raleway:300,400,500"}}]]
+                       :or {font-family ["Roboto" "Helvetica" "Arial" "sans-serif"]
+                            font-url "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"}}]]
    (let [size (.getSize vsm)]
      {:db (-> db
               (merge default-db)

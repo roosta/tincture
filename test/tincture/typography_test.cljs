@@ -15,7 +15,7 @@
      (let [variant (#'tincture.typography/variants :h2 :light)]
        (is (= (-> variant :color :f) "rgb"))
        (is (= (-> variant :color :args) [0 0 0 0.87]))
-       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-family) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
        (is (= (-> variant :font-size :unit) :rem))
        (is (= (-> variant :font-size :magnitude) 3.75))
        (is (= (-> variant :font-weight) 300))
@@ -23,7 +23,7 @@
 
      (let [variant (#'tincture.typography/variants :subtitle1 :dark)]
        (is (= (-> variant :color) "#fff"))
-       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-family) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
        (is (= (-> variant :font-size :unit) :rem))
        (is (= (-> variant :font-size :magnitude) 1))
        (is (= (-> variant :font-weight) 400))
@@ -32,7 +32,7 @@
      (let [variant (#'tincture.typography/variants :body1 :secondary-light)]
        (is (= (-> variant :color :f) "rgb"))
        (is (= (-> variant :color :args) [0 0 0 0.54]))
-       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-family) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
        (is (= (-> variant :font-size :unit) :rem))
        (is (= (-> variant :font-size :magnitude) 1))
        (is (= (-> variant :font-weight) 400))
@@ -41,7 +41,7 @@
      (let [variant (#'tincture.typography/variants :button :light)]
        (is (= (-> variant :color :f) "rgb"))
        (is (= (-> variant :color :args) [0 0 0 0.87]))
-       (is (= (-> variant :font-family) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+       (is (= (-> variant :font-family) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
        (is (= (-> variant :font-size :unit) :rem))
        (is (= (-> variant :font-size :magnitude) 0.875))
        (is (= (-> variant :font-weight) 500))
@@ -69,7 +69,7 @@
          (is (= (-> style :font-size :magnitude) 0.875))
          (is (= (:text-shadow style) "none"))
          (is (= (:direction style) "ltr"))
-         (is (= (:font-family style) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+         (is (= (:font-family style) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
          (is (= (-> style meta :key) "body2-left-normal-ltr-0-false-false-light-false")))
 
        (let [style (#'tincture.typography/typography-style
@@ -83,7 +83,7 @@
          (is (= (:text-shadow style) "4px 4px 8px rgba(0, 0, 0, 0.3)"))
          (is (= (-> style :margin-bottom :unit) :em))
          (is (= (-> style :margin-bottom :magnitude) 0.35))
-         (is (= (:font-family style) ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]))
+         (is (= (:font-family style) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
          (is (= (:direction style) "rtl"))
          (is (= (:margin style) 0))
          (is (= (-> style meta :key) "h3-right-italic-rtl-3-true-true-dark-true"))))))

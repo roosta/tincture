@@ -17,11 +17,11 @@
        (rf/dispatch [:tincture/initialize])
        (is (= (:tincture/font @db)
                {:font/family
-                ["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"],
+                ["Roboto" "Helvetica" "Arial" "sans-serif"],
                 :font/url
-                "https://fonts.googleapis.com/css?family=Raleway:300,400,500"}))
+                "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"}))
        (is (= (.getAttribute (sel1 js/document :#tincture-font) "href")
-              "https://fonts.googleapis.com/css?family=Raleway:300,400,500"))))))
+              "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"))))))
 
 (deftest set-viewport-size-event
   (testing "Setting viewport size"
@@ -42,4 +42,3 @@
        (rf/dispatch [:tincture/set-font "test" "anothertest"])
        (is (=  @family "test"))
        (is (=  @url "anothertest"))))))
-
