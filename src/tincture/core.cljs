@@ -223,13 +223,14 @@
   **Options**
 
   `:font-family` a vector of font-families to be used in
-  `tincture.typography/Typography` component. Default: `[\"Raleway\" \"'Helvetica Neue'\" \"Arial\" \"Helvetica\" \"sans-serif\"]`
+  `tincture.typography/Typography` component.
+  Default: `[\"Roboto\" \"Helvetica\" \"Arial\" \"sans-serif\"]`
 
-  `:font-url` a string representing a font url.
-   The font url is injected as a &lt;link&gt; element in &lt;head&gt; on initialize. Default:
-  \"https://fonts.googleapis.com/css?family=Raleway:300,400,500\"
+  `:font-url` a string representing a font url.  If a url is provided
+  it is injected as a &lt;link&gt; element in &lt;head&gt; on
+  initialize. Default: nil
    "
-  ([] (rf/dispatch [:tincture/initialize]))
+  ([] (rf/dispatch-sync [:tincture/initialize]))
   ([options] (rf/dispatch-sync [:tincture/initialize options])))
 
 (def ^{:doc "Shorthand for subscribing to re-frame subscriptions and

@@ -30,22 +30,21 @@
 
 (reg-event-fx
  :tincture/initialize
- (fn [{:keys [db]} [_ {:keys [font-family font-url]
-                       :or {font-family ["Roboto" "Helvetica" "Arial" "sans-serif"]
-                            font-url "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"}}]]
+ (fn [{:keys [db]} [_ {:keys [font-family font-url]}]]
    (let [size (.getSize vsm)]
-     {:db (-> db
-              (merge default-db)
-              (assoc :tincture/viewport-size [(.-width size) (.-height size)]))
-      :dispatch [:tincture/set-font font-family font-url]})))
+     (cond-> {:db (-> db
+                      (merge default-db)
+                      (assoc :tincture/viewport-size [(.-width size) (.-height size)]))}
+       font-family (assoc-in [:db :tincture/font :font/family] font-family)
+       font-url (assoc-in [:db :tincture/font :font/url] font-url)
+       font-url (assoc :tincture.font/attach font-url)))))
 
 (reg-event-db
  :tincture/set-viewport-size
  (fn [db [_ new]]
    (assoc db :tincture/viewport-size new)))
 
-
-(reg-event-fx
+#_(reg-event-fx
  :tincture/set-font
  (fn [{:keys [db]} [_ font-family font-url]]
    {:db (-> (assoc-in db [:tincture/font :font/family] font-family)

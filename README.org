@@ -70,6 +70,20 @@ You might also optionally initialize the event system.
         [:span "column 3"]]]
     #+END_SRC
 *** Typography component
+
+    The typography component have the default font-family set to
+    ~["Roboto" "Helvetica" "Arial" "sans-serif"]~, but Tincture does not
+    load the Roboto font automatically. It is up to the developer to
+    choose a method to load said font. Two options are:
+
+    - Add this markup to ~index.html~:
+      #+BEGIN_SRC html
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+      #+END_SRC
+    - Call ~tincture.core/init!~ with a provided font url and family, it
+      is then attached to the head. See [[*Initialize][Initialize]] section for more
+      details.
+
     #+BEGIN_SRC clojure
       (ns my-project.my-ns
         (:require [tincture.typography :refer [Typography]]))
@@ -84,17 +98,25 @@ You might also optionally initialize the event system.
 
 ** Re-frame and Tincture events
 *** Initialize
-   Tincture uses re-frame as an event handler, and if you want to use
-   Tincture's events you have to initialize it first.
+    Tincture uses [[https://github.com/Day8/re-frame][re-frame]] as an event/subscription handler, and it
+    can be initialized by calling ~tincture.core/init!~.
 
-   You can do this by calling ~tincture.core/init!~. Init! take a map of
-   options, namely a font family and a font url. These are used in the
-   typography component. If no options is provided Tincture uses
-   ~["'Raleway'" "'Helvetica Neue'" "Arial" "Helvetica" "sans-serif"]~
-   as a default. The url also needs to be provided if you are going to
-   use a custom font face, an example of this would be:
-   "https://fonts.googleapis.com/css?family=Raleway:300,400,500"
-   This URL is attached to the head of the HTML dynamically.
+    ~init!~ take a map of options, currently a font family and a font
+    url. These are used in the typography component. If no options is
+    provided Tincture uses ~["Roboto" "Helvetica" "Arial" "sans-serif"]~
+    as a default, and no url is attached to the head.
+
+    Example:
+    #+BEGIN_SRC clojure
+      (ns my-project
+        (:require [tincture.core :as t]))
+
+      ;; Add a custom font via init
+      (defn my-init-function []
+        (t/init! {:font-family ["Raleway" "Helvetica" "Arial" "sans-serif"]
+                  :font-url "https://fonts.googleapis.com/css?family=Raleway:300,400,500,700&display=swap"}))
+    #+END_SRC
+
 *** Subscriptions
 **** :tincture/viewport-size
      Returns a vector of the current viewport size: [width height]

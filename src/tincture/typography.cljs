@@ -33,10 +33,13 @@
 (s/def ::valid-colors #{:light :dark :secondary-light :secondary-dark :inherit})
 (s/def ::id (s/nilable string?))
 
+(def default-font-family ["Roboto" "Helvetica" "Arial" "sans-serif"])
+
 (defn- variants
   [variant color]
   (let [color (get colors color)
-        font @(rf/subscribe [:tincture.font/family])]
+        font (or @(rf/subscribe [:tincture.font/family])
+                 default-font-family)]
     (variant {:h1 {:color color
                    :font-family font
                    :font-size (rem 6)
