@@ -18,7 +18,8 @@
 
 (def ^:private font-weight {:light 300
                             :regular 400
-                            :medium 500})
+                            :medium 500
+                            :bold 700})
 
 (def ^:private colors {:light (rgb 0 0 0 0.87)
                        :dark "#fff"
