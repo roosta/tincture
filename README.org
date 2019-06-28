@@ -145,8 +145,9 @@ You might also optionally initialize the event system.
      given breakpoint. Breakpoints are defined in
      ~tincture.core/breakpoints~ and looks like this: ~{:xs 0 :sm 600 :md
      960 :lg 1280 :xl 1920}~
+
 ** Disclaimer
-   Tincture is not a UI framework as such, it's simply various
+   Tincture is not a UI framework, it's more a collection of various
    functions and components I use on a regular basis being a frontend
    developer using ClojureScript. Many components in Tincture is based
    on [[https://material-ui.com/][Material UI]], and is a re-implementation of those components in
