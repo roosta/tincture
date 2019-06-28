@@ -7,7 +7,7 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [ring-server "0.5.0"]
                  [reagent "0.8.1"]
-                 [tincture "0.3.2-SNAPSHOT"]
+                 [tincture "0.3.2"]
                  [reagent-utils "0.3.2"]
                  [ring "1.7.1"]
                  [ring/ring-defaults "0.3.2"]
