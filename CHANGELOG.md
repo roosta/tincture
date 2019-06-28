@@ -3,8 +3,22 @@ All notable changes to this project will be documented in this file. This change
 
 ## [0.3.2-SNAPSHOT]
 ### Added
-- Enable passing raw style-map to components
 - `<sub` and `>evt` shorthand functions to core
+
+### Fixed
+- Inline styles are now supported for all of tinctures components
+- Issue where not having either `:item true` or `:container true`
+  would throw an underlying herb error
+
+### Changed
+- Default font is changed from Raleway to Roboto.
+
+### Breaking changed
+- Default font is now not automatically injected into head. If a font
+  URL is passed to `tincture.core/init!` it will get injected,
+  otherwise leave it up to the developer. See
+  [readme](https://github.com/roosta/tincture/blob/master/README.org)
+  for more details.
 
 ## [0.3.1]
 
