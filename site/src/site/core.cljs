@@ -138,5 +138,5 @@
     (fn [path]
       (boolean (reitit/match-by-path router path)))})
   (accountant/dispatch-current!)
-  (mount-root)
-  (t/init!))
+  (t/init! {:font-url "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"})
+  (mount-root))
