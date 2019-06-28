@@ -58,7 +58,8 @@
            :class (<class styles :row)
            :md 6
            :xs 12}
-     [Typography {:variant :h2}
+     [Typography {:variant :h2
+                  :gutter-bottom true}
       "Welcome to the Tincture demo"]
      [Typography {:variant :body1}
       "Tincture is a frontend toolkit for ClojureScript that provides several
