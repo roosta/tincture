@@ -15,12 +15,15 @@
    ;; :transition ""
    })
 
-(defn- SvgIcon
+(defn SvgIcon
+  "Main wrapper component for svg icons"
   [{:keys [class viewbox]}]
   (into
    [:svg {:view-box viewbox
           :class [class (<class svg-icon-style)]}]
    (r/children (r/current-component))))
+
+(def ^{:deprecated "0.3.0"} svg-icon SvgIcon)
 
 (defn Mail
   [{:keys [class]}]
