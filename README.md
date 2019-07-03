@@ -181,7 +181,33 @@ Takes a breakpoint, one of `#{:xs :sm :md :lg :xl}` Returns a
 `boolean` that indicates if current viewport width is above the
 given breakpoint. Breakpoints are defined in
 `tincture.core/breakpoints` and looks like this: `{:xs 0 :sm 600 :md
-     960 :lg 1280 :xl 1920}`
+960 :lg 1280 :xl 1920}`
+
+# Advanced compilation
+
+For compilation of CSS to work optimally I recommend adding the flag
+`:clojure-defines {"goog.debug" false}` to the `:compiler` config for
+your ClojureScript production build setup. This tells the underlying
+CSS library ([Herb](https://github.com/roosta/herb)) to use
+minification and remove unneeded meta info from the head.
+
+``` clojure
+:cljsbuild {:builds [{:id "demo-release"
+                      :source-paths ["demo"]
+                      :compiler {:main "demo.prod"
+                                 :output-to "resources/public/js/demo.js"
+                                 :output-dir "resources/public/js/release"
+                                 :closure-defines {"goog.DEBUG" false} ;; NOTE
+                                 :optimizations :advanced}}]}
+
+```
+
+# Contributing
+
+Please open issues or pull requests if there is something you'd like
+to see included in this library. It is at the moment rather bare
+bones, and I'd love to see what other people use on a regular basis
+developing web pages using ClojureScript.
 
 # Disclaimer
 
@@ -198,7 +224,7 @@ wholeheartedly recommend [Material UI](https://material-ui.com/).
 - [Tincture Grid](https://github.com/roosta/tincture/blob/master/src/tincture/grid.cljs) is inspired by [Material-ui Grid](https://material-ui.com/layout/grid/)
 - [Tincture Typography](https://github.com/roosta/tincture/blob/master/src/tincture/typography.cljs) is inspired by [Material-ui Typography](https://material-ui.com/style/typography/)
 - [Tincture Paper](https://github.com/roosta/tincture/blob/master/src/tincture/paper.cljs) is inspired by [Material-ui Paper](https://material-ui.com/components/paper/)
-- [Logo](https://raw.githubusercontent.com/roosta/tincture/master/assets/tincture.svg) is inspired by the work of [Alex Kunchevsky](https://dribbble.com/kunchevsky) and [Boris Garic](https://dribbble.com/Risbo90)
+- [Logo](https://github.com/roosta/tincture/blob/master/assets/tincture.svg) is inspired by the work of [Alex Kunchevsky](https://dribbble.com/kunchevsky) and [Boris Garic](https://dribbble.com/Risbo90)
 
 # Development
 
