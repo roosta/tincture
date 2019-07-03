@@ -14,7 +14,7 @@ developing common web page visuals and functionality.
 ** Requirements
 
    Tincture requires at least Clojure 1.9.0 and ClojureScript 1.9.542
-   due to use of [[ https://cljs.github.io/api/cljs.spec.alpha/ ][clojure.spec.alpha]] to validate various
+   due to use of [[https://cljs.github.io/api/cljs.spec.alpha/][clojure.spec.alpha]] to validate various
    input.
 
    The components in this library is build using [[https://github.com/reagent-project/reagent][Reagent]] API, and the
