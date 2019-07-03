@@ -192,6 +192,14 @@ developer using ClojureScript. Many components in Tincture is based on
 those components in ClojureScript. If you want a full framework I
 wholeheartedly recommend [Material UI](https://material-ui.com/).
 
+# Sources / Inspiration
+
+- [gradients.json](https://github.com/roosta/tincture/blob/master/resources/gradients.json) sourced from: <https://github.com/Ghosh/uiGradients/>
+- [Tincture Grid](https://github.com/roosta/tincture/blob/master/src/tincture/grid.cljs) is inspired by [Material-ui Grid](https://material-ui.com/layout/grid/)
+- [Tincture Typography](https://github.com/roosta/tincture/blob/master/src/tincture/typography.cljs) is inspired by [Material-ui Typography](https://material-ui.com/style/typography/)
+- [Tincture Paper](https://github.com/roosta/tincture/blob/master/src/tincture/paper.cljs) is inspired by [Material-ui Paper](https://material-ui.com/components/paper/)
+- [Logo](https://raw.githubusercontent.com/roosta/tincture/master/assets/tincture.svg) is inspired by the work of [Alex Kunchevsky](https://dribbble.com/kunchevsky) and [Boris Garic](https://dribbble.com/Risbo90)
+
 # Development
 
 Start figwheel main with the development build
@@ -218,11 +226,3 @@ installed on your system.
 You can also start the dev build and navigate to
 [http://localhost:9500/figwheel-extra-main/auto-testing](http://localhost:9500/figwheel-extra-main/auto-testing)
 to get a nice interface while coding that runs the tests on each save.
-
-# Sources / Inspiration
-
-- [gradients.json](https://github.com/roosta/tincture/blob/master/resources/gradients.json) sourced from: <https://github.com/Ghosh/uiGradients/>
-- [Tincture Grid](https://github.com/roosta/tincture/blob/master/src/tincture/grid.cljs) is inspired by [Material-ui Grid](https://material-ui.com/layout/grid/)
-- [Tincture Typography](https://github.com/roosta/tincture/blob/master/src/tincture/typography.cljs) is inspired by [Material-ui Typography](https://material-ui.com/style/typography/)
-- [Tincture Paper](https://github.com/roosta/tincture/blob/master/src/tincture/paper.cljs) is inspired by [Material-ui Paper](https://material-ui.com/components/paper/)
-- [Logo](https://raw.githubusercontent.com/roosta/tincture/master/assets/tincture.svg) is inspired by the work of [Alex Kunchevsky](https://dribbble.com/kunchevsky) and [Boris Garic](https://dribbble.com/Risbo90)
