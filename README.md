@@ -1,9 +1,14 @@
 <p align="center">
   <img height="300" src="./assets/tincture.svg">
 </p>
+
 <p align="center">
-  <img src="https://circleci.com/gh/roosta/tincture.svg?style=svg">
-  <img src="https://img.shields.io/clojars/v/tincture.svg">
+  <a href="https://circleci.com/gh/roosta/tincture">
+    <img src="https://circleci.com/gh/roosta/tincture.svg?style=svg">
+  </a>
+  <a href="https://clojars.org/tincture">
+    <img src="https://img.shields.io/clojars/v/tincture.svg">
+  </a>
 </p>
 
 Tincture is a frontend toolkit for ClojureScript that provides several
