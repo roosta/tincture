@@ -51,15 +51,18 @@
             (assoc-in [:tincture/font :font/url] font-url))
     :tincture.font/attach font-url}))
 
-(defn attach-font! [font-url]
-    (let [el (dom/getElement "tincture-font")
-          head (.-head js/document)]
-      (when (not el)
-        (let [el (.createElement js/document "link")]
-          (set! (.-id el) "tincture-font")
-          (.setAttribute el "href" font-url)
-          (.setAttribute el "rel" "stylesheet")
-          (.appendChild head el)))))
+(defn- attach-font!
+  "Attach font to head of js/document. Checks if element is already
+  present and only attach if its not."
+  [font-url]
+  (let [el (dom/getElement "tincture-font")
+        head (.-head js/document)]
+    (when (not el)
+      (let [el (.createElement js/document "link")]
+        (set! (.-id el) "tincture-font")
+        (.setAttribute el "href" font-url)
+        (.setAttribute el "rel" "stylesheet")
+        (.appendChild head el)))))
 
 (reg-fx
  :tincture.font/attach
