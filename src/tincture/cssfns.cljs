@@ -92,7 +92,8 @@ to do it properly
 ```
 Result:
 ```css
-  .my-class {height: calc(100% - 20px);
+.my-class {
+  height: calc(100% - 20px);
 }
 ```
 NOTE: No validation is currently done on the input of this function
