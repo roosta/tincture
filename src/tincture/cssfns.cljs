@@ -15,7 +15,14 @@
 
 (s/def ::color (s/or :percent ::percent :int (s/int-in 0 256)))
 (def color-msg "Invalid color passed to rgb cssfn, 0-255 or percent 0%-100%")
-(def alpha-msg "Invalid alpha value")
+(def alpha-msg "Invalid alpha value, has to be a float between 0 and 1 inclusive")
+
+(s/def ::alpha
+  (letfn [(pred [s]
+            (and (float? s)
+                 (<= s 1.0)
+                 (> s 0.0)))]
+    (s/spec pred)))
 
 (defcssfn
   ^{:doc "Create a RGB(A) color string by passing red green blue and optionally alpha
@@ -36,7 +43,9 @@ Example usage:
   ([r g b a]
    (let [r (check-spec r ::color color-msg)
          g (check-spec g ::color color-msg)
-         b (check-spec b ::color color-msg)]
+         b (check-spec b ::color color-msg)
+         a (check-spec a ::alpha alpha-msg)
+         ]
      [r g b a])))
 
 (defcssfn url)
