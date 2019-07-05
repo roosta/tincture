@@ -25,13 +25,27 @@
     (s/spec pred)))
 
 (defcssfn
-  ^{:doc "Create a RGB(A) color string by passing red green blue and optionally alpha
+  ^{:doc "Create a RGB(A) color string by passing red green blue and optionally alpha.
 
-Example usage:
+**Args:**
+
+* r (red): a number between 0 and 255 (inclusive) or a percent string (0% - 100%)
+* g (green): a number between 0 and 255 (inclusive) or a percent string (0% - 100%)
+* b (blue): a number between 0 and 255 (inclusive) or a percent string (0% - 100%)
+
+**Optional:**
+
+* a (alpha): floating point value between 0 and 1 inclusive
+
+**Example usage:**
 ```clojure
 (garden.core/css [:.my-class {:color (rgb 255 255 255 0.2)}])
-
-;;=> \".my-class {color: rgb(255, 255, 255, 0.2);}\"
+```
+Result:
+```css
+.my-class {
+  color: rgb(255, 255, 255, 0.2);
+}
 ```
 "}
   rgb
@@ -48,8 +62,48 @@ Example usage:
          ]
      [r g b a])))
 
-(defcssfn url)
+(defcssfn
+  ^{:doc "Create a CSS URL data type
 
-(defcssfn calc
+Example usage:
+
+```clojure
+(garden.core/css [:.my-class {:background (url \"http://www.example.com/image.png\")}])
+```
+Result:
+```css
+.my-class {
+  background: url(http://www.example.com/image.png);
+}
+```
+NOTE: I make no attempt at validating URLs currently, unsure how
+to do it properly
+"}
+  url
+  )
+
+(defcssfn
+  ^{:doc "Create a calc CSS function, takes a variable number of arguments.
+
+**Example:**
+```clojure
+(require '[garden.units :refer [percent px]])
+(garden.core/css [:.my-class {:height (calc (percent 100) '- (px 20))}])
+```
+Result:
+```css
+  .my-class {height: calc(100% - 20px);
+}
+```
+NOTE: No validation is currently done on the input of this function
+since it can be serveral different units, leaving the validation to
+CSS.
+
+NOTE: Due to how this functions arguments is layed out the calc call
+takes its arguments using infix notation, which is not ideal but might
+improve in future.
+"
+ }
+  calc
   [& args]
   [args])
