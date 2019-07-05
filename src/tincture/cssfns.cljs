@@ -4,9 +4,54 @@
    [tincture.spec :refer [check-spec]]
    [cljs.spec.alpha :as s :include-macros true]))
 
-(defcssfn linear-gradient
-  [dir color1 position1 color2 position2]
-  [dir [color1 position1] [color2 position2]])
+(defcssfn
+  ^{:doc "Create a linear gradient CSS function using two colors and two positions.
+
+See [MDN linear-gradient
+documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient)
+for posible values, I'm not gonna detail all the variants here.
+
+**Args:**
+
+Either two color stops, leaving the rest to default, or:
+
+* dir (direction): See https://developer.mozilla.org/en-US/docs/Web/CSS/linear-gradient#Values
+
+* color1: first color, all valid color-stops
+
+* postition1: first position,
+  either [percentage](https://developer.mozilla.org/en-US/docs/Web/CSS/percentage)
+  or [length](https://developer.mozilla.org/en-US/docs/Web/CSS/length)
+
+* color2: second color, all valid color stops
+
+* postition2: second position,
+  either [percentage](https://developer.mozilla.org/en-US/docs/Web/CSS/percentage)
+  or [length](https://developer.mozilla.org/en-US/docs/Web/CSS/length)
+
+**Example usage:**
+```clojure
+(garden.core/css [:.my-class {:background (linear-gradient \"to-left\" \"#333\" \"0%\" \"#eee\" \"100%\")}])
+```
+Result:
+```css
+.my-class {
+  background: linear-gradient(to-left, #333 0%, #eee 100%);}
+}
+```
+TODO Add more variants, multiple colors.
+
+NOTE: No validation currently done on input.
+
+NOTE: Your milage may vary on this one, there are simply too many
+variations to account for all of them. Consider creating your own
+custom css function using garden.
+"}
+  linear-gradient
+  ([color1 color2]
+   [color1 color2])
+  ([dir color1 position1 color2 position2]
+   [dir [color1 position1] [color2 position2]]))
 
 (s/def ::percent
   (letfn [(pred [s]
