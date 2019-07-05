@@ -14,8 +14,8 @@
     (s/spec pred)))
 
 (s/def ::color (s/or :percent ::percent :int (s/int-in 0 256)))
-(def color-msg "Invalid color passed to rgb cssfn, 0-255 or percent 0%-100%")
-(def alpha-msg "Invalid alpha value, has to be a float between 0 and 1 inclusive")
+(def ^:private color-msg "Invalid color passed to rgb cssfn, 0-255 or percent 0%-100%")
+(def ^:private alpha-msg "Invalid alpha value, has to be a float between 0 and 1 inclusive")
 
 (s/def ::alpha
   (letfn [(pred [s]
