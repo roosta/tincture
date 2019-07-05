@@ -20,8 +20,8 @@
 (s/def ::alpha
   (letfn [(pred [s]
             (and (float? s)
-                 (<= s 1.0)
-                 (> s 0.0)))]
+                 (<= s 1)
+                 (>= s 0)))]
     (s/spec pred)))
 
 (defcssfn
