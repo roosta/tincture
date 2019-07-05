@@ -162,7 +162,7 @@
                         (map #(str % "ms") delays))]
     (str/join ", " transition)))
 
-(s/def ::valid-box-shadow-elevation (set (range 25)))
+(s/def ::valid-box-shadow-elevation (s/int-in 0 25))
 
 (defn box-shadow
   "Takes a elevation and retuns a CSS box-shadow string. Elevation can
@@ -197,7 +197,7 @@
           "0px 11px 15px -7px rgba(0, 0, 0, 0.2),0px 24px 38px 3px rgba(0, 0, 0, 0.14),0px 9px 46px 8px rgba(0, 0, 0, 0.12)"]
          elevation)))
 
-(s/def ::valid-text-shadow-elevation (set (range 4)))
+(s/def ::valid-text-shadow-elevation (s/int-in 0 4))
 
 (defn text-shadow
   "Takes an elevation and returns a CSS string to be used in text-shadow property
