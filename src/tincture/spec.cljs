@@ -11,5 +11,7 @@
      (throw (ex-info message (s/explain-data spec value)))
      value)))
 
-(def email-re #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$")
-(s/def ::email #(re-matches email-re %))
+(s/def ::email
+  (letfn [(pred [s]
+            (re-matches #"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$" s))]
+    (s/spec pred)))
