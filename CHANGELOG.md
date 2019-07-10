@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
+## [v0.3.3-SNAPSHOT]
+### Changed
+- Upgrade herb to v0.8.2
+
 ## [v0.3.2]
 ### Added
 - `<sub` and `>evt` shorthand functions to core
