@@ -11,7 +11,8 @@
 
 (defn gradient-box
   [gradient kw]
-  ^{:key kw}
+  ^{:key kw
+    :group true}
   {:background gradient
    :height (px 200)})
 
