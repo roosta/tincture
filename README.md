@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="300" src="./assets/tincture.svg">
+  <img height="300" src="https://raw.githubusercontent.com/roosta/tincture/master/assets/tincture.svg?sanitize=true">
 </p>
 
 <p align="center">
