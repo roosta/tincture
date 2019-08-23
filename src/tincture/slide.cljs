@@ -177,7 +177,8 @@
            on-enter        #()
            on-exit         #()
            on-exited       #()
-           on-entered      #()}}]
+           on-entered      #()
+           classes         {}}}]
   (let [direction      (check-spec direction ::direction)
         duration       (check-spec duration ::duration)
         timeout        (check-spec timeout ::timeout)

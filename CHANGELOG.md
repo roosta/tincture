@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file. This change
 ### Changed
 - Upgrade herb to v0.8.2
 
+### Fixed
+- Fix issue where slide component would error out when not passed a map for `:classes` prop
+
 ## [v0.3.2]
 ### Added
 - `<sub` and `>evt` shorthand functions to core
