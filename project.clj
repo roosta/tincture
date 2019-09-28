@@ -21,7 +21,7 @@
                  [cljsjs/react-transition-group "2.4.0-0" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [reagent "0.8.1"]
                  [rm-hull/inkspot "0.2.1"]
-                 [herb "0.8.2"]
+                 [herb "0.10.0"]
                  [prismatic/dommy "1.1.0"]
                  [re-frame "0.10.7"]]
   :source-paths ["src"]
