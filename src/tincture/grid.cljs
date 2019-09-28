@@ -53,7 +53,7 @@
 (s/def ::wrap wrap)
 (s/def ::id (s/nilable string?))
 (s/def ::style (s/nilable map?))
-(s/def ::on-click fn?)
+(s/def ::on-click (s/nilable fn?))
 
 (defn up
   "
