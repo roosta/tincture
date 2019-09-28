@@ -154,11 +154,7 @@
   [variant align font-style direction
    elevation gutter-bottom paragraph
    color no-wrap]
-  (let [k (str/join "-" [(name variant) (name align) (name font-style)
-                         (name direction) elevation gutter-bottom paragraph
-                         (name color) no-wrap])
-
-        root {:margin 0}
+  (let [root {:margin 0}
 
         directions {:ltr {:direction "ltr"}
                     :rtl {:direction "rtl"}}
@@ -190,7 +186,7 @@
              (font-style font-styles)
              (align aligns)
              root))
-      {:key k})))
+      {:hint (name variant)})))
 
 (defn Typography
   "Typography component. It contains reusable categories of text, each with an
