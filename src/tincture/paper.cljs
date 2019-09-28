@@ -12,8 +12,7 @@
 
 (defn- paper-style [elevation square]
   ^{:extend [box-shadow elevation]
-    :key (str elevation "-" square)
-    :group true}
+    :hint (str elevation "-" square)}
   {:box-sizing "border-box"
    :border-radius (if square 0 (px 4))})
 

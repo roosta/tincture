@@ -182,8 +182,6 @@
   [align-content align-items container direction
    spacing item justify wrap zero-min-width]
   (let [gutter (generate-gutter)
-        k (str/join "-" [(name align-content) (name align-items) (str container) (name direction)
-                         (str spacing) (str item) (name justify) (name wrap)])
         styles (merge
                 {}
                 (when container (:container styles))
@@ -197,8 +195,7 @@
                 (get styles (keyword (str "justify-" (name justify)))))]
     (with-meta
       styles
-      (cond-> {:key k
-               :group true}
+      (cond-> {}
         (not= spacing 0)
         (assoc :combinators {[:> :.flexbox-item]
                              {:padding (px (/ spacing 2)) }})))))
