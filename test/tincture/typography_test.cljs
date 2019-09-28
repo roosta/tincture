@@ -69,8 +69,7 @@
          (is (= (-> style :font-size :magnitude) 0.875))
          (is (= (:text-shadow style) "none"))
          (is (= (:direction style) "ltr"))
-         (is (= (:font-family style) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
-         (is (= (-> style meta :key) "body2-left-normal-ltr-0-false-false-light-false")))
+         (is (= (:font-family style) ["Roboto" "Helvetica" "Arial" "sans-serif"])))
 
        (let [style (#'tincture.typography/typography-style
                     :h3 :right :italic :rtl 3 true true :dark true)]
@@ -85,8 +84,7 @@
          (is (= (-> style :margin-bottom :magnitude) 0.35))
          (is (= (:font-family style) ["Roboto" "Helvetica" "Arial" "sans-serif"]))
          (is (= (:direction style) "rtl"))
-         (is (= (:margin style) 0))
-         (is (= (-> style meta :key) "h3-right-italic-rtl-3-true-true-dark-true"))))))
+         (is (= (:margin style) 0))))))
 
 (def ^:dynamic c)
 
@@ -95,7 +93,7 @@
     (binding [c (utils/new-container!)]
       (r/render [t/Typography {:id "test"}] c)
       (is (= (.-className (sel1 c :#test))
-             "tincture_typography_typography-style_body2-left-normal-ltr-0-false-false-light-false"))
+             "tincture_typography_typography-style_body2_2127137949"))
       (r/render [t/Typography {:id "test"
                                :variant :h2
                                :align :right
@@ -107,10 +105,10 @@
                                :color :dark
                                :no-wrap true}] c)
       (is (= (.-className (sel1 c :#test))
-             "tincture_typography_typography-style_h2-right-normal-rtl-2-true-false-dark-true"))
+             "tincture_typography_typography-style_h2_1513690853"))
       (is (= (.-tagName (sel1 c :#test)) "SPAN"))
 
       (r/render [t/Typography {:id "test" :paragraph true :component :span}] c)
       (is (= (.-className (sel1 c :#test))
-             "tincture_typography_typography-style_body2-left-normal-ltr-0-false-true-light-false"))
+             "tincture_typography_typography-style_body2_429855216"))
       (is (= (.-tagName (sel1 c :#test)) "P")))))

@@ -13,9 +13,9 @@
     (binding [c (utils/new-container!)]
       (r/render [Paper {:id "test-paper" :square true :elevation 4}] c)
       (is (= (.-className (sel1 c :#test-paper))
-             "tincture_paper_paper-style_4-true"))
+             "tincture_paper_paper-style_4-true_151348674"))
       (r/render [Paper {:id "test-paper" :component :span}] c)
       (is (= (.-tagName (sel1 c :#test-paper))
              "SPAN"))
       (is (= (.-className (sel1 c :#test-paper))
-             "tincture_paper_paper-style_2-false")))))
+             "tincture_paper_paper-style_2-false_1661104318")))))

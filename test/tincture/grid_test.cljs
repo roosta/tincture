@@ -611,10 +611,10 @@
     (binding [c (utils/new-container!)]
       (r/render [g/Grid {:id "test-grid" :container true :align-items :center :justify :center}] c)
       (is (= (.-className (sel1 c :#test-grid))
-             "tincture_grid_grid-style_stretch-center-true-row-0-false-center-wrap"))
+             "tincture_grid_grid-style_-85624227"))
       (r/render [g/Grid {:id "test-grid" :item true :xs 12 :md 6}] c)
       (is (= (.-className (sel1 c :#test-grid))
-             "tincture_grid_grid-style_stretch-stretch-false-row-0-true-flex-start-wrap flexbox-item grid-xs-12 grid-md-6"))
+             "tincture_grid_grid-style_-1000983566 flexbox-item grid-xs-12 grid-md-6"))
       (r/render [g/Grid {:id "test-grid" :container true :direction :column :spacing 40}] c)
       (is (= (.-className (sel1 c :#test-grid))
-             "tincture_grid_grid-style_stretch-stretch-true-column-40-false-flex-start-wrap")))))
+             "tincture_grid_grid-style_88939790")))))
