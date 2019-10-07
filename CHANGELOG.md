@@ -3,10 +3,16 @@ All notable changes to this project will be documented in this file. This change
 
 ## [v0.3.3-SNAPSHOT]
 ### Changed
-- Upgrade herb to v0.8.2
+- Upgrade herb to v0.10.0, update components that used `:key` and `:group` meta
+- Check spec for rgb alpha value
+- Make SvgIcon public
 
 ### Fixed
 - Fix issue where slide component would error out when not passed a map for `:classes` prop
+- Fix issue with `:on-click` handler being nil in grid component
+
+### Added
+- Expand icons
 
 ## [v0.3.2]
 ### Added
