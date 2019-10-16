@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file. This change
 - Upgrade herb to v0.10.0, update components that used `:key` and `:group` meta
 - Check spec for rgb alpha value
 - Make SvgIcon public
+- Upgrade dependencies
 
 ### Fixed
 - Fix issue where slide component would error out when not passed a map for `:classes` prop
