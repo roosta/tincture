@@ -10,7 +10,7 @@
           :source-paths ["src"]}
   :resource-paths ["target" "resources"]
   :jar-exclusions [#"(?:^|\/)public\/"]
-  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1"]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.3"]
                                   [day8.re-frame/test "0.1.5"]]
                    :aliases {"fig" ["trampoline" "run" "-m" "figwheel.main"]
                              "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" tincture.test-runner]
@@ -18,12 +18,12 @@
                              "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}}}
   :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
-                 [cljsjs/react-transition-group "2.4.0-0" :exclusions [cljsjs/react cljsjs/react-dom]]
+                 [cljsjs/react-transition-group "4.3.0-0" :exclusions [cljsjs/react cljsjs/react-dom]]
                  [reagent "0.8.1"]
                  [rm-hull/inkspot "0.2.1"]
                  [herb "0.10.0"]
                  [prismatic/dommy "1.1.0"]
-                 [re-frame "0.10.7"]]
+                 [re-frame "0.10.9"]]
   :source-paths ["src"]
   :clean-targets ^{:protect false} ["target"]
   )
