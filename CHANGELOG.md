@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [v0.3.4-SNAPSHOT]
+### Fix
+- Issue where `:unmount-on-exit true` was needed for slide component
+  by setting each component to `display: none` when it has exited
 
 ## [v0.3.3-1]
 ### Fix
