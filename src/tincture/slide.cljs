@@ -1,7 +1,6 @@
 (ns tincture.slide
   (:require [tincture.transitions :refer [Transition TransitionGroup CSSTransition]]
             [clojure.spec.alpha :as s]
-            [debux.cs.core :refer-macros [clog]]
             [tincture.core :refer [easing-presets create-transition]]
             [tincture.spec :refer [check-spec]]
             [herb.core :refer [defgroup <class]]
