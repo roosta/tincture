@@ -37,11 +37,14 @@
 (defn- exit-active-style [duration easing direction opacity]
   (with-meta
     (cond-> {:transform (direction {:left "translate(-100%, 0)"
-                              :right "translate(100%, 0)"
-                              :up "translate(0, -100%)"
-                              :down "translate(0, 100%)"})}
+                                    :right "translate(100%, 0)"
+                                    :up "translate(0, -100%)"
+                                    :down "translate(0, 100%)"})}
       opacity (assoc :opacity 0))
     {:extend [base-style duration easing]}))
+
+(defn exit-done-style []
+  {:display "none"})
 
 (defn- slide-child
   [{:keys
@@ -55,7 +58,8 @@
                   :classNames {:enter (<class enter-style direction opacity)
                                :enter-active (<class enter-active-style duration easing opacity)
                                :exit (<class exit-style opacity)
-                               :exit-active (<class exit-active-style duration easing direction opacity)}
+                               :exit-active (<class exit-active-style duration easing direction opacity)
+                               :exit-done (<class exit-done-style)}
                   :unmountOnExit unmount-on-exit
                   :mountOnEnter mount-on-enter
                   :appear appear
