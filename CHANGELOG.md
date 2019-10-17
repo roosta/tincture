@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file. This change
 - Check spec for rgb alpha value
 - Make SvgIcon public
 - Upgrade dependencies
+- Change Slide component to use CSSTransition thereby changing the
+  animation to not wait for one component to exit before starting the
+  next one
 
 ### Fixed
 - Fix issue where slide component would error out when not passed a map for `:classes` prop
@@ -14,6 +17,7 @@ All notable changes to this project will be documented in this file. This change
 
 ### Added
 - Expand icons
+- Add opacity option to Slide component, default is false
 
 ## [v0.3.2]
 ### Added
