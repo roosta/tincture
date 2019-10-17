@@ -110,6 +110,7 @@
                             (nth colors))]
              [Slide {:id "slide-root"
                      :class (<class slide-style)
+                     :unmount-on-exit true
                      :classes {:child-container (<class style :child-container)}
                      :direction (:dir @state)}
               ^{:key color}

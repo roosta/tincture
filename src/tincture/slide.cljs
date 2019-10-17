@@ -1,14 +1,16 @@
 (ns tincture.slide
   (:require [tincture.transitions :refer [Transition TransitionGroup CSSTransition]]
             [clojure.spec.alpha :as s]
+            [debux.cs.core :refer-macros [clog]]
             [tincture.core :refer [easing-presets create-transition]]
             [tincture.spec :refer [check-spec]]
+            [herb.core :refer [defgroup <class]]
             [reagent.debug :refer [log]]
             [clojure.string :as str]
             [reagent.core :as r]))
 
 ;; TODO Fix this, use Herb
-(defn- get-style
+#_(defn- get-style
   [state direction easing duration]
   (merge
    (case state
@@ -32,27 +34,60 @@
                                     :duration duration
                                     :easing easing})}))
 
+
+(defn base-style [duration easing]
+  {:left 0
+   :top 0
+   :position "absolute"
+   :transition (create-transition {:property [:transform :opacity]
+                                   :duration duration
+                                   :easing easing})})
+
+(defn enter-style [direction]
+  {:transform (direction {:left "translate(100%, 0)"
+                          :right "translate(-100%, 0)"
+                          :up "translate(0, 100%)"
+                          :down "translate(0, -100%)"})})
+
+(defn enter-active-style [duration easing]
+  ^{:extend [base-style duration easing]}
+  {:transform "translate(0, 0)"})
+
+(defn exit-style [direction]
+  {:transform "translate(0, 0)"})
+
+(defn exit-active-style [duration easing direction]
+  ^{:extend [base-style duration easing]}
+  {:transform (direction {:left "translate(-100%, 0)"
+                          :right "translate(100%, 0)"
+                          :up "translate(0, -100%)"
+                          :down "translate(0, 100%)"})
+   })
+
 (defn- slide-child
   [{:keys
     [duration style timeout on-exit on-exited on-enter on-entered
      unmount-on-exit mount-on-enter easing appear direction children in
      child-container-class transition-class]}]
-   [Transition {:in in
-                :style style
-                :timeout timeout
-                :class transition-class
-                :unmountOnExit unmount-on-exit
-                :mountOnEnter mount-on-enter
-                :appear appear
-                :onExit on-exit
-                :onEnter on-enter
-                :onExited on-exited
-                :onEntered on-entered}
-    (fn [state]
-        (r/as-element
-         (into [:div {:class child-container-class
-                      :style (get-style state direction easing duration)}]
-               children)))])
+  [CSSTransition {:in in
+                  :style style
+                  :timeout timeout
+                  :class transition-class
+                  :classNames {:enter (<class enter-style direction)
+                               :enter-active (<class enter-active-style duration easing)
+                               :exit (<class exit-style direction)
+                               :exit-active (<class exit-active-style duration easing direction)}
+                  :unmountOnExit unmount-on-exit
+                  :mountOnEnter mount-on-enter
+                  :appear appear
+                  :onExit on-exit
+                  :onEnter on-enter
+                  :onExited on-exited
+                  :onEntered on-entered}
+   (fn [state]
+     (r/as-element
+      (into [:div {:class child-container-class}]
+            children)))])
 
 (s/def ::direction #{:up :down :left :right})
 (s/def ::duration pos-int?)
