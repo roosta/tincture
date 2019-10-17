@@ -1,4 +1,4 @@
-(defproject tincture "0.3.3-1"
+(defproject tincture "0.3.4-SNAPSHOT"
   :description "Frontend development toolkit for ClojureScript"
   :url "https://github.com/roosta/tincture"
   :license {:name "Eclipse Public License"
