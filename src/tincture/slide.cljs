@@ -8,33 +8,7 @@
             [clojure.string :as str]
             [reagent.core :as r]))
 
-;; TODO Fix this, use Herb
-#_(defn- get-style
-  [state direction easing duration]
-  (merge
-   (case state
-     "entering" {:transform (direction {:left "translate(100%, 0)"
-                                        :right "translate(-100%, 0)"
-                                        :up "translate(0, 100%)"
-                                        :down "translate(0, -100%)"})
-                 :opacity 0.01}
-     "entered" {:transform "translate(0, 0)"
-                :opacity 1}
-     "exiting" {:transform (direction {:left "translate(-100%, 0)"
-                                       :right "translate(100%, 0)"
-                                       :up "translate(0, -100%)"
-                                       :down "translate(0, 100%)"})
-                :opacity 0.01}
-     "exited" {:opacity 0})
-   {:left 0
-    :top 0
-    :position "absolute"
-    :transition (create-transition {:property [:transform :opacity]
-                                    :duration duration
-                                    :easing easing})}))
-
-
-(defn base-style [duration easing]
+(defn- base-style [duration easing]
   {:left 0
    :top 0
    :position "absolute"
@@ -42,7 +16,7 @@
                                    :duration duration
                                    :easing easing})})
 
-(defn enter-style [direction opacity]
+(defn- enter-style [direction opacity]
   (cond->
       {:transform (direction {:left "translate(100%, 0)"
                               :right "translate(-100%, 0)"
@@ -50,17 +24,17 @@
                               :down "translate(0, -100%)"})}
     opacity (assoc :opacity 0)))
 
-(defn enter-active-style [duration easing opacity]
+(defn- enter-active-style [duration easing opacity]
   (with-meta
     (cond-> {:transform "translate(0, 0)"}
       opacity (assoc :opacity 1))
     {:extend [base-style duration easing]}))
 
-(defn exit-style [opacity]
+(defn- exit-style [opacity]
   (cond-> {:transform "translate(0, 0)"}
     opacity (assoc :opacity 1)))
 
-(defn exit-active-style [duration easing direction opacity]
+(defn- exit-active-style [duration easing direction opacity]
   (with-meta
     (cond-> {:transform (direction {:left "translate(-100%, 0)"
                               :right "translate(100%, 0)"
