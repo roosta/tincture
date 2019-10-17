@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file. This change
 
 ## [v0.3.4-SNAPSHOT]
 
+## [v0.3.3-1]
+### Fix
+- Mistakenly pushed a package that required in debux, which would
+  cause errors if project was loaded without debux in dependencies
+
 ## [v0.3.3]
 ### Changed
 - Upgrade herb to v0.10.0, update components that used `:key` and `:group` meta
@@ -69,6 +74,7 @@ All notable changes to this project will be documented in this file. This change
 - CSS functions
 
 [v0.3.4-SNAPSHOT]: https://github.com/roosta/tincture/compare/v0.3.3...HEAD
+[v0.3.3-1]: https://github.com/roosta/tincture/compare/v0.3.3...v0.3.3-1
 [v0.3.3]: https://github.com/roosta/tincture/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/roosta/tincture/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/roosta/tincture/compare/v0.3.0...v0.3.1
