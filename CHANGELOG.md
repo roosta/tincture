@@ -1,7 +1,9 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
-## [v0.3.3-SNAPSHOT]
+## [v0.3.4-SNAPSHOT]
+
+## [v0.3.3]
 ### Changed
 - Upgrade herb to v0.10.0, update components that used `:key` and `:group` meta
 - Check spec for rgb alpha value
@@ -66,7 +68,8 @@ All notable changes to this project will be documented in this file. This change
 - Breakpoint event/sub handlers using re-frame
 - CSS functions
 
-[v0.3.3-SNAPSHOT]: https://github.com/roosta/tincture/compare/v0.3.2...HEAD
+[v0.3.4-SNAPSHOT]: https://github.com/roosta/tincture/compare/v0.3.3...HEAD
+[v0.3.3]: https://github.com/roosta/tincture/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/roosta/tincture/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/roosta/tincture/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/roosta/tincture/compare/v0.2.0...v0.3.0
