@@ -43,40 +43,46 @@
                                    :duration duration
                                    :easing easing})})
 
-(defn enter-style [direction]
-  {:transform (direction {:left "translate(100%, 0)"
-                          :right "translate(-100%, 0)"
-                          :up "translate(0, 100%)"
-                          :down "translate(0, -100%)"})})
+(defn enter-style [direction opacity]
+  (cond->
+      {:transform (direction {:left "translate(100%, 0)"
+                              :right "translate(-100%, 0)"
+                              :up "translate(0, 100%)"
+                              :down "translate(0, -100%)"})}
+    opacity (assoc :opacity 0)))
 
-(defn enter-active-style [duration easing]
-  ^{:extend [base-style duration easing]}
-  {:transform "translate(0, 0)"})
+(defn enter-active-style [duration easing opacity]
+  (with-meta
+    (cond-> {:transform "translate(0, 0)"}
+      opacity (assoc :opacity 1))
+    {:extend [base-style duration easing]}))
 
-(defn exit-style [direction]
-  {:transform "translate(0, 0)"})
+(defn exit-style [opacity]
+  (cond-> {:transform "translate(0, 0)"}
+    opacity (assoc :opacity 1)))
 
-(defn exit-active-style [duration easing direction]
-  ^{:extend [base-style duration easing]}
-  {:transform (direction {:left "translate(-100%, 0)"
-                          :right "translate(100%, 0)"
-                          :up "translate(0, -100%)"
-                          :down "translate(0, 100%)"})
-   })
+(defn exit-active-style [duration easing direction opacity]
+  (with-meta
+    (cond-> {:transform (direction {:left "translate(-100%, 0)"
+                              :right "translate(100%, 0)"
+                              :up "translate(0, -100%)"
+                              :down "translate(0, 100%)"})}
+      opacity (assoc :opacity 0))
+    {:extend [base-style duration easing]}))
 
 (defn- slide-child
   [{:keys
     [duration style timeout on-exit on-exited on-enter on-entered
      unmount-on-exit mount-on-enter easing appear direction children in
-     child-container-class transition-class]}]
+     child-container-class transition-class opacity]}]
   [CSSTransition {:in in
                   :style style
                   :timeout timeout
                   :class transition-class
-                  :classNames {:enter (<class enter-style direction)
-                               :enter-active (<class enter-active-style duration easing)
-                               :exit (<class exit-style direction)
-                               :exit-active (<class exit-active-style duration easing direction)}
+                  :classNames {:enter (<class enter-style direction opacity)
+                               :enter-active (<class enter-active-style duration easing opacity)
+                               :exit (<class exit-style opacity)
+                               :exit-active (<class exit-active-style duration easing direction opacity)}
                   :unmountOnExit unmount-on-exit
                   :mountOnEnter mount-on-enter
                   :appear appear
@@ -107,6 +113,7 @@
 (s/def ::child-container string?)
 (s/def ::classes (s/keys :opt [::transition ::child-container]))
 (s/def ::id (s/nilable string?))
+(s/def ::opacity boolean?)
 
 (defn Slide
   "Slide components in and out based on mount status
@@ -175,6 +182,9 @@
   Default `nil`. A map of override classes, one for the `Transition` component,
   and one for the `child-container`, which is the innermost child.
 
+  * `:opacity`. Pred: `boolean`. Default `false` If you want opacity added to
+  the slide animation
+
   **Important note** It is important that height is set with CSS on the
   `TransitionGroup`, by passing a string with the `:class` key value pair. It is
   deliberately not set by this component since the height can be one of any
@@ -199,7 +209,7 @@
   "
   [{:keys [direction duration timeout unmount-on-exit mount-on-enter
            class easing appear enter exit on-exit on-exited on-enter
-           on-entered classes id]
+           on-entered classes id opacity]
     :or   {direction       :left
            duration        500
            timeout         500
@@ -213,7 +223,8 @@
            on-exit         #()
            on-exited       #()
            on-entered      #()
-           classes         {}}}]
+           classes         {}
+           opacity         false}}]
   (let [direction      (check-spec direction ::direction)
         duration       (check-spec duration ::duration)
         timeout        (check-spec timeout ::timeout)
@@ -229,6 +240,7 @@
         on-enter       (check-spec on-enter ::on-enter)
         on-entered     (check-spec on-entered ::on-entered)
         {transition-class :transition child-container-class :child-container} (check-spec classes ::classes)
+        opacity        (check-spec opacity ::opacity)
         children       (r/children (r/current-component))
         k              (or (-> children first meta :key)
                            (-> children first second :key))]
@@ -261,6 +273,7 @@
                                     :easing                easing
                                     :appear                appear
                                     :direction             direction
-                                    :children              children}))]))
+                                    :children              children
+                                    :opacity               opacity}))]))
 
 (def ^{:deprecated "0.3.0"} slide Slide)
